@@ -6,10 +6,17 @@ namespace Movement
     public class CameraHandler : MonoBehaviour
     {
         [SerializeField] private CameraType _type;
+        public CameraType Type => _type;
         private CinemachineVirtualCamera _camera;
-        public void SetActive()
+
+        private void Awake()
         {
-            
+            _camera = GetComponent<CinemachineVirtualCamera>();
+        }
+
+        public void SetActive(bool value)
+        {
+            gameObject.SetActive(value);
         }
     }
 }

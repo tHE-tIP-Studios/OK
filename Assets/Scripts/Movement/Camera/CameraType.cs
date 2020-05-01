@@ -3,6 +3,7 @@ namespace Movement
     public enum CameraType
     {
         WALKING,
-        CROUCH
+        CROUCH,
+        FISHING
     };
 }
