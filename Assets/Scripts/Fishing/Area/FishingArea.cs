@@ -9,11 +9,13 @@ namespace Fishing.Area
         [SerializeField] private Color _gizmosColor = Color.magenta;
         [SerializeField] private FishingMarker[] _markers = null;
         [SerializeField] private Transform _markersParent;
+        [SerializeField] private FishingAreaType _areaType = default;
 
         private Vector2[] _polygonArray;
 
         public Transform MarkersParent => _markersParent;
         public FishingMarker[] Markers => _markers;
+        public FishingAreaType AreaType => _areaType;
 
         private void Awake()
         {
