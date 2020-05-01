@@ -8,8 +8,12 @@
     "com.unity.collab-proxy": "1.2.16",
     "com.unity.ext.nunit": "1.0.0",
     "com.unity.ide.rider": "1.1.0",
-    "com.unity.ide.vscode": "1.1.3",
+<<<<<<< HEAD
+    "com.unity.ide.vscode": "1.1.2",
     "com.unity.inputsystem": "1.0.0",
+=======
+    "com.unity.ide.vscode": "1.1.3",
+>>>>>>> 6e654196d67597ad409a5b5d31da828855c2b8e1
     "com.unity.package-manager-ui": "2.2.0",
     "com.unity.purchasing": "2.0.6",
     "com.unity.render-pipelines.lightweight": "6.9.0",
