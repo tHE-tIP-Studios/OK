@@ -10,9 +10,40 @@ namespace Fishing.Area
         [SerializeField] private FishingMarker[] _markers = null;
         [SerializeField] private Transform _markersParent;
 
-        public Transform MarkersParent => _markersParent;
+        private Vector2[] _polygonArray;
 
+        public Transform MarkersParent => _markersParent;
         public FishingMarker[] Markers => _markers;
+
+        private void Awake()
+        {
+            if (_markers == null) return;
+
+            _polygonArray = new Vector2[_markers.Length];
+            for (int i = 0; i < _markers.Length; i++)
+                _polygonArray[i] = new Vector2(_markers[i].transform.position.x, _markers[i].transform.position.z);
+        }
+
+        // Solution taken from
+        //http://wiki.unity3d.com/index.php?title=PolyContainsPoint
+        // It ignores the Y for now!
+        public bool IsInside(Vector3 positionToCheck)
+        {
+            if (_polygonArray == null) return false;
+
+            Vector2 p = new Vector2(positionToCheck.x, positionToCheck.z);
+            bool inside = false;
+            int j = _polygonArray.Length - 1;
+            for (int i = 0; i < _polygonArray.Length; j = i++)
+            {
+                Vector2 pi = _polygonArray[i];
+                Vector2 pj = _polygonArray[j];
+                if (((pi.y <= p.y && p.y < pj.y) || (pj.y <= p.y && p.y < pi.y)) &&
+                    (p.x < (pj.x - pi.x) * (p.y - pi.y) / (pj.y - pi.y) + pi.x))
+                    inside = !inside;
+            }
+            return inside;
+        }
 
         public bool MarkersParentExists()
         {
