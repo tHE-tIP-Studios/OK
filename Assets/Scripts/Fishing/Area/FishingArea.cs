@@ -61,12 +61,14 @@ namespace Fishing.Area
             return inside;
         }
 
-        public void FishingStart()
+        public FishingBehaviour FishingStart()
         {
-            if (_fishingBehaviourScript != null) return;
+            if (_fishingBehaviourScript != null) return _fishingBehaviourScript;
 
             areaCollider.enabled = false;
             InitializeFishingBehaviour();
+
+            return _fishingBehaviourScript;
         }
 
         public void FishingEnd(bool success)

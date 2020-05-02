@@ -12,6 +12,8 @@ namespace Fishing
         private FishingControls _controls;
         private bool _reelPressed;
 
+        private int _perlinSeed;
+
         private float _timeToFishBite;
         private float _fishStamina;
         private float _getawayCount;
@@ -22,8 +24,9 @@ namespace Fishing
 
         private float NextWindow => (_fish.CatchingValues.Stamina - 1) - _reelCount;
 
-        protected int Fails { get; private set; }
-        protected bool FishVulnerable { get; private set; }
+        public float FishStaminaPercentage => _fishStamina / _fish.CatchingValues.Stamina;
+        public int Fails { get; private set; }
+        public bool FishVulnerable { get; private set; }
 
         protected FishingArea _containingArea;
         protected Animal _fish;
@@ -43,6 +46,7 @@ namespace Fishing
 
         public void Init(Animal fish, FishingArea callerArea)
         {
+            _perlinSeed = UnityEngine.Random.Range(0, int.MaxValue);
             _containingArea = callerArea;
 
             _fish = fish;
@@ -53,7 +57,6 @@ namespace Fishing
 
             _reelCount = 0;
             _reelsRequired = fish.CatchingValues.Stamina;
-            Debug.Log(_reelsRequired);
 
             OnFishBiteAction = StartCatchingBehaviour;
 
@@ -79,17 +82,18 @@ namespace Fishing
 
         protected virtual void DecreaseFishStamina()
         {
-            _fishStamina -= Time.deltaTime;
-            if (_fishStamina <= 0)
-            {
-                UpdateAction = null;
-                EndFishing(true);
-            }
-            else if (_fishStamina <= NextWindow)
+            float _factor = (_fishStamina * _perlinSeed) /
+                (_fish.CatchingValues.Stamina * _perlinSeed);
+            float _staminaPerlin = Mathf.PerlinNoise(_factor, _factor);
+            _fishStamina -= Time.deltaTime * _staminaPerlin;
+            Debug.Log(_fishStamina);
+
+            if (_fishStamina <= NextWindow)
             {
                 FishVulnerable = true;
                 _reelInWindowTimer = _fish.CatchingValues.ReelWindow + (_reelCount * _fish.CatchingValues.ReelWindowIncrease);
                 ActiveCatchingAction = WhileOnReelInWindow;
+                OnReelWindow?.Invoke();
                 Debug.LogWarning("Reel window!");
             }
         }
@@ -117,6 +121,12 @@ namespace Fishing
                 ActiveCatchingAction = DecreaseFishStamina;
                 OnReelSuccess?.Invoke();
                 Debug.Log("Reel window taken!");
+
+                if (_reelCount == _reelsRequired)
+                {
+                    UpdateAction = null;
+                    EndFishing(true);
+                }
             }
             else
             {
@@ -192,6 +202,7 @@ namespace Fishing
         protected Action OnReelSuccess;
         protected Action OnReelFail;
 
+        protected Action OnReelWindow;
         protected Action OnReelWindowMissed;
 
         private Action ActiveCatchingAction;
