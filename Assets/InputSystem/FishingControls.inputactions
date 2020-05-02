@@ -1,0 +1,33 @@
+{
+    "name": "FishingControls",
+    "maps": [
+        {
+            "name": "Rod",
+            "id": "5bb206aa-3ac3-45ac-96ab-b3921594f5d8",
+            "actions": [
+                {
+                    "name": "Throw",
+                    "type": "Button",
+                    "id": "d0531901-48da-4cff-aed9-5afdff6b2fb9",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "e971c487-419f-4ef8-94bd-287e028260f4",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Throw",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
