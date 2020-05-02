@@ -25,6 +25,8 @@ public class FishingAreaInspector : Editor
 
     public override void OnInspectorGUI()
     {
+        _fishingArea.MarkersParent.localPosition = Vector3.zero;
+        
         EditorGUILayout.LabelField("", GUILayout.Height(3));
         
         EditorGUILayout.PropertyField(_areaType);

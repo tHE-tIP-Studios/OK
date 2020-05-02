@@ -179,7 +179,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 370627991}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.935, y: 0, z: 6.32}
+  m_LocalPosition: {x: 8.7, y: 0, z: 0.13}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 228487272}
@@ -452,6 +452,7 @@ MonoBehaviour:
   - {fileID: 1959185820}
   - {fileID: 370627993}
   _markersParent: {fileID: 228487272}
+  _areaType: 0
 --- !u!4 &1054671456
 Transform:
   m_ObjectHideFlags: 0
@@ -460,7 +461,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1054671454}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 1.95, y: 0, z: 19.88}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 228487272}
