@@ -5,6 +5,7 @@ namespace Movement
     public class ThirdPersonMovement : MonoBehaviour
     {
         [SerializeField] private float _maxSpeed = 5f;
+        [SerializeField] private float _angularSpeed = 10f;
         [SerializeField] private float _crouchModifier = .5f;
         private float _speed;
         private CharacterController _playerController;
@@ -60,6 +61,17 @@ namespace Movement
             movement.x = _movementDir.y * _speed;
             movement.z = _movementDir.x * _speed;
             _playerController.Move(movement * Time.deltaTime);
+
+            if (movement.magnitude > 0.2f)
+            {
+                UpdateRotation(movement * Time.deltaTime);
+            }
+        }
+
+        private void UpdateRotation(Vector3 moveDir)
+        {
+            Quaternion rot = Quaternion.LookRotation(moveDir, Vector3.up);
+            transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * _angularSpeed);
         }
 
         public void ChangeSpeed(float modifier)
