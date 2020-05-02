@@ -1,15 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Fishing.Area;
 
 namespace Fishing.Rod
 {
-    public class FishingRodThrow : MonoBehaviour
+    public class FishingRodCast : MonoBehaviour
     {
         [SerializeField] float _maxStrength;
         private FishingControls _controls;
         private bool _held;
         private float _throwStrength;
+        /// <summary>
+        /// Point to cast the line to.
+        /// </summary>
+        private Vector3 _point;
         private LayerMask _checkMask;
 
         private void OnEnable()
@@ -26,8 +31,8 @@ namespace Fishing.Rod
         {
             _controls = new FishingControls();
             _controls.Rod.Throw.performed += ctx => UpdateThrowState();
-            _controls.Rod.Throw.canceled += ctx => UpdateThrowState();
-            _checkMask = LayerMask.GetMask();
+            _controls.Rod.Throw.canceled += ctx => {UpdateThrowState(); ValidatePoint();};
+            _checkMask = LayerMask.GetMask(FishingArea.FISHING_LAYER);
         }
 
         private void UpdateThrowState()
@@ -37,20 +42,10 @@ namespace Fishing.Rod
 
         private void Update()
         {
-            Vector3 point = default;
             if (_held)
             {
-                point = GetThrowPoint();
+                _point = GetThrowPoint();
                 // Update travel distance here
-                
-            }
-            else
-            {
-                _throwStrength = 0.0f;
-                if (ValidThrowPoint(point))
-                {
-
-                }
             }
         }
 
@@ -61,17 +56,14 @@ namespace Fishing.Rod
             _throwStrength = Mathf.PingPong(_throwStrength, _maxStrength);
             origin = transform.position;
             origin.z += _throwStrength;
-            if (Physics.Raycast(origin, Vector3.down, 10, _checkMask))
-            {
-
-            }
+            Physics.Raycast(origin, Vector3.down, out hit, 10);
 
             return hit.point;
         }
 
-        private bool ValidThrowPoint(Vector3 point)
+        private bool ValidatePoint()
         {
-            return true;
+            return Physics.CheckSphere(_point, .5f, _checkMask);
         }
 
         private void OnDrawGizmosSelected()

@@ -5,6 +5,7 @@ namespace Fishing.Area
 {
     public class FishingArea : MonoBehaviour
     {
+        public const string FISHING_LAYER = "FishingArea";
         [SerializeField] private Color _gizmosColor = Color.magenta;
         [SerializeField] private FishingMarker[] _markers = null;
         [SerializeField] private Transform _markersParent;
@@ -52,6 +53,7 @@ namespace Fishing.Area
         public void FishingStart()
         {
             areaCollider.enabled = false;
+            Debug.Log("Started Fishing!");
         }
 
         public void FishingEnd()
