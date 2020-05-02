@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using Fishing.Rod;
 
 namespace Movement
 {
@@ -9,8 +10,10 @@ namespace Movement
         [SerializeField] private float _crouchModifier = .5f;
         private float _speed;
         private CharacterController _playerController;
+        private FishingRodCast _fishingRod;
         private PlayerControls _playerControls;
         private Vector2 _movementDir = default;
+        private Vector2 _lookDir = default;
         private bool _crouching = false;
 
         private void OnEnable()
@@ -27,11 +30,13 @@ namespace Movement
         {
             _playerControls = new PlayerControls();
             _playerControls.Movement.Direction.performed += ctx => _movementDir = ctx.ReadValue<Vector2>();
+            _playerControls.Movement.Look.performed += ctx => _lookDir = ctx.ReadValue<Vector2>();
             _playerControls.Movement.Direction.canceled += ctx => _movementDir = default;
             _playerControls.Movement.Crouch.performed += ctx => _crouching = ctx.ReadValueAsButton();
             _playerControls.Movement.Crouch.canceled += ctx => _crouching = ctx.ReadValueAsButton();
 
             _playerController = GetComponent<CharacterController>();
+            _fishingRod = GetComponent<FishingRodCast>();
 
             // Init variables
             _speed = _maxSpeed;
@@ -60,11 +65,21 @@ namespace Movement
             Vector3 movement = default;
             movement.x = _movementDir.y * _speed;
             movement.z = _movementDir.x * _speed;
-            _playerController.Move(movement * Time.deltaTime);
+            
+            if (!_fishingRod.Casting)
+            {
+                _playerController.Move(movement * Time.deltaTime);
+            }
 
-            if (movement.magnitude > 0.2f)
+            if (movement.magnitude > 0.2f && !_fishingRod.Casting)
             {
                 UpdateRotation(movement * Time.deltaTime);
+                _lookDir = _movementDir;
+            }
+            else if (_lookDir.magnitude > 0.2f)
+            {
+                Vector3 lookVec = new Vector3(_lookDir.y, 0, _lookDir.x);
+                UpdateRotation(lookVec * Time.deltaTime);
             }
         }
 

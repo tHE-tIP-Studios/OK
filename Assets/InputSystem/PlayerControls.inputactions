@@ -20,6 +20,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "Look",
+                    "type": "Value",
+                    "id": "f6e91f10-a79f-4ae1-b0ea-66e46b723287",
+                    "expectedControlType": "Vector2",
+                    "processors": "InvertVector2(invertX=false)",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -42,6 +50,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Crouch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b8772e7f-f7c7-452c-a1d3-ef35c85a19ee",
+                    "path": "<Gamepad>/rightStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Look",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
