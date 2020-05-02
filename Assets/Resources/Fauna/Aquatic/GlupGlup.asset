@@ -21,6 +21,7 @@ MonoBehaviour:
     _availablePhases: 0
   _catchingValues:
     _stamina: 3
-    _reelInWindow: 0.8
-    _windowDecreasePerReel: 0
+    _failAttempts: 2
+    _reelInWindow: 1.5
+    _windowIncreasePerReel: 0
     _biteWaitWindow: {x: 2, y: 6}

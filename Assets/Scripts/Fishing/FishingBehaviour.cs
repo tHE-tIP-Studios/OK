@@ -20,6 +20,9 @@ namespace Fishing
         private int _reelsRequired;
         private int _reelCount;
 
+        private float NextWindow => (_fish.CatchingValues.Stamina - 1) - _reelCount;
+
+        protected int Fails { get; private set; }
         protected bool FishVulnerable { get; private set; }
 
         protected FishingArea _containingArea;
@@ -77,18 +80,17 @@ namespace Fishing
         protected virtual void DecreaseFishStamina()
         {
             _fishStamina -= Time.deltaTime;
-            Debug.Log(_fishStamina);
-            if (_fishStamina <= (_fish.CatchingValues.Stamina - 1) - _reelCount)
+            if (_fishStamina <= 0)
+            {
+                UpdateAction = null;
+                EndFishing(true);
+            }
+            else if (_fishStamina <= NextWindow)
             {
                 FishVulnerable = true;
                 _reelInWindowTimer = _fish.CatchingValues.ReelWindow + (_reelCount * _fish.CatchingValues.ReelWindowIncrease);
                 ActiveCatchingAction = WhileOnReelInWindow;
-            }
-            if (_fishStamina <= 0)
-            {
-                UpdateAction = null;
-                OnCatchEnded?.Invoke(true);
-                _containingArea.FishingEnd(true);
+                Debug.LogWarning("Reel window!");
             }
         }
 
@@ -98,22 +100,27 @@ namespace Fishing
 
             if (_reelInWindowTimer <= 0)
             {
+                _fishStamina = NextWindow + 1;
                 FishVulnerable = false;
+                Debug.LogWarning("Reel window missed...");
+                Fail();
                 OnReelWindowMissed?.Invoke();
-                UpdateAction = DecreaseFishStamina;
+                ActiveCatchingAction = DecreaseFishStamina;
             }
-
         }
 
         protected virtual void ReelIn()
         {
             if (FishVulnerable)
             {
-                UpdateAction = DecreaseFishStamina;
+                _reelCount++;
+                ActiveCatchingAction = DecreaseFishStamina;
                 OnReelSuccess?.Invoke();
+                Debug.Log("Reel window taken!");
             }
-            else 
+            else
             {
+                Fail();
                 OnReelFail?.Invoke();
             }
         }
@@ -129,8 +136,8 @@ namespace Fishing
         private void OnFishBite()
         {
             ActiveCatchingAction = DecreaseFishStamina;
-
             OnFishBiteAction?.Invoke();
+            Debug.LogWarning("We got a bite!");
         }
 
         private void StartCatchingBehaviour()
@@ -141,6 +148,21 @@ namespace Fishing
         private void CatchingBehaviour()
         {
             ActiveCatchingAction?.Invoke();
+        }
+
+        private void Fail()
+        {
+            Fails++;
+            if (Fails > _fish.CatchingValues.FailAttempts)
+                EndFishing(false);
+            else
+                Debug.Log("Failed reel...\n remaining fails: " + (_fish.CatchingValues.FailAttempts - Fails));
+        }
+
+        protected void EndFishing(bool success)
+        {
+            OnCatchEnded?.Invoke(success);
+            _containingArea.FishingEnd(success);
         }
 
         private void UpdateReelState()

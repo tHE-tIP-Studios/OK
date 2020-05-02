@@ -13,6 +13,7 @@ public struct CatchValues
     [SerializeField] private Vector2 _biteWaitWindow;
 
     public int Stamina => _stamina;
+    public int FailAttempts => _failAttempts;
     public float ReelWindow => _reelInWindow;
     public float ReelWindowIncrease => _windowIncreasePerReel;
     public Vector2 WaitWindow => _biteWaitWindow;

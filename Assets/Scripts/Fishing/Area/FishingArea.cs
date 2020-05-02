@@ -37,7 +37,7 @@ namespace Fishing.Area
 
         private void Start()
         {
-            //FishingStart();
+            FishingStart();
         }
 
         // Solution taken from
