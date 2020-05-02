@@ -10,11 +10,13 @@ public class FishingAreaInspector : Editor
     private const int MAX_MARKER_BUTTONS_PER_LINE = 5;
 
     private FishingArea _fishingArea;
+    private SerializedProperty _areaType;
     private SerializedProperty _gizmosColor;
 
     private void OnEnable()
     {
         _fishingArea = target as FishingArea;
+        _areaType = serializedObject.FindProperty("_areaType");
         _gizmosColor = serializedObject.FindProperty("_gizmosColor");
 
         if (!_fishingArea.MarkersParentExists())
@@ -23,6 +25,12 @@ public class FishingAreaInspector : Editor
 
     public override void OnInspectorGUI()
     {
+        EditorGUILayout.LabelField("", GUILayout.Height(3));
+        
+        EditorGUILayout.PropertyField(_areaType);
+
+        EditorGUILayout.LabelField("", GUILayout.Height(3));
+
         if (GUILayout.Button("Add New Marker", GUILayout.Height(50)))
         {
             Selection.activeGameObject = _fishingArea.NewMarker().gameObject;
@@ -38,6 +46,7 @@ public class FishingAreaInspector : Editor
         DrawMarkerButtons();
 
         EditorGUILayout.PropertyField(_gizmosColor);
+
         serializedObject.ApplyModifiedProperties();
     }
 
