@@ -13,6 +13,7 @@ namespace Fishing.Rod
         private Floater _floater = default;
         private FishingControls _controls;
         private bool _held;
+        private bool _casted;
         private float _throwStrength;
         private float _timePressing;
         /// <summary>
@@ -37,8 +38,14 @@ namespace Fishing.Rod
         {
             _controls = new FishingControls();
             _controls.Rod.Throw.performed += ctx => UpdateThrowState();
-            _controls.Rod.Throw.canceled += ctx => {UpdateThrowState(); ValidatePoint();};
+            _controls.Rod.Throw.canceled += ctx => 
+                {
+                    UpdateThrowState(); 
+                    _casted = ValidatePoint();
+                };
+            
             _checkMask = LayerMask.GetMask(FishingArea.FISHING_LAYER);
+            _casted = false;
         }
 
         private void Start() 
@@ -48,12 +55,18 @@ namespace Fishing.Rod
 
         private void UpdateThrowState()
         {
+            if (_casted)
+            {
+                _casted = false;
+                _floater.PullBack();
+            }
+
             _held = !_held;
         }
 
         private void Update()
         {
-            if (_held)
+            if (_held && !_casted)
             {
                 // Update point until button is released
                 _point = GetThrowPoint();
@@ -95,7 +108,6 @@ namespace Fishing.Rod
                     return true;
                 }
             }
-            Debug.Log("Validated");
             _throwStrength = 0;
             return false;
         }
