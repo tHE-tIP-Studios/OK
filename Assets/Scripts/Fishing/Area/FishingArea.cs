@@ -88,6 +88,7 @@ namespace Fishing.Area
             }
         }
 
+        #region Inspector Methods
         public bool MarkersParentExists()
         {
             Transform found = transform.Find("Markers");
@@ -208,6 +209,7 @@ namespace Fishing.Area
             }
             return false;
         }
+        #endregion
 
         private void OnDrawGizmos()
         {
