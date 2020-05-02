@@ -2,20 +2,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Fishing.Area;
+using Utilities;
 
 namespace Fishing.Rod
 {
     public class FishingRodCast : MonoBehaviour
     {
-        [SerializeField] float _maxStrength;
+        [SerializeField] float _maxStrength = 10f;
+        [SerializeField] float _castStrengthSpeed = 1f;
+        private Floater _floater = default;
         private FishingControls _controls;
         private bool _held;
         private float _throwStrength;
+        private float _timePressing;
         /// <summary>
         /// Point to cast the line to.
         /// </summary>
         private Vector3 _point;
         private LayerMask _checkMask;
+
+        public bool Casting => _held;
 
         private void OnEnable()
         {
@@ -35,6 +41,11 @@ namespace Fishing.Rod
             _checkMask = LayerMask.GetMask(FishingArea.FISHING_LAYER);
         }
 
+        private void Start() 
+        {
+            _floater = transform.GetComponentRecursive<Floater>();
+        }
+
         private void UpdateThrowState()
         {
             _held = !_held;
@@ -44,8 +55,13 @@ namespace Fishing.Rod
         {
             if (_held)
             {
+                // Update point until button is released
                 _point = GetThrowPoint();
-                // Update travel distance here
+                _timePressing += Time.deltaTime;
+            }
+            else
+            {
+                _timePressing = 0.0f;
             }
         }
 
@@ -53,39 +69,53 @@ namespace Fishing.Rod
         {
             RaycastHit hit = default;
             Vector3 origin;
-            _throwStrength = Mathf.PingPong(_throwStrength, _maxStrength);
+            // Ping pong distance along time
+            _throwStrength = Mathf.PingPong(_timePressing * _castStrengthSpeed, _maxStrength);
             origin = transform.position;
-            origin.z += _throwStrength;
+            origin += transform.forward * _throwStrength;
+            // Check position and get the point
             Physics.Raycast(origin, Vector3.down, out hit, 10);
 
             return hit.point;
         }
 
+        /// <summary>
+        /// Validates the current point and casts the line if possible.
+        /// </summary>
+        /// <returns> True if the line can be cast, false otherwise</returns>
         private bool ValidatePoint()
         {
-            return Physics.CheckSphere(_point, .5f, _checkMask);
+            var result = Physics.OverlapSphere(_point, .5f, _checkMask);
+            FishingArea area;
+            foreach(Collider col in result)
+            {
+                if (col.TryGetComponent<FishingArea>(out area))
+                {
+                    _floater.Cast(area, _point);
+                    return true;
+                }
+            }
+            Debug.Log("Validated");
+            _throwStrength = 0;
+            return false;
         }
 
-        private void OnDrawGizmosSelected()
+        private void OnDrawGizmos()
         {
             Gizmos.color = Color.red;
             DrawStrength(_maxStrength, 0.5f);
             Gizmos.color = Color.blue;
             DrawStrength(_throwStrength, 0.3f);
+            Gizmos.DrawSphere(_point, .2f);
 
             void DrawStrength(float max, float offset)
             {
-                Vector3 destination = transform.position;
                 Vector3 origin = transform.position;
-                destination.z += max;
                 // Place an X offset
-                destination.x += offset;
-                origin.x += offset;
-                Gizmos.DrawLine(origin, destination);
-                origin.x -= offset * 2;
-                destination.x -= offset * 2;
-                Gizmos.DrawLine(origin, destination);
-                Gizmos.color = Color.blue;
+                origin += transform.right * offset;
+                Gizmos.DrawRay(origin, transform.forward * max);
+                origin -= transform.right * offset * 2;
+                Gizmos.DrawRay(origin, transform.forward * max);
             }
         }
     }
