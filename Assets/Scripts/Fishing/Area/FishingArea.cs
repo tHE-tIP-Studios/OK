@@ -1,6 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using Utilities;
 
 namespace Fishing.Area
 {
@@ -12,6 +11,7 @@ namespace Fishing.Area
         [SerializeField] private FishingAreaType _areaType = default;
 
         private Vector2[] _polygonArray;
+        private MeshCollider areaCollider;
 
         public Transform MarkersParent => _markersParent;
         public FishingMarker[] Markers => _markers;
@@ -24,6 +24,8 @@ namespace Fishing.Area
             _polygonArray = new Vector2[_markers.Length];
             for (int i = 0; i < _markers.Length; i++)
                 _polygonArray[i] = new Vector2(_markers[i].transform.position.x, _markers[i].transform.position.z);
+
+            CreateMesh();
         }
 
         // Solution taken from
@@ -45,6 +47,45 @@ namespace Fishing.Area
                     inside = !inside;
             }
             return inside;
+        }
+
+        public void FishingStart()
+        {
+            areaCollider.enabled = false;
+        }
+
+        public void FishingEnd()
+        {
+            areaCollider.enabled = true;
+        }
+
+        private void CreateMesh()
+        {
+            Mesh mesh = new Mesh();
+            MeshFilter filter = gameObject.AddComponent<MeshFilter>();
+            Vector3[] vertices = new Vector3[_markers.Length];
+            int[] triangles;
+
+            CreateShape();
+            FinalizeMesh();
+
+            void CreateShape()
+            {
+                for (int i = 0; i < _markers.Length; i++)
+                    vertices[i] = _markers[i].transform.localPosition;
+
+                Triangulator tr = new Triangulator(_polygonArray);
+                triangles = tr.Triangulate();
+            }
+
+            void FinalizeMesh()
+            {
+                filter.mesh = mesh;
+                mesh.Clear();
+                mesh.vertices = vertices;
+                mesh.triangles = triangles;
+                areaCollider = gameObject.AddComponent<MeshCollider>();
+            }
         }
 
         public bool MarkersParentExists()
@@ -73,7 +114,7 @@ namespace Fishing.Area
             if (_markers == null)
             {
                 _markers = new FishingMarker[1] { newMarker };
-                newMarker.transform.position = MarkersParent.transform.position;
+                newMarker.transform.position = transform.position;
                 newMarker.name = "Marker 1";
             }
             else
