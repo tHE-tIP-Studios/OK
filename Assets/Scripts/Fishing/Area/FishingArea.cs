@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using Utilities;
 
 namespace Fishing.Area
@@ -6,6 +7,7 @@ namespace Fishing.Area
     public class FishingArea : MonoBehaviour
     {
         public const string FISHING_LAYER = "FishingArea";
+        [SerializeField] private FishingAreaBehaviourType _fishingBehaviour = default;
         [SerializeField] private Color _gizmosColor = Color.magenta;
         [SerializeField] private FishingMarker[] _markers = null;
         [SerializeField] private Transform _markersParent;
@@ -14,9 +16,13 @@ namespace Fishing.Area
         private Vector2[] _polygonArray;
         private MeshCollider areaCollider;
 
+        private FishingBehaviour _fishingBehaviourScript;
+
         public Transform MarkersParent => _markersParent;
         public FishingMarker[] Markers => _markers;
         public FishingAreaType AreaType => _areaType;
+
+        public FishingBehaviour ActiveFishingScript => _fishingBehaviourScript;
 
         private void Awake()
         {
@@ -27,6 +33,11 @@ namespace Fishing.Area
                 _polygonArray[i] = new Vector2(_markers[i].transform.position.x, _markers[i].transform.position.z);
 
             CreateMesh();
+        }
+
+        private void Start()
+        {
+            //FishingStart();
         }
 
         // Solution taken from
@@ -52,13 +63,45 @@ namespace Fishing.Area
 
         public void FishingStart()
         {
+            if (_fishingBehaviourScript != null) return;
+
             areaCollider.enabled = false;
-            Debug.Log("Started Fishing!");
+            InitializeFishingBehaviour();
         }
 
-        public void FishingEnd()
+        public void FishingEnd(bool success)
         {
+            if (_fishingBehaviourScript == null) return;
+
+            if (success)
+                Debug.Log("Fish Caught!");
+            else
+                Debug.Log("Fish Got Away...");
+
+            Destroy(_fishingBehaviourScript.gameObject);
+
             areaCollider.enabled = true;
+        }
+
+        private void InitializeFishingBehaviour()
+        {
+            Type chosenBehaviour = default;
+
+            switch (_fishingBehaviour)
+            {
+                case FishingAreaBehaviourType.DEFAULT:
+                    chosenBehaviour = typeof(FishingBehaviour);
+                    break;
+            }
+
+            _fishingBehaviourScript =
+                (new GameObject("Fishing Behaviour")
+                    .AddComponent(chosenBehaviour)) as FishingBehaviour;
+            _fishingBehaviourScript.transform.SetParent(transform);
+            //_fishingBehaviourScript.Init(default, this);
+            _fishingBehaviourScript.GlupGlupInit(this);
+
+            Debug.Log("Started Fishing!");
         }
 
         private void CreateMesh()
