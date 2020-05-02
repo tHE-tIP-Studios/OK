@@ -13,9 +13,14 @@ MonoBehaviour:
   m_Name: GlupGlup
   m_EditorClassIdentifier: 
   _specie: 0
-  _name: 
-  _briefDescripion: 
-  _detailedDescripion: 
+  _name: Glup Glup
+  _briefDescripion: 'Glup Glup Glup Glup '
+  _detailedDescripion: 'Glup Glup Glup Glup Glup Glup '
   _availability:
     _availableMonths: 0
     _availablePhases: 0
+  _catchingValues:
+    _stamina: 3
+    _reelInWindow: 0.8
+    _windowDecreasePerReel: 0
+    _biteWaitWindow: {x: 2, y: 6}

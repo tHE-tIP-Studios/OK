@@ -11,6 +11,7 @@ public class FishingAreaInspector : Editor
 
     private FishingArea _fishingArea;
     private SerializedProperty _areaType;
+    private SerializedProperty _fishingBehaviour;
     private SerializedProperty _gizmosColor;
 
     private void OnEnable()
@@ -18,6 +19,7 @@ public class FishingAreaInspector : Editor
         _fishingArea = target as FishingArea;
         _areaType = serializedObject.FindProperty("_areaType");
         _gizmosColor = serializedObject.FindProperty("_gizmosColor");
+        _fishingBehaviour = serializedObject.FindProperty("_fishingBehaviour");
 
         if (!_fishingArea.MarkersParentExists())
             _fishingArea.CreateMarkersParent();
@@ -26,6 +28,10 @@ public class FishingAreaInspector : Editor
     public override void OnInspectorGUI()
     {
         _fishingArea.MarkersParent.localPosition = Vector3.zero;
+
+        EditorGUILayout.LabelField("", GUILayout.Height(3));
+        
+        EditorGUILayout.PropertyField(_fishingBehaviour);
         
         EditorGUILayout.LabelField("", GUILayout.Height(3));
         
