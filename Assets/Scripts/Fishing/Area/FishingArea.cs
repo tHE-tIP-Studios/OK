@@ -36,6 +36,7 @@ namespace Fishing.Area
 
         public Fish ActiveFish { get; private set; }
         public bool BaitTaken => ActiveFish != null;
+        public Transform BaitTransform { get; private set; }
 
         private void Awake()
         {
@@ -54,7 +55,7 @@ namespace Fishing.Area
 
         private void Start()
         {
-            FishingStart(null);
+            FishingStart(GameObject.Find("Dummy Bait").transform);
         }
 
         private void CreateFishParentObject()
@@ -125,6 +126,7 @@ namespace Fishing.Area
 
 
             areaCollider.enabled = false;
+            BaitTransform = baitTransform;
 
             ActiveFish = null;
             foreach (Fish f in Fishes)

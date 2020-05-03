@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 100cc103b48892c449d5b957402c27da, type: 3}
-  m_Name: GlupGlup
+  m_Name: Glup Glup
   m_EditorClassIdentifier: 
   _specie: 0
   _name: Glup Glup

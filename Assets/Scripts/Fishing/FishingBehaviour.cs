@@ -10,10 +10,12 @@ namespace Fishing
     public class FishingBehaviour : MonoBehaviour
     {
         private const float GETAWAY_THRESHOLD = 1;
-        private FishingControls _controls;
+        private FishingControls _fishingControls;
+        private PlayerControls _playerControls;
         private bool _reelPressed;
 
-        private int _perlinSeed;
+        private int _staminaPerlinSeed;
+        private int _steerPerlinSeed;
 
         private float _fishStamina;
         private float _getawayCount;
@@ -25,18 +27,27 @@ namespace Fishing
         private float NextWindow => (FishInfo.CatchingValues.Stamina - 1) - _reelCount;
 
         public float FishStaminaPercentage => _fishStamina / FishInfo.CatchingValues.Stamina;
+        public int TendencySide => _fishTendencySide;
         public int Fails { get; private set; }
         public bool FishVulnerable { get; private set; }
+        public Vector2 BaitVelocityDirection { get; private set; }
 
-        protected FishingArea _containingArea;
+        protected Vector2 _playerSteerDir;
+        protected float _steerDir;
+        protected int _fishTendencySide;
+
+        protected FishingArea _callerArea;
         protected Fish _fish;
         protected AnimalInfo FishInfo => _fish.Info;
 
         private void Awake()
         {
-            _controls = new FishingControls();
-            _controls.Rod.Reel.performed += ctx => UpdateReelState();
-            _controls.Rod.Reel.canceled += ctx => UpdateReelState();
+            _fishingControls = new FishingControls();
+            _fishingControls.Rod.Reel.performed += ctx => UpdateReelState();
+            _fishingControls.Rod.Reel.canceled += ctx => UpdateReelState();
+
+            _playerControls = new PlayerControls();
+            _playerControls.Movement.Look.performed += ctx => _playerSteerDir = ctx.ReadValue<Vector2>();
         }
 
         private void Update()
@@ -47,8 +58,13 @@ namespace Fishing
 
         public void Init(Fish fish, FishingArea callerArea)
         {
-            _perlinSeed = UnityEngine.Random.Range(0, int.MaxValue);
-            _containingArea = callerArea;
+            _staminaPerlinSeed = UnityEngine.Random.Range(0, int.MaxValue);
+            _steerPerlinSeed = UnityEngine.Random.Range(0, int.MaxValue);
+
+            _fishTendencySide = UnityEngine.Random.Range(0.0f, 1.0f) >= 0.5f ?
+                -1 : 1;
+
+            _callerArea = callerArea;
 
             _fish = fish;
             _fishStamina = fish.Info.CatchingValues.Stamina;
@@ -70,13 +86,11 @@ namespace Fishing
 
         protected virtual void DecreaseFishStamina()
         {
-            float _factor = (_fishStamina * _perlinSeed) /
-                (FishInfo.CatchingValues.Stamina * _perlinSeed);
-            float _staminaPerlin = Mathf.PerlinNoise(_factor, _factor);
-            _fishStamina -= Time.deltaTime * _staminaPerlin;
+            _fishStamina -= GetStaminaDecreaseValue();
+            DoFishMovement();
 
             if (_fishStamina <= NextWindow)
-            { 
+            {
                 ReelWindow();
             }
         }
@@ -126,25 +140,86 @@ namespace Fishing
             }
         }
 
+        protected virtual float GetStaminaDecreaseValue()
+        {
+            float randomStaminaFactor = (_fishStamina * _staminaPerlinSeed) /
+                (FishInfo.CatchingValues.Stamina * _staminaPerlinSeed);
+            float staminaPerlin = Mathf.PerlinNoise(randomStaminaFactor, randomStaminaFactor);
+
+            return Time.deltaTime * staminaPerlin;
+        }
+
+        protected virtual void DoFishMovement()
+        {
+            float randomSteerFactor = (_fishStamina * _steerPerlinSeed) /
+                (FishInfo.CatchingValues.Stamina * _steerPerlinSeed);
+            float steerPerlin = Mathf.PerlinNoise(randomSteerFactor * 5, randomSteerFactor * 5);
+
+            // Normalize result
+            _steerDir = (steerPerlin - 0.5f) * 2;
+
+            BaitVelocityDirection = new Vector2(Mathf.Clamp(_steerDir, -1, 1), Mathf.Clamp01(steerPerlin));
+
+            float sideways = _steerDir * 3;
+            sideways *= Time.deltaTime;
+
+            float forward = steerPerlin * (FishStaminaPercentage + 0.1f);
+
+            Vector3 newPosition = _callerArea.BaitTransform.position +
+                (_callerArea.BaitTransform.right * sideways) * _fishTendencySide;
+
+            newPosition += _callerArea.BaitTransform.forward * (forward * Time.deltaTime);
+
+            _callerArea.BaitTransform.position = newPosition;
+        }
+
         protected virtual void ReelIn()
         {
             if (FishVulnerable)
             {
                 _reelCount++;
-                ActiveCatchingAction = DecreaseFishStamina;
+                FishVulnerable = false;
                 OnReelSuccess?.Invoke();
                 Debug.Log("Reel window taken!");
+                _fishTendencySide *= -1;
+                BaitVelocityDirection = new Vector2(0, -1);
 
                 if (_reelCount == _reelsRequired)
                 {
                     UpdateAction = null;
-                    EndFishing(true);
+                    //! move towards player and not back in the future
+                    LeanTween.move(
+                            _callerArea.BaitTransform.gameObject,
+                            _callerArea.BaitTransform.position - (_callerArea.BaitTransform.forward * (1.3f - FishStaminaPercentage)),
+                            .7f * (1.3f - FishStaminaPercentage))
+                        .setEaseOutCirc()
+                        .setOnComplete(FishCaught);
+                }
+                else
+                {
+                    //! move towards player and not back in the future
+                    LeanTween.move(
+                            _callerArea.BaitTransform.gameObject,
+                            _callerArea.BaitTransform.position - (_callerArea.BaitTransform.forward * (1.3f - FishStaminaPercentage)),
+                            .7f * (1.3f - FishStaminaPercentage))
+                        .setEaseOutBack()
+                        .setOnComplete(RestartStaminaDrain);
                 }
             }
             else
             {
                 Fail();
                 OnReelFail?.Invoke();
+            }
+
+            void RestartStaminaDrain()
+            {
+                ActiveCatchingAction = DecreaseFishStamina;
+            }
+
+            void FishCaught()
+            {
+                EndFishing(true);
             }
         }
         #endregion
@@ -180,7 +255,7 @@ namespace Fishing
         protected void EndFishing(bool success)
         {
             OnCatchEnded?.Invoke(success);
-            _containingArea.FishingEnd(success);
+            _callerArea.FishingEnd(success);
         }
 
         private void UpdateReelState()
@@ -193,12 +268,12 @@ namespace Fishing
 
         private void OnEnable()
         {
-            _controls.Enable();
+            _fishingControls.Enable();
         }
 
         private void OnDisable()
         {
-            _controls.Disable();
+            _fishingControls.Disable();
         }
         #endregion
 

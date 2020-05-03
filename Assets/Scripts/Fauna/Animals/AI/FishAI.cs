@@ -8,7 +8,8 @@ namespace Fauna.Animals.AI
     public class FishAI
     {
         public const float MIN_DISTANCE = 0.6f;
-        private const float INTEREST_COOLDOWN = 15.0f;
+        //private const float INTEREST_COOLDOWN = 15.0f;
+        private const float INTEREST_COOLDOWN = 0.1f;
         public const float FOV = 45.0f;
         public const float FOV_DISTANCE = 3.0f;
         private const int MOVE_POINTS = 3;
@@ -86,6 +87,17 @@ namespace Fauna.Animals.AI
             {
                 OnBaitFound();
             }
+        }
+
+        public void LockOnBait()
+        {
+            Vector3 direction = _fish.ContainingArea.ActiveFishingScript.BaitVelocityDirection;
+            direction.z = direction.y;
+            direction.y = 0;
+            direction.x *= _fish.ContainingArea.ActiveFishingScript.TendencySide;
+            Vector3 newPos = (-direction) + _fish.ContainingArea.BaitTransform.position;
+            transform.position = newPos;
+            transform.LookAt(_fish.ContainingArea.BaitTransform);
         }
 
         private void OnBaitFound()

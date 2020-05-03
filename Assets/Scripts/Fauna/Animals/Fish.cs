@@ -10,12 +10,15 @@ namespace Fauna.Animals
     public class Fish : Animal
     {
         protected FishAI _aiBehaviour;
+
+        public Vector3 MouthPivotOffset { get; private set; }
         public FishingArea ContainingArea { get; private set; }
 
         public void Init(AnimalInfo info, FishingArea containingArea)
         {
             base.Init(info);
             ContainingArea = containingArea;
+            MouthPivotOffset = transform.Find("Mouth Pivot").localPosition;
             _aiBehaviour = new FishAI(this);
             Behaviour = DoWander;
         }
@@ -89,6 +92,7 @@ namespace Fauna.Animals
         public void BiteBait()
         {
             ForceStopAI();
+            Behaviour = _aiBehaviour.LockOnBait;
             ContainingArea.FishBite(this);
         }
 
