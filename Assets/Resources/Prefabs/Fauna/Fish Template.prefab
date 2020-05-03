@@ -244,6 +244,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8986469123034881210}
   - component: {fileID: 8100672854329382472}
+  - component: {fileID: 7966022969377830304}
   m_Layer: 0
   m_Name: Fish Template
   m_TagString: Untagged
@@ -281,6 +282,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b558444ad8c0a14fad4b51f8908e2ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!135 &7966022969377830304
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2824495544506865483}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.8
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3777547096033860907
 GameObject:
   m_ObjectHideFlags: 0

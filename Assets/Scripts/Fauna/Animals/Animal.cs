@@ -8,6 +8,8 @@ namespace Fauna.Animals
 {
     public abstract class Animal : MonoBehaviour
     {
+        public const int ANIMAL_LAYER = 10;
+        public const string ANIMAL_LAYER_NAME = "Animal";
         public AnimalInfo Info { get; private set; }
 
         protected float LifespanLeft { get; private set; }
@@ -17,10 +19,15 @@ namespace Fauna.Animals
         private byte LifetimeFactor;
         private ClockEvent LifespanSpeedUpEvent;
 
+        private void Awake()
+        {
+            gameObject.layer = ANIMAL_LAYER;
+        }
+
         public virtual void Init(AnimalInfo info)
         {
             Info = info;
-            
+
             SpawnTime = MainClock.NowTime;
             LifespanLeft = Info.Availability.Lifespan;
             LifetimeFactor = 1;

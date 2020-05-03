@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using Fauna;
+using Fauna.Animals;
 using Fishing.Area;
 using UnityEngine;
 
@@ -14,7 +15,6 @@ namespace Fishing
 
         private int _perlinSeed;
 
-        private float _timeToFishBite;
         private float _fishStamina;
         private float _getawayCount;
 
@@ -22,14 +22,15 @@ namespace Fishing
         private int _reelsRequired;
         private int _reelCount;
 
-        private float NextWindow => (_fish.CatchingValues.Stamina - 1) - _reelCount;
+        private float NextWindow => (FishInfo.CatchingValues.Stamina - 1) - _reelCount;
 
-        public float FishStaminaPercentage => _fishStamina / _fish.CatchingValues.Stamina;
+        public float FishStaminaPercentage => _fishStamina / FishInfo.CatchingValues.Stamina;
         public int Fails { get; private set; }
         public bool FishVulnerable { get; private set; }
 
         protected FishingArea _containingArea;
-        protected AnimalInfo _fish;
+        protected Fish _fish;
+        protected AnimalInfo FishInfo => _fish.Info;
 
         private void Awake()
         {
@@ -44,19 +45,16 @@ namespace Fishing
             SandboxUpdateAction?.Invoke();
         }
 
-        public void Init(AnimalInfo fish, FishingArea callerArea)
+        public void Init(Fish fish, FishingArea callerArea)
         {
             _perlinSeed = UnityEngine.Random.Range(0, int.MaxValue);
             _containingArea = callerArea;
 
             _fish = fish;
-            _fishStamina = fish.CatchingValues.Stamina;
-            _timeToFishBite = UnityEngine.Random.Range(
-                fish.CatchingValues.WaitWindow.x,
-                fish.CatchingValues.WaitWindow.y);
+            _fishStamina = fish.Info.CatchingValues.Stamina;
 
             _reelCount = 0;
-            _reelsRequired = fish.CatchingValues.Stamina;
+            _reelsRequired = fish.Info.CatchingValues.Stamina;
 
             OnFishBiteAction = StartCatchingBehaviour;
 
@@ -67,25 +65,20 @@ namespace Fishing
         #region Sandbox
         protected virtual void OnInit()
         {
-            StartBiteWait();
-        }
-
-        protected void StartBiteWait()
-        {
-            StartCoroutine(CWaitForFishBite());
+            OnFishBite();
         }
 
         protected virtual void DecreaseFishStamina()
         {
             float _factor = (_fishStamina * _perlinSeed) /
-                (_fish.CatchingValues.Stamina * _perlinSeed);
+                (FishInfo.CatchingValues.Stamina * _perlinSeed);
             float _staminaPerlin = Mathf.PerlinNoise(_factor, _factor);
             _fishStamina -= Time.deltaTime * _staminaPerlin;
 
             if (_fishStamina <= NextWindow)
             {
                 FishVulnerable = true;
-                _reelInWindowTimer = _fish.CatchingValues.ReelWindow + (_reelCount * _fish.CatchingValues.ReelWindowIncrease);
+                _reelInWindowTimer = FishInfo.CatchingValues.ReelWindow + (_reelCount * FishInfo.CatchingValues.ReelWindowIncrease);
                 ActiveCatchingAction = WhileOnReelInWindow;
                 OnReelWindow?.Invoke();
                 Debug.LogWarning("Reel window!");
@@ -131,11 +124,6 @@ namespace Fishing
         #endregion
 
         #region Doesnt Matter
-        private IEnumerator CWaitForFishBite()
-        {
-            yield return new WaitForSeconds(_timeToFishBite);
-            OnFishBite();
-        }
 
         private void OnFishBite()
         {
@@ -157,10 +145,10 @@ namespace Fishing
         private void Fail()
         {
             Fails++;
-            if (Fails > _fish.CatchingValues.FailAttempts)
+            if (Fails > FishInfo.CatchingValues.FailAttempts)
                 EndFishing(false);
             else
-                Debug.Log("Failed reel...\n remaining fails: " + (_fish.CatchingValues.FailAttempts - Fails));
+                Debug.Log("Failed reel...\n remaining fails: " + (FishInfo.CatchingValues.FailAttempts - Fails));
         }
 
         protected void EndFishing(bool success)

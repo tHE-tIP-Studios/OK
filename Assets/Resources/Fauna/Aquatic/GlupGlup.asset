@@ -19,9 +19,11 @@ MonoBehaviour:
   _availability:
     _availableMonths: 0
     _availablePhases: 0
+    _spawnChance: 0
+    _lifespan: 0
   _catchingValues:
     _stamina: 3
     _failAttempts: 2
     _reelInWindow: 1.5
     _windowIncreasePerReel: 0
-    _biteWaitWindow: {x: 0, y: 1}
+    _baseBaitInterest: 0

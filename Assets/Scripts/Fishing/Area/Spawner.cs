@@ -18,7 +18,6 @@ namespace Fishing.Area
         public static IEnumerable<Fish> SpawnFish(FishingArea area)
         {
             // Use randomization and time phases in the future
-            Debug.Log("a");
             AnimalInfo chosenInfo = Resources.Load<AnimalInfo>("Fauna/Aquatic/GlupGlup");
 
             for (int i = 0; i < area.Capacity; i++)
@@ -27,14 +26,14 @@ namespace Fishing.Area
                     GameObject.Instantiate(TemplateFish).GetComponent<Fish>();
                 newFish.gameObject.name = chosenInfo.name;
 
-                newFish.transform.position = GetStartPosInArea(area);
+                newFish.transform.position = GetRandomPosInArea(area);
                 newFish.transform.SetParent(area.FishParent);
-                newFish.Init(chosenInfo);
+                newFish.Init(chosenInfo, area);
                 yield return newFish;
             }
         }
 
-        private static Vector3 GetStartPosInArea(FishingArea area)
+        public static Vector3 GetRandomPosInArea(FishingArea area)
         {
             Vector3 startPos = new Vector3(
                 Random.Range(-area.MaxDistanceFromCenter, area.MaxDistanceFromCenter),
@@ -43,7 +42,7 @@ namespace Fishing.Area
             );
 
             if (!area.IsInside(startPos))
-                return GetStartPosInArea(area);
+                return GetRandomPosInArea(area);
             else
                 return startPos;
         }

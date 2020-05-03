@@ -51,7 +51,7 @@ namespace Fishing.Area
 
         private void Start()
         {
-            //FishingStart();
+            FishingStart(null);
         }
 
         private void CreateFishParentObject()
@@ -119,7 +119,9 @@ namespace Fishing.Area
             if (_fishingBehaviourScript != null) return _fishingBehaviourScript;
 
             areaCollider.enabled = false;
-            InitializeFishingBehaviour();
+
+            foreach (Fish f in Fishes)
+                f.FishingStart();
 
             return _fishingBehaviourScript;
         }
@@ -133,12 +135,15 @@ namespace Fishing.Area
             else
                 Debug.Log("Fish Got Away...");
 
+            foreach (Fish f in Fishes)
+                f.FishingEnd();
+
             Destroy(_fishingBehaviourScript.gameObject);
 
             areaCollider.enabled = true;
         }
 
-        private void InitializeFishingBehaviour()
+        public FishingBehaviour FishBite(Fish fish)
         {
             Type chosenBehaviour = default;
 
@@ -156,9 +161,11 @@ namespace Fishing.Area
 
             int _interestedFish = UnityEngine.Random.Range(0, Fishes.Count);
 
-            _fishingBehaviourScript.Init(Fishes[_interestedFish].Info, this);
+            _fishingBehaviourScript.Init(fish, this);
 
             Debug.Log("Started Fishing!");
+
+            return _fishingBehaviourScript;
         }
 
         private void CreateMesh()
