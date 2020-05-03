@@ -8,12 +8,14 @@ namespace Fishing.Rod
 {
     public class FishingRodCast : MonoBehaviour
     {
-        [SerializeField] float _maxStrength = 10f;
+        [SerializeField] float _maxStrength = 16f;
+        [SerializeField] float _minStrength = 4f;
         [SerializeField] float _castStrengthSpeed = 1f;
-        private Floater _floater = default;
+        [SerializeField] Floater _floaterPrefab;
+        [SerializeField] LineHandler _floaterLine;
+        private Floater _currentFloater = default;
         private FishingControls _controls;
         private bool _held;
-        private bool _casted;
         private float _throwStrength;
         private float _timePressing;
         /// <summary>
@@ -22,7 +24,8 @@ namespace Fishing.Rod
         private Vector3 _point;
         private LayerMask _checkMask;
 
-        public bool Casting => _held;
+        public bool Casting =>  _held || Casted;
+        public bool Casted {get; set;}
 
         private void OnEnable()
         {
@@ -37,36 +40,43 @@ namespace Fishing.Rod
         private void Awake()
         {
             _controls = new FishingControls();
-            _controls.Rod.Throw.performed += ctx => UpdateThrowState();
+            _controls.Rod.Throw.performed += ctx => OnButtonPress();
             _controls.Rod.Throw.canceled += ctx => 
                 {
-                    UpdateThrowState(); 
-                    _casted = ValidatePoint();
+                    OnButtonRelease();
+                    Debug.Log(Casted);
+                    if (!Casted)
+                    {
+                        Casted = ValidatePoint();
+                    }
+                    else
+                    {
+                        Casted = !Casted;
+                    }
                 };
             
             _checkMask = LayerMask.GetMask(FishingArea.FISHING_LAYER);
-            _casted = false;
+            Casted = false;
         }
-
-        private void Start() 
+        private void OnButtonPress()
         {
-            _floater = transform.GetComponentRecursive<Floater>();
-        }
-
-        private void UpdateThrowState()
-        {
-            if (_casted)
+            if (Casted)
             {
-                _casted = false;
-                _floater.PullBack();
+                _floaterLine.Release();
+                GameObject.Destroy(_currentFloater.gameObject);
             }
 
-            _held = !_held;
+            _held = true;
+        }
+
+        private void OnButtonRelease()
+        {
+            _held = false;
         }
 
         private void Update()
         {
-            if (_held && !_casted)
+            if (_held && !Casted)
             {
                 // Update point until button is released
                 _point = GetThrowPoint();
@@ -84,6 +94,7 @@ namespace Fishing.Rod
             Vector3 origin;
             // Ping pong distance along time
             _throwStrength = Mathf.PingPong(_timePressing * _castStrengthSpeed, _maxStrength);
+            _throwStrength = Mathf.Clamp(_throwStrength, _minStrength, _maxStrength);
             origin = transform.position;
             origin += transform.forward * _throwStrength;
             // Check position and get the point
@@ -95,7 +106,7 @@ namespace Fishing.Rod
         /// <summary>
         /// Validates the current point and casts the line if possible.
         /// </summary>
-        /// <returns> True if the line can be cast, false otherwise</returns>
+        /// <returns> True if the line was cast, false otherwise</returns>
         private bool ValidatePoint()
         {
             var result = Physics.OverlapSphere(_point, .5f, _checkMask);
@@ -104,7 +115,13 @@ namespace Fishing.Rod
             {
                 if (col.TryGetComponent<FishingArea>(out area))
                 {
-                    _floater.Cast(area, _point);
+                    // Create and throw a new floater.
+                    _currentFloater = Instantiate(_floaterPrefab, _floaterLine.transform.position, 
+                        _floaterLine.transform.rotation);
+                    _floaterLine.NewTarget(_currentFloater.transform);
+                    Debug.Log(_point);
+                    _currentFloater.Cast(area, _point);
+                    Casted = true;
                     return true;
                 }
             }
@@ -114,8 +131,10 @@ namespace Fishing.Rod
 
         private void OnDrawGizmos()
         {
-            Gizmos.color = Color.red;
+            Gizmos.color = Color.green;
             DrawStrength(_maxStrength, 0.5f);
+            Gizmos.color = Color.red;
+            DrawStrength(_minStrength, 0.5f);
             Gizmos.color = Color.blue;
             DrawStrength(_throwStrength, 0.3f);
             Gizmos.DrawSphere(_point, .2f);

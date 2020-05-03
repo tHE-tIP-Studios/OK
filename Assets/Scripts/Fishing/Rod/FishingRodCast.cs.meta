@@ -1,13 +1,5 @@
 fileFormatVersion: 2
-<<<<<<< HEAD
-<<<<<<< HEAD:Assets/Scripts/Fishing/Rod/FishingRodCast.cs.meta
-guid: 8113e10aedb2ce64e83305e97005cd53
-=======
-guid: 6614a8fff60c5f740b647e7729527837
->>>>>>> 210b2c471b11e81f50f61fa7f6faf2087b55767c:Assets/Scripts/Fishing/Area/FishingAreaBehaviourType.cs.meta
-=======
 guid: c72a8967cae333443a92c2515b7cf444
->>>>>>> 210b2c471b11e81f50f61fa7f6faf2087b55767c
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2

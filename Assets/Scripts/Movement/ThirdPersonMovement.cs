@@ -71,16 +71,16 @@ namespace Movement
                 _playerController.Move(movement * Time.deltaTime);
             }
 
-            if (movement.magnitude > 0.2f && !_fishingRod.Casting)
+            if (movement.magnitude > 0.2f)
             {
                 UpdateRotation(movement * Time.deltaTime);
                 _lookDir = _movementDir;
             }
-            else if (_lookDir.magnitude > 0.2f)
-            {
-                Vector3 lookVec = new Vector3(_lookDir.y, 0, _lookDir.x);
-                UpdateRotation(lookVec * Time.deltaTime);
-            }
+            //! else if (_lookDir.magnitude > 0.2f)
+            //! {
+            //!     Vector3 lookVec = new Vector3(_lookDir.y, 0, _lookDir.x);
+            //!     UpdateRotation(lookVec * Time.deltaTime);
+            //! }
         }
 
         private void UpdateRotation(Vector3 moveDir)
