@@ -29,7 +29,7 @@ namespace Fishing
         public bool FishVulnerable { get; private set; }
 
         protected FishingArea _containingArea;
-        protected Animal _fish;
+        protected AnimalInfo _fish;
 
         private void Awake()
         {
@@ -44,7 +44,7 @@ namespace Fishing
             SandboxUpdateAction?.Invoke();
         }
 
-        public void Init(Animal fish, FishingArea callerArea)
+        public void Init(AnimalInfo fish, FishingArea callerArea)
         {
             _perlinSeed = UnityEngine.Random.Range(0, int.MaxValue);
             _containingArea = callerArea;
@@ -64,11 +64,6 @@ namespace Fishing
             OnInit();
         }
 
-        public void GlupGlupInit(FishingArea callerArea)
-        {
-            Init(Resources.Load<Animal>("Fauna/Aquatic/GlupGlup"), callerArea);
-        }
-
         #region Sandbox
         protected virtual void OnInit()
         {
@@ -86,7 +81,6 @@ namespace Fishing
                 (_fish.CatchingValues.Stamina * _perlinSeed);
             float _staminaPerlin = Mathf.PerlinNoise(_factor, _factor);
             _fishStamina -= Time.deltaTime * _staminaPerlin;
-            Debug.Log(_fishStamina);
 
             if (_fishStamina <= NextWindow)
             {

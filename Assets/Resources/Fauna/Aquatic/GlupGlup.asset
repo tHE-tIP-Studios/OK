@@ -24,4 +24,4 @@ MonoBehaviour:
     _failAttempts: 2
     _reelInWindow: 1.5
     _windowIncreasePerReel: 0
-    _biteWaitWindow: {x: 2, y: 6}
+    _biteWaitWindow: {x: 0, y: 1}

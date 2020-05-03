@@ -4,8 +4,8 @@ using Clock;
 
 namespace Fauna
 {
-    [CreateAssetMenu(menuName = "OK/Animal")]
-    public class Animal : ScriptableObject
+    [CreateAssetMenu(menuName = "OK/Animal Info")]
+    public class AnimalInfo : ScriptableObject
     {
         [SerializeField] private AnimalSpecie _specie = default;
         [SerializeField] private string _name = default;

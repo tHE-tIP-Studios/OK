@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Fauna.Animals;
 using UnityEngine;
 using Utilities;
 
@@ -12,15 +15,22 @@ namespace Fishing.Area
         [SerializeField] private FishingMarker[] _markers = null;
         [SerializeField] private Transform _markersParent;
         [SerializeField] private FishingAreaType _areaType = default;
+        [SerializeField] private int _capacity = 2;
 
         private Vector2[] _polygonArray;
         private MeshCollider areaCollider;
 
         private FishingBehaviour _fishingBehaviourScript;
 
+        public Vector3 MidPoint { get; private set; }
+        public float MaxDistanceFromCenter { get; private set; }
+        public Transform FishParent { get; private set; }
+        public List<Fish> Fishes { get; private set; }
+
         public Transform MarkersParent => _markersParent;
         public FishingMarker[] Markers => _markers;
         public FishingAreaType AreaType => _areaType;
+        public int Capacity => _capacity;
 
         public FishingBehaviour ActiveFishingScript => _fishingBehaviourScript;
 
@@ -32,12 +42,55 @@ namespace Fishing.Area
             for (int i = 0; i < _markers.Length; i++)
                 _polygonArray[i] = new Vector2(_markers[i].transform.position.x, _markers[i].transform.position.z);
 
+            GetMidPointAndMaxDistance();
+            CreateFishParentObject();
             CreateMesh();
+
+            Fishes = Spawner.SpawnFish(this).ToList();
         }
 
         private void Start()
         {
             //FishingStart();
+        }
+
+        private void CreateFishParentObject()
+        {
+            FishParent = new GameObject("Fishes").transform;
+            FishParent.SetParent(transform);
+        }
+
+        private void GetMidPointAndMaxDistance()
+        {
+            //Distance 
+            float currentMaxDistance = 0;
+
+            // Get midpoint
+            float allX = 0;
+            float allY = 0;
+            float allZ = 0;
+
+            int length = _markers.Length;
+
+            for (int i = 0; i < length; i++)
+            {
+                // Add to midpoint
+                allX += _markers[i].transform.position.x;
+                allY += _markers[i].transform.position.y;
+                allZ += _markers[i].transform.position.z;
+
+                // Check distance
+                float thisDistance = Vector3.Distance(
+                    MarkersParent.transform.position,
+                    _markers[i].transform.position);
+
+                if (thisDistance > currentMaxDistance)
+                    currentMaxDistance = thisDistance;
+            }
+
+            // Assign
+            MidPoint = new Vector3(allX / length, allY / length, allZ / length);
+            MaxDistanceFromCenter = currentMaxDistance;
         }
 
         // Solution taken from
@@ -61,7 +114,7 @@ namespace Fishing.Area
             return inside;
         }
 
-        public FishingBehaviour FishingStart()
+        public FishingBehaviour FishingStart(Transform baitTransform)
         {
             if (_fishingBehaviourScript != null) return _fishingBehaviourScript;
 
@@ -100,8 +153,10 @@ namespace Fishing.Area
                 (new GameObject("Fishing Behaviour")
                     .AddComponent(chosenBehaviour)) as FishingBehaviour;
             _fishingBehaviourScript.transform.SetParent(transform);
-            //_fishingBehaviourScript.Init(default, this);
-            _fishingBehaviourScript.GlupGlupInit(this);
+
+            int _interestedFish = UnityEngine.Random.Range(0, Fishes.Count);
+
+            _fishingBehaviourScript.Init(Fishes[_interestedFish].Info, this);
 
             Debug.Log("Started Fishing!");
         }
