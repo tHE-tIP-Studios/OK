@@ -20,16 +20,28 @@ namespace Fauna.Animals
             Behaviour = DoWander;
         }
 
+        // Only called when caught, hopefully 
+        public void ForceStopAI()
+        {
+            Behaviour = null;
+            FixedUpdateBehaviour = null;
+        }
+
         public void FishingStart()
         {
             Behaviour += LookForBait;
-            FixedUpdateBehaviour = LookInFront;
+            FixedUpdateBehaviour = LookForOthers;
         }
 
         public void FishingEnd()
         {
             FixedUpdateBehaviour = null;
             Behaviour = DoWander;
+        }
+
+        public void RunFromCenter()
+        {
+
         }
 
         protected override void OnUpdate()
@@ -48,19 +60,19 @@ namespace Fauna.Animals
             _aiBehaviour.DoWander();
         }
 
-        private void LookForBait()
-        {
-            _aiBehaviour.LookForBait(Vector3.zero);
-        }
-
         private void MoveTowardsBait()
         {
             _aiBehaviour.MoveTowardsBait(Vector3.zero);
         }
+
+        private void LookForBait()
+        {
+            _aiBehaviour.LookForBait(Vector3.zero);
+        }
         //* ///
 
         //* Physics based behaviors
-        private void LookInFront()
+        private void LookForOthers()
         {
             _aiBehaviour.LookForAnimalsInFront();
         }
@@ -69,15 +81,14 @@ namespace Fauna.Animals
         //* AI events
         public void BaitFound()
         {
-            ContainingArea.FishInterested();
+            ContainingArea.FishInterested(this);
             Behaviour = MoveTowardsBait;
-            FixedUpdateBehaviour -= LookInFront;
+            FixedUpdateBehaviour -= LookForOthers;
         }
 
         public void BiteBait()
         {
-            Behaviour = null;
-            FixedUpdateBehaviour = null;
+            ForceStopAI();
             ContainingArea.FishBite(this);
         }
 
@@ -86,12 +97,13 @@ namespace Fauna.Animals
             ContainingArea.FishLostInterest();
             Behaviour = DoWander;
             Behaviour += LookForBait;
-            FixedUpdateBehaviour += LookInFront;
+            FixedUpdateBehaviour += LookForOthers;
         }
         //* ///
 
         private void OnDrawGizmos()
         {
+            if (true) return;
             Gizmos.color = Color.gray;
             Gizmos.DrawWireSphere(_aiBehaviour.TargetPoint, FishAI.MIN_DISTANCE);
             Gizmos.DrawLine(transform.position, _aiBehaviour.TargetPoint);

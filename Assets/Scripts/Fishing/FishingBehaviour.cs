@@ -53,7 +53,7 @@ namespace Fishing
             _fish = fish;
             _fishStamina = fish.Info.CatchingValues.Stamina;
 
-            _reelCount = 0;
+            _reelCount = -1; // -1 prevents initial reel from counting
             _reelsRequired = fish.Info.CatchingValues.Stamina;
 
             OnFishBiteAction = StartCatchingBehaviour;
@@ -76,15 +76,41 @@ namespace Fishing
             _fishStamina -= Time.deltaTime * _staminaPerlin;
 
             if (_fishStamina <= NextWindow)
-            {
-                FishVulnerable = true;
-                _reelInWindowTimer = FishInfo.CatchingValues.ReelWindow + (_reelCount * FishInfo.CatchingValues.ReelWindowIncrease);
-                ActiveCatchingAction = WhileOnReelInWindow;
-                OnReelWindow?.Invoke();
-                Debug.LogWarning("Reel window!");
+            { 
+                ReelWindow();
             }
         }
 
+        protected virtual void InitialReelWindow()
+        {
+            FishVulnerable = true;
+            _reelInWindowTimer = FishInfo.CatchingValues.ReelWindow + 1;
+            ActiveCatchingAction = WhileOnInitialReelInWindow;
+            OnReelWindow?.Invoke();
+            Debug.LogWarning("Waiting Initial Reel!");
+        }
+
+        protected virtual void WhileOnInitialReelInWindow()
+        {
+            _reelInWindowTimer -= Time.deltaTime;
+
+            if (_reelInWindowTimer <= 0)
+            {
+                _fishStamina = NextWindow + 1;
+                FishVulnerable = false;
+                Debug.LogWarning("Initial Reel window missed, fish got away...");
+                ActiveCatchingAction = DecreaseFishStamina;
+            }
+        }
+
+        protected virtual void ReelWindow()
+        {
+            FishVulnerable = true;
+            _reelInWindowTimer = FishInfo.CatchingValues.ReelWindow + (_reelCount * FishInfo.CatchingValues.ReelWindowIncrease);
+            ActiveCatchingAction = WhileOnReelInWindow;
+            OnReelWindow?.Invoke();
+            Debug.LogWarning("Reel window!");
+        }
         protected virtual void WhileOnReelInWindow()
         {
             _reelInWindowTimer -= Time.deltaTime;
@@ -127,9 +153,9 @@ namespace Fishing
 
         private void OnFishBite()
         {
-            ActiveCatchingAction = DecreaseFishStamina;
             OnFishBiteAction?.Invoke();
             Debug.LogWarning("We got a bite!");
+            InitialReelWindow();
         }
 
         private void StartCatchingBehaviour()

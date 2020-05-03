@@ -33,7 +33,9 @@ namespace Fishing.Area
         public int Capacity => _capacity;
 
         public FishingBehaviour ActiveFishingScript => _fishingBehaviourScript;
-        public bool BaitTaken { get; private set; }
+
+        public Fish ActiveFish { get; private set; }
+        public bool BaitTaken => ActiveFish != null;
 
         private void Awake()
         {
@@ -119,8 +121,12 @@ namespace Fishing.Area
         {
             if (_fishingBehaviourScript != null) return _fishingBehaviourScript;
 
+            Debug.Log("Started Fishing!");
+
+
             areaCollider.enabled = false;
 
+            ActiveFish = null;
             foreach (Fish f in Fishes)
                 f.FishingStart();
 
@@ -137,21 +143,24 @@ namespace Fishing.Area
             if (_fishingBehaviourScript == null) return;
 
             if (success)
+            {
+                ActiveFish.ForceStopAI();
                 Debug.Log("Fish Caught!");
+            }
             else
                 Debug.Log("Fish Got Away...");
 
             Destroy(_fishingBehaviourScript.gameObject);
         }
 
-        public void FishInterested()
+        public void FishInterested(Fish fish)
         {
-            BaitTaken = true;
+            ActiveFish = fish;
         }
 
         public void FishLostInterest()
         {
-            BaitTaken = false;
+            ActiveFish = null;
         }
 
         public FishingBehaviour FishBite(Fish fish)
@@ -173,8 +182,6 @@ namespace Fishing.Area
             int _interestedFish = UnityEngine.Random.Range(0, Fishes.Count);
 
             _fishingBehaviourScript.Init(fish, this);
-
-            Debug.Log("Started Fishing!");
 
             return _fishingBehaviourScript;
         }
