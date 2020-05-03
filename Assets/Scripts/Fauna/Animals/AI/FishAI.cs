@@ -37,7 +37,7 @@ namespace Fauna.Animals.AI
             _baitSpeedFactor = 0.5f;
             _animalMask = LayerMask.GetMask(Animal.ANIMAL_LAYER_NAME);
             _timeOfLooseInterest = Time.unscaledTime;
-            GetNewPoint();        
+            GetNewPoint();
         }
 
         public void DoWander(float moveSpeed = 1, float rotationSpeed = 0.6f)
@@ -61,7 +61,7 @@ namespace Fauna.Animals.AI
             if (Physics.Raycast(transform.position, transform.forward, MIN_DISTANCE * 2, _animalMask))
             {
                 _speedFactor -= Time.fixedDeltaTime;
-                if (_speedFactor <= 0)
+                if (_speedFactor < 0.1f)
                 {
                     _speedFactor = 0.5f;
                     // Skip point
@@ -76,7 +76,7 @@ namespace Fauna.Animals.AI
 
         public void LookForBait(Vector3 baitPosition)
         {
-            if (IgnoreBait) return;
+            if (IgnoreBait || _fish.ContainingArea.BaitTaken) return;
 
             Vector3 directionToTarget = transform.position - baitPosition;
             float angle = Vector3.Angle(transform.forward, directionToTarget);

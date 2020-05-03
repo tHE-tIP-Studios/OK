@@ -26,4 +26,4 @@ MonoBehaviour:
     _failAttempts: 2
     _reelInWindow: 1.5
     _windowIncreasePerReel: 0
-    _baseBaitInterest: 0
+    _baseBaitInterest: 1

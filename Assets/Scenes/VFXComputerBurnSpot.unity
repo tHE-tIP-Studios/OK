@@ -454,7 +454,7 @@ MonoBehaviour:
   - {fileID: 370627993}
   _markersParent: {fileID: 228487272}
   _areaType: 0
-  _capacity: 1
+  _capacity: 6
 --- !u!4 &1054671456
 Transform:
   m_ObjectHideFlags: 0

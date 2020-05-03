@@ -33,6 +33,7 @@ namespace Fishing.Area
         public int Capacity => _capacity;
 
         public FishingBehaviour ActiveFishingScript => _fishingBehaviourScript;
+        public bool BaitTaken { get; private set; }
 
         private void Awake()
         {
@@ -128,6 +129,11 @@ namespace Fishing.Area
 
         public void FishingEnd(bool success)
         {
+            foreach (Fish f in Fishes)
+                f.FishingEnd();
+
+            areaCollider.enabled = true;
+
             if (_fishingBehaviourScript == null) return;
 
             if (success)
@@ -135,12 +141,17 @@ namespace Fishing.Area
             else
                 Debug.Log("Fish Got Away...");
 
-            foreach (Fish f in Fishes)
-                f.FishingEnd();
-
             Destroy(_fishingBehaviourScript.gameObject);
+        }
 
-            areaCollider.enabled = true;
+        public void FishInterested()
+        {
+            BaitTaken = true;
+        }
+
+        public void FishLostInterest()
+        {
+            BaitTaken = false;
         }
 
         public FishingBehaviour FishBite(Fish fish)

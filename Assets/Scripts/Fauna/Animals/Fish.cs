@@ -69,6 +69,7 @@ namespace Fauna.Animals
         //* AI events
         public void BaitFound()
         {
+            ContainingArea.FishInterested();
             Behaviour = MoveTowardsBait;
             FixedUpdateBehaviour -= LookInFront;
         }
@@ -82,6 +83,7 @@ namespace Fauna.Animals
 
         public void LooseInterest()
         {
+            ContainingArea.FishLostInterest();
             Behaviour = DoWander;
             Behaviour += LookForBait;
             FixedUpdateBehaviour += LookInFront;
