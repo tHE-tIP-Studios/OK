@@ -5,7 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public struct CatchValues
 {    
-    [Range(2, 10)]
+    [Range(2, 20)]
     [SerializeField] private int _stamina;
     [SerializeField] private int _failAttempts;
     [SerializeField] private float _reelInWindow;
@@ -17,4 +17,13 @@ public struct CatchValues
     public float ReelWindow => _reelInWindow;
     public float ReelWindowIncrease => _windowIncreasePerReel;
     public float BaitInterest => _baseBaitInterest;
+
+    public CatchValues(int stamina, int fails, float reelWindow, float windIncrease, float interest)
+    {
+        _stamina = stamina;
+        _failAttempts = fails;
+        _reelInWindow = reelWindow;
+        _windowIncreasePerReel = windIncrease;
+        _baseBaitInterest = interest;
+    }
 }
