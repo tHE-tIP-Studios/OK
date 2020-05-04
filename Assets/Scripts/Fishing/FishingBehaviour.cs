@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using Fauna;
+using Fauna.Animals;
 using Fishing.Area;
 using UnityEngine;
 
@@ -9,10 +10,13 @@ namespace Fishing
     public class FishingBehaviour : MonoBehaviour
     {
         private const float GETAWAY_THRESHOLD = 1;
-        private FishingControls _controls;
+        private FishingControls _fishingControls;
+        private PlayerControls _playerControls;
         private bool _reelPressed;
 
-        private float _timeToFishBite;
+        private int _staminaPerlinSeed;
+        private int _steerPerlinSeed;
+
         private float _fishStamina;
         private float _getawayCount;
 
@@ -20,19 +24,30 @@ namespace Fishing
         private int _reelsRequired;
         private int _reelCount;
 
-        private float NextWindow => (_fish.CatchingValues.Stamina - 1) - _reelCount;
+        private float NextWindow => (FishInfo.CatchingValues.Stamina - 1) - _reelCount;
 
-        protected int Fails { get; private set; }
-        protected bool FishVulnerable { get; private set; }
+        public float FishStaminaPercentage => _fishStamina / FishInfo.CatchingValues.Stamina;
+        public int TendencySide => _fishTendencySide;
+        public int Fails { get; private set; }
+        public bool FishVulnerable { get; private set; }
+        public Vector2 BaitVelocityDirection { get; private set; }
 
-        protected FishingArea _containingArea;
-        protected Animal _fish;
+        protected Vector2 _playerSteerDir;
+        protected float _steerDir;
+        protected int _fishTendencySide;
+
+        protected FishingArea _callerArea;
+        protected Fish _fish;
+        protected AnimalInfo FishInfo => _fish.Info;
 
         private void Awake()
         {
-            _controls = new FishingControls();
-            _controls.Rod.Reel.performed += ctx => UpdateReelState();
-            _controls.Rod.Reel.canceled += ctx => UpdateReelState();
+            _fishingControls = new FishingControls();
+            _fishingControls.Rod.Reel.performed += ctx => UpdateReelState();
+            _fishingControls.Rod.Reel.canceled += ctx => UpdateReelState();
+
+            _playerControls = new PlayerControls();
+            _playerControls.Movement.Look.performed += ctx => _playerSteerDir = ctx.ReadValue<Vector2>();
         }
 
         private void Update()
@@ -41,19 +56,21 @@ namespace Fishing
             SandboxUpdateAction?.Invoke();
         }
 
-        public void Init(Animal fish, FishingArea callerArea)
+        public void Init(Fish fish, FishingArea callerArea)
         {
-            _containingArea = callerArea;
+            _staminaPerlinSeed = UnityEngine.Random.Range(0, 1000);
+            _steerPerlinSeed = UnityEngine.Random.Range(0, 1000);
+
+            _fishTendencySide = UnityEngine.Random.Range(0.0f, 1.0f) >= 0.5f ?
+                -1 : 1;
+
+            _callerArea = callerArea;
 
             _fish = fish;
-            _fishStamina = fish.CatchingValues.Stamina;
-            _timeToFishBite = UnityEngine.Random.Range(
-                fish.CatchingValues.WaitWindow.x,
-                fish.CatchingValues.WaitWindow.y);
+            _fishStamina = fish.Info.CatchingValues.Stamina;
 
-            _reelCount = 0;
-            _reelsRequired = fish.CatchingValues.Stamina;
-            Debug.Log(_reelsRequired);
+            _reelCount = -1; // -1 prevents initial reel from counting
+            _reelsRequired = fish.Info.CatchingValues.Stamina;
 
             OnFishBiteAction = StartCatchingBehaviour;
 
@@ -61,42 +78,60 @@ namespace Fishing
             OnInit();
         }
 
-        public void GlupGlupInit(FishingArea callerArea)
-        {
-            Init(Resources.Load<Animal>("Fauna/Aquatic/GlupGlup"), callerArea);
-        }
-
         #region Sandbox
         protected virtual void OnInit()
         {
-            StartBiteWait();
-        }
-
-        protected void StartBiteWait()
-        {
-            StartCoroutine(CWaitForFishBite());
+            OnFishBite();
         }
 
         protected virtual void DecreaseFishStamina()
         {
-            _fishStamina -= Time.deltaTime;
-            if (_fishStamina <= 0)
+            _fishStamina -= GetStaminaDecreaseValue();
+            DoFishMovement();
+
+            if (_fishStamina <= NextWindow)
             {
-                UpdateAction = null;
-                EndFishing(true);
-            }
-            else if (_fishStamina <= NextWindow)
-            {
-                FishVulnerable = true;
-                _reelInWindowTimer = _fish.CatchingValues.ReelWindow + (_reelCount * _fish.CatchingValues.ReelWindowIncrease);
-                ActiveCatchingAction = WhileOnReelInWindow;
-                Debug.LogWarning("Reel window!");
+                ReelWindow();
             }
         }
 
+        protected virtual void InitialReelWindow()
+        {
+            FishVulnerable = true;
+            _reelInWindowTimer = FishInfo.CatchingValues.ReelWindow + 1;
+            ActiveCatchingAction = WhileOnInitialReelInWindow;
+            OnReelWindow?.Invoke();
+            BaitVelocityDirection = new Vector2(BaitVelocityDirection.x, 1);
+            Debug.LogWarning("Waiting Initial Reel!");
+        }
+
+        protected virtual void WhileOnInitialReelInWindow()
+        {
+            _reelInWindowTimer -= Time.deltaTime;
+            DoSidewaysFishMovement();
+
+            if (_reelInWindowTimer <= 0)
+            {
+                _fishStamina = NextWindow + 1;
+                FishVulnerable = false;
+                Debug.LogWarning("Initial Reel window missed, fish got away...");
+                ActiveCatchingAction = DecreaseFishStamina;
+                Fail(true);
+            }
+        }
+
+        protected virtual void ReelWindow()
+        {
+            FishVulnerable = true;
+            _reelInWindowTimer = FishInfo.CatchingValues.ReelWindow + (_reelCount * FishInfo.CatchingValues.ReelWindowIncrease);
+            ActiveCatchingAction = WhileOnReelInWindow;
+            OnReelWindow?.Invoke();
+            Debug.LogWarning("Reel window!");
+        }
         protected virtual void WhileOnReelInWindow()
         {
             _reelInWindowTimer -= Time.deltaTime;
+            DoSidewaysFishMovement();
 
             if (_reelInWindowTimer <= 0)
             {
@@ -109,35 +144,111 @@ namespace Fishing
             }
         }
 
+        protected virtual float GetStaminaDecreaseValue()
+        {
+            float randomStaminaFactor = (_fishStamina * _staminaPerlinSeed) /
+                (FishInfo.CatchingValues.Stamina * _staminaPerlinSeed);
+            float staminaPerlin = Mathf.PerlinNoise(randomStaminaFactor, randomStaminaFactor);
+
+            return Time.deltaTime * staminaPerlin;
+        }
+
+        protected virtual void DoFishMovement()
+        {
+            DoSidewaysFishMovement();
+            DoForwardFishMovement();
+        }
+
+        protected virtual void DoForwardFishMovement()
+        {
+            float randomPercentageFactor = (_fishStamina * _steerPerlinSeed) /
+                (FishInfo.CatchingValues.Stamina * _steerPerlinSeed);
+            float forwardPerlin = Mathf.PerlinNoise(randomPercentageFactor * 5, randomPercentageFactor * 5);
+            float forward = forwardPerlin * (FishStaminaPercentage + 0.1f);
+            Vector3 newPosition = _callerArea.BaitTransform.position +
+                _callerArea.BaitTransform.forward * (forward * Time.deltaTime);
+
+            _callerArea.BaitTransform.position = newPosition;
+
+            BaitVelocityDirection = new Vector2(BaitVelocityDirection.x, forward);
+        }
+
+        protected virtual void DoSidewaysFishMovement()
+        {
+            float sidewaysPerlin = Mathf.PerlinNoise((Time.time + _steerPerlinSeed) * 5, (Time.time + _steerPerlinSeed) * 5);
+
+            // Normalize result
+            _steerDir = (sidewaysPerlin - 0.5f) * 2;
+
+            BaitVelocityDirection = new Vector2(_steerDir * _fishTendencySide, BaitVelocityDirection.y);
+
+            float sideways = _steerDir * 3;
+            sideways *= Time.deltaTime;
+
+            Vector3 newPosition = _callerArea.BaitTransform.position +
+                (_callerArea.BaitTransform.right * sideways) * _fishTendencySide;
+
+            _callerArea.BaitTransform.position = newPosition;
+        }
+
         protected virtual void ReelIn()
         {
             if (FishVulnerable)
             {
                 _reelCount++;
-                ActiveCatchingAction = DecreaseFishStamina;
+                FishVulnerable = false;
                 OnReelSuccess?.Invoke();
                 Debug.Log("Reel window taken!");
+                _fishTendencySide *= -1;
+                BaitVelocityDirection = new Vector2(BaitVelocityDirection.x, -1);
+
+                if (_reelCount == _reelsRequired)
+                {
+                    UpdateAction = null;
+                    //! move towards player and not back in the future
+                    LeanTween.move(
+                            _callerArea.BaitTransform.gameObject,
+                            _callerArea.BaitTransform.position - (_callerArea.BaitTransform.forward * (1.3f - FishStaminaPercentage)),
+                            .7f * (1.3f - FishStaminaPercentage))
+                        .setEaseOutCirc()
+                        .setOnComplete(FishCaught);
+                }
+                else
+                {
+                    //! move towards player and not back in the future
+                    LeanTween.move(
+                            _callerArea.BaitTransform.gameObject,
+                            _callerArea.BaitTransform.position - (_callerArea.BaitTransform.forward * (1.3f - FishStaminaPercentage)),
+                            .7f * (1.3f - FishStaminaPercentage))
+                        .setEaseOutBack()
+                        .setOnComplete(RestartStaminaDrain);
+                }
             }
             else
             {
                 Fail();
                 OnReelFail?.Invoke();
             }
+
+            void RestartStaminaDrain()
+            {
+                ActiveCatchingAction = DecreaseFishStamina;
+            }
+
+            void FishCaught()
+            {
+                EndFishing(true);
+            }
         }
         #endregion
 
         #region Doesnt Matter
-        private IEnumerator CWaitForFishBite()
-        {
-            yield return new WaitForSeconds(_timeToFishBite);
-            OnFishBite();
-        }
 
         private void OnFishBite()
         {
-            ActiveCatchingAction = DecreaseFishStamina;
             OnFishBiteAction?.Invoke();
             Debug.LogWarning("We got a bite!");
+            InitialReelWindow();
         }
 
         private void StartCatchingBehaviour()
@@ -150,19 +261,20 @@ namespace Fishing
             ActiveCatchingAction?.Invoke();
         }
 
-        private void Fail()
+        private void Fail(bool forceFinish = false)
         {
             Fails++;
-            if (Fails > _fish.CatchingValues.FailAttempts)
+            if (Fails > FishInfo.CatchingValues.FailAttempts || forceFinish)
                 EndFishing(false);
             else
-                Debug.Log("Failed reel...\n remaining fails: " + (_fish.CatchingValues.FailAttempts - Fails));
+
+                Debug.Log("Failed reel...\n remaining fails: " + (FishInfo.CatchingValues.FailAttempts - Fails));
         }
 
         protected void EndFishing(bool success)
         {
             OnCatchEnded?.Invoke(success);
-            _containingArea.FishingEnd(success);
+            _callerArea.FishingEnd(success);
         }
 
         private void UpdateReelState()
@@ -175,14 +287,20 @@ namespace Fishing
 
         private void OnEnable()
         {
-            _controls.Enable();
+            _fishingControls.Enable();
         }
 
         private void OnDisable()
         {
-            _controls.Disable();
+            _fishingControls.Disable();
         }
         #endregion
+
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawRay(_callerArea.BaitTransform.position, BaitVelocityDirection);
+        }
 
         private Action UpdateAction;
 
@@ -192,6 +310,7 @@ namespace Fishing
         protected Action OnReelSuccess;
         protected Action OnReelFail;
 
+        protected Action OnReelWindow;
         protected Action OnReelWindowMissed;
 
         private Action ActiveCatchingAction;

@@ -10,11 +10,11 @@ public struct CatchValues
     [SerializeField] private int _failAttempts;
     [SerializeField] private float _reelInWindow;
     [SerializeField] private float _windowIncreasePerReel;
-    [SerializeField] private Vector2 _biteWaitWindow;
+    [SerializeField] private float _baseBaitInterest;
 
     public int Stamina => _stamina;
     public int FailAttempts => _failAttempts;
     public float ReelWindow => _reelInWindow;
     public float ReelWindowIncrease => _windowIncreasePerReel;
-    public Vector2 WaitWindow => _biteWaitWindow;
+    public float BaitInterest => _baseBaitInterest;
 }
