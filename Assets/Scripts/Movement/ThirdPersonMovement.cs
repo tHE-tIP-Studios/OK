@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using Fishing.Rod;
+using Movement.Cameras;
 
 namespace Movement
 {
@@ -8,6 +9,7 @@ namespace Movement
         [SerializeField] private float _maxSpeed = 5f;
         [SerializeField] private float _angularSpeed = 10f;
         [SerializeField] private float _crouchModifier = .5f;
+        [SerializeField] private CameraSwitch _switcher;
         private float _speed;
         private CharacterController _playerController;
         private FishingRodCast _fishingRod;
@@ -32,8 +34,10 @@ namespace Movement
             _playerControls.Movement.Direction.performed += ctx => _movementDir = ctx.ReadValue<Vector2>();
             _playerControls.Movement.Look.performed += ctx => _lookDir = ctx.ReadValue<Vector2>();
             _playerControls.Movement.Direction.canceled += ctx => _movementDir = default;
-            _playerControls.Movement.Crouch.performed += ctx => _crouching = ctx.ReadValueAsButton();
-            _playerControls.Movement.Crouch.canceled += ctx => _crouching = ctx.ReadValueAsButton();
+            _playerControls.Movement.Crouch.performed += ctx => 
+                {_crouching = ctx.ReadValueAsButton(); _switcher.TurnOnCrouch();};
+            _playerControls.Movement.Crouch.canceled += ctx => 
+                {_crouching = ctx.ReadValueAsButton(); _switcher.TurnOnWalkCamera();};
 
             _playerController = GetComponent<CharacterController>();
             _fishingRod = GetComponent<FishingRodCast>();

@@ -12,6 +12,8 @@ namespace Fishing.Rod
         private Transform _floaterPos;
         private VerletLinePoint[] _points;
 
+        public Transform EndPoint {get; set;}
+
         private void InitRope()
         {
             Vector3 pointPosition = _floaterPos.position;
@@ -53,7 +55,7 @@ namespace Fishing.Rod
         {
             // FIrst rope section to the tip of the rod
             _points[0].Pos = transform.position;
-            _points[_points.Length - 1].Pos =  _floaterPos.position;
+            _points[_points.Length - 1].Pos =  EndPoint.position;
             UpdateVerlet(dt);
 
             // Check for the currect section lenght
@@ -107,6 +109,7 @@ namespace Fishing.Rod
         public void NewTarget(Transform target)
         {
             _floaterPos = target;
+            EndPoint = target;
             Floater tempF = _floaterPos.GetComponent<Floater>();
             
             // Calculate line distance via hypotenuse with player height

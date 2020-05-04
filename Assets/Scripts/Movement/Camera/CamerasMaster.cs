@@ -35,6 +35,7 @@ namespace Movement.Cameras
                 else
                 {
                     _cameras[i].SetActive(true);
+
                     _activeCamera = _cameras[i];
                 }
             }
