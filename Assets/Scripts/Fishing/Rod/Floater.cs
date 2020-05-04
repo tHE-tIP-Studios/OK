@@ -1,7 +1,7 @@
+using System;
 using System.Collections;
 using Fishing.Area;
 using UnityEngine;
-using System;
 
 namespace Fishing.Rod
 {
@@ -63,10 +63,12 @@ namespace Fishing.Rod
 
         private void OnWaterLand()
         {
+            // Wobble animation
+            LeanTween.moveY(gameObject, transform.position.y - 0.5f, .85f).setEasePunch();
             _currentArea.FishingStart(transform, _onFail);
         }
 
-        private void OnDestroy()
+        private void OnDisable()
         {
             if (!Application.isPlaying) return;
             _currentArea?.FishingEnd(false);

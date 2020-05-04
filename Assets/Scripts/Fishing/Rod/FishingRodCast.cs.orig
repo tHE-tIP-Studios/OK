@@ -63,14 +63,7 @@ namespace Fishing.Rod
         {
             if (Casted)
             {
-<<<<<<< HEAD
-                _floaterLine.Release();
-                _switch.TurnOnWalkCamera();
-                if (_currentFloater != null)
-                    GameObject.Destroy(_currentFloater.gameObject);
-=======
-                PullBack();    
->>>>>>> a059dbc406c94a31049a0cd4eef646f44fc1ef43
+                PullBack();
             }
 
             _held = true;
@@ -80,7 +73,17 @@ namespace Fishing.Rod
         {
             _floaterLine.Release();
             _switch.TurnOnWalkCamera();
-            GameObject.Destroy(_currentFloater.gameObject);
+            if (_currentFloater != null)
+                GameObject.Destroy(_currentFloater.gameObject);
+<<<<<<< HEAD
+=======
+        }
+
+        private void OnFail()
+        {
+            PullBack();
+>>>>>>> 777b6ea7a57a2f38054de2861a06f74c08b1ff96
+            Casted = false;
         }
 
         private void OnButtonRelease()
@@ -133,7 +136,7 @@ namespace Fishing.Rod
                     _currentFloater = Instantiate(_floaterPrefab, _floaterLine.transform.position,
                         _floaterLine.transform.rotation);
                     Debug.Log(_point);
-                    _currentFloater.Cast(area, _point, PullBack);
+                    _currentFloater.Cast(area, _point, OnFail);
                     _floaterLine.NewTarget(_currentFloater.transform);
                     _switch.TurnOnFishingCamera(_currentFloater.transform);
                     Casted = true;

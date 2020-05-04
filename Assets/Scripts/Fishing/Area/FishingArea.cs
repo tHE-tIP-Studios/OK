@@ -142,6 +142,7 @@ namespace Fishing.Area
                 f.FishingEnd();
 
             areaCollider.enabled = true;
+            Debug.Log("Stopped fishing.");
 
             if (_fishingBehaviourScript == null) return;
 
