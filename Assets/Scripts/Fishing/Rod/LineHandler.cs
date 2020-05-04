@@ -5,18 +5,28 @@ namespace Fishing.Rod
     public class LineHandler : MonoBehaviour
     {
         [SerializeField] private float SECTION_LENGTH = 1f;
-        [SerializeField] private int _lineResolution = 10;
+        [SerializeField] private int _extendedResolution = 10;
         [SerializeField] private Material _lineMaterial;
-        [SerializeField] private float _dampening = .2f;
+        [SerializeField] private float _dampeningAmount = .1f;
         private LineRenderer _line;
         private Transform _floaterPos;
         private VerletLinePoint[] _points;
+        private int _resolution;
+        private float _dampening;
+        private bool _hang;
+
+        public Transform EndPoint {get; set;}
+
+        private void Start() 
+        {
+            _dampening = _dampeningAmount;    
+        }
 
         private void InitRope()
         {
             Vector3 pointPosition = _floaterPos.position;
 
-            for (int i = 0; i < _lineResolution; i++)
+            for (int i = 0; i < _resolution; i++)
             {
                 _points[i] = new VerletLinePoint(pointPosition, Physics.gravity);
 
@@ -42,7 +52,7 @@ namespace Fishing.Rod
 
         private void DisplayRope()
         {
-            for (int i = 0; i < _lineResolution; i++)
+            for (int i = 0; i < _resolution; i++)
             {
                 _line.SetPosition(i, _points[i].Pos);
             }
@@ -53,7 +63,10 @@ namespace Fishing.Rod
         {
             // FIrst rope section to the tip of the rod
             _points[0].Pos = transform.position;
-            _points[_points.Length - 1].Pos =  _floaterPos.position;
+            if (_hang)
+                EndPoint.position = _points[_resolution - 1].Pos;
+            else
+                _points[_resolution - 1].Pos =  EndPoint.position;
             UpdateVerlet(dt);
 
             // Check for the currect section lenght
@@ -66,7 +79,7 @@ namespace Fishing.Rod
 
         private void UpdateConstrains()
         {
-            for (int i = 0; i < _lineResolution - 1; i++)
+            for (int i = 0; i < _resolution - 1; i++)
             {
                 ConstrainLine(ref _points[i], ref _points[i + 1], SECTION_LENGTH);
             }
@@ -86,7 +99,7 @@ namespace Fishing.Rod
 
         private void UpdateVerlet(float dt)
         {
-            for (int i = 0; i < _lineResolution; i++)
+            for (int i = 0; i < _resolution; i++)
             {
                 Verlet(ref _points[i], dt);
             }
@@ -104,21 +117,24 @@ namespace Fishing.Rod
             point.OldPos = temp;
         }
 
-        public void NewTarget(Transform target)
+        public void NewTarget(Transform target, float customDampening = 0.0f, bool hang = false)
         {
+            _hang = hang;
             _floaterPos = target;
+            EndPoint = target;
             Floater tempF = _floaterPos.GetComponent<Floater>();
             
+            _resolution = _extendedResolution;
             // Calculate line distance via hypotenuse with player height
             Vector3 groundPos = transform.position;
             groundPos.y = tempF.Point.y;
             float a = Vector3.Distance(tempF.Point, groundPos);
             float b = transform.position.y;
-            _lineResolution = Mathf.FloorToInt(Mathf.Sqrt((a*a) + (b*b)));
-            _lineResolution *=2;
-            _lineResolution += 2;
-            Debug.Log(_lineResolution);
-            _points = new VerletLinePoint[_lineResolution];
+            _resolution = Mathf.FloorToInt(Mathf.Sqrt((a*a) + (b*b)));
+            _resolution *=2;
+            _resolution += 2;
+            Debug.Log(_resolution);
+            _points = new VerletLinePoint[_resolution];
             gameObject.AddComponent<LineRenderer>();
             _line = GetComponent<LineRenderer>();
             _line.material = _lineMaterial;
@@ -126,8 +142,10 @@ namespace Fishing.Rod
             _line.endWidth = .02f;
             _line.SetPosition(0, transform.position);
 
-            _line.positionCount = _lineResolution;
+            _line.positionCount = _resolution;
             InitRope();
+            if (customDampening != 0.0f) _dampening = customDampening;
+            else _dampening = _dampeningAmount;
         }
 
         public void Release()

@@ -17,10 +17,15 @@ namespace Fishing.Rod
         public void Cast(FishingArea area, Vector3 pointToReach, Action onFail)
         {
             Point = pointToReach;
-            StartCoroutine(MoveTo(pointToReach, transform.position, 1.5f));
+            StartCoroutine(MoveTo(pointToReach, transform.position, 2f));
             transform.parent = null;
             _onFail = onFail;
             _currentArea = area;
+        }
+
+        public void ReleaseFish()
+        {
+            _currentArea.ActiveFish?.FishingEnd();
         }
 
         public void FollowTarget(Transform target)

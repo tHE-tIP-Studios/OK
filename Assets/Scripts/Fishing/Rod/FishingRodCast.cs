@@ -65,16 +65,26 @@ namespace Fishing.Rod
             {
                 PullBack();
             }
-
             _held = true;
         }
 
         private void PullBack()
         {
-            _floaterLine.Release();
+            //_floaterLine.Release();
             _switch.TurnOnWalkCamera();
+            _currentFloater.ReleaseFish();
             if (_currentFloater != null)
-                GameObject.Destroy(_currentFloater.gameObject);
+            {
+                LeanTween.move(_currentFloater.gameObject, _floaterLine.transform, 0.3f).
+                setOnComplete(x=> 
+                {
+                    GameObject.Destroy(_currentFloater.gameObject);
+                    
+                    _currentFloater = Instantiate(_floaterPrefab, _floaterLine.transform.position,
+                        _floaterLine.transform.rotation);
+                    _floaterLine.NewTarget(_currentFloater.transform, .5f, true);
+                });
+            }
         }
 
         private void OnFail()
@@ -129,6 +139,7 @@ namespace Fishing.Rod
             {
                 if (col.TryGetComponent<FishingArea>(out area))
                 {
+                    if (_currentFloater) Destroy(_currentFloater.gameObject);
                     // Create and throw a new floater.
                     _currentFloater = Instantiate(_floaterPrefab, _floaterLine.transform.position,
                         _floaterLine.transform.rotation);
