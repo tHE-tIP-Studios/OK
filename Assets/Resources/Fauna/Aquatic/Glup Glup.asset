@@ -12,9 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 100cc103b48892c449d5b957402c27da, type: 3}
   m_Name: Glup Glup
   m_EditorClassIdentifier: 
+  _fishGFX: {fileID: 7885725086291902592, guid: 6cc644f582ccb4440b332b0eb42ce768,
+    type: 3}
+  _id: 0
   _specie: 0
+  _location: 0
   _name: Glup Glup
-  _briefDescripion: 'Glup Glup Glup Glup '
+  _subtitle: 
   _detailedDescripion: 'Glup Glup Glup Glup Glup Glup '
   _availability:
     _availableMonths: 0

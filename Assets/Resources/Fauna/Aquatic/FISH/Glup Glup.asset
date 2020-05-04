@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 100cc103b48892c449d5b957402c27da, type: 3}
   m_Name: Glup Glup
   m_EditorClassIdentifier: 
+  _fishGFX: {fileID: 2468671907497417028, guid: c3632a5763b39bc40b010cc5cf4fdef8,
+    type: 3}
   _id: 1
   _specie: 0
   _location: 1
