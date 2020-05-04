@@ -55,7 +55,7 @@ namespace Fishing.Area
 
         private void Start()
         {
-            FishingStart(GameObject.Find("Dummy Bait").transform);
+            //FishingStart(GameObject.Find("Dummy Bait").transform);
         }
 
         private void CreateFishParentObject()
