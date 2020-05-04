@@ -1,6 +1,6 @@
-using UnityEngine;
-using Fishing.Area;
 using System.Collections;
+using Fishing.Area;
+using UnityEngine;
 
 namespace Fishing.Rod
 {
@@ -8,14 +8,16 @@ namespace Fishing.Rod
     {
         private Transform _target;
         private Vector3 _mid;
+        private FishingArea _currentArea;
 
-        public Vector3 Point {get; private set;}
+        public Vector3 Point { get; private set; }
 
         public void Cast(FishingArea area, Vector3 pointToReach)
         {
             Point = pointToReach;
             StartCoroutine(MoveTo(pointToReach, transform.position, 1.5f));
             transform.parent = null;
+            _currentArea = area;
         }
 
         public void FollowTarget(Transform target)
@@ -53,6 +55,18 @@ namespace Fishing.Rod
                 time += Time.deltaTime;
                 yield return null;
             }
+            OnWaterLand();
+        }
+
+        private void OnWaterLand()
+        {
+            _currentArea.FishingStart(transform);
+        }
+
+        private void OnDestroy()
+        {
+            if (!Application.isPlaying) return;
+            _currentArea?.FishingEnd(false);
         }
     }
 }

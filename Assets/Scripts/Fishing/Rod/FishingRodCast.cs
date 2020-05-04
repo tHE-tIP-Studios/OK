@@ -1,8 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using Fishing.Area;
 using Movement.Cameras;
+using UnityEngine;
 
 namespace Fishing.Rod
 {
@@ -13,7 +13,7 @@ namespace Fishing.Rod
         [SerializeField] float _castStrengthSpeed = 1f;
         [SerializeField] Floater _floaterPrefab;
         [SerializeField] LineHandler _floaterLine;
-        [SerializeField] CameraSwitch _switch; 
+        [SerializeField] CameraSwitch _switch;
         private Floater _currentFloater = default;
         private FishingControls _controls;
         private bool _held;
@@ -25,8 +25,8 @@ namespace Fishing.Rod
         private Vector3 _point;
         private LayerMask _checkMask;
 
-        public bool Casting =>  _held || Casted;
-        public bool Casted {get; set;}
+        public bool Casting => _held || Casted;
+        public bool Casted { get; set; }
 
         private void OnEnable()
         {
@@ -42,20 +42,20 @@ namespace Fishing.Rod
         {
             _controls = new FishingControls();
             _controls.Rod.Throw.performed += ctx => OnButtonPress();
-            _controls.Rod.Throw.canceled += ctx => 
+            _controls.Rod.Throw.canceled += ctx =>
+            {
+                OnButtonRelease();
+                Debug.Log(Casted);
+                if (!Casted)
                 {
-                    OnButtonRelease();
-                    Debug.Log(Casted);
-                    if (!Casted)
-                    {
-                        Casted = ValidatePoint();
-                    }
-                    else
-                    {
-                        Casted = !Casted;
-                    }
-                };
-            
+                    Casted = ValidatePoint();
+                }
+                else
+                {
+                    Casted = !Casted;
+                }
+            };
+
             _checkMask = LayerMask.GetMask(FishingArea.FISHING_LAYER);
             Casted = false;
         }
@@ -65,7 +65,8 @@ namespace Fishing.Rod
             {
                 _floaterLine.Release();
                 _switch.TurnOnWalkCamera();
-                GameObject.Destroy(_currentFloater.gameObject);
+                if (_currentFloater != null)
+                    GameObject.Destroy(_currentFloater.gameObject);
             }
 
             _held = true;
@@ -113,12 +114,12 @@ namespace Fishing.Rod
         {
             var result = Physics.OverlapSphere(_point, .5f, _checkMask);
             FishingArea area;
-            foreach(Collider col in result)
+            foreach (Collider col in result)
             {
                 if (col.TryGetComponent<FishingArea>(out area))
                 {
                     // Create and throw a new floater.
-                    _currentFloater = Instantiate(_floaterPrefab, _floaterLine.transform.position, 
+                    _currentFloater = Instantiate(_floaterPrefab, _floaterLine.transform.position,
                         _floaterLine.transform.rotation);
                     Debug.Log(_point);
                     _currentFloater.Cast(area, _point);

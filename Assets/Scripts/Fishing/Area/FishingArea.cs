@@ -136,7 +136,7 @@ namespace Fishing.Area
         }
 
         public void FishingEnd(bool success)
-        {
+        {            
             foreach (Fish f in Fishes)
                 f.FishingEnd();
 
