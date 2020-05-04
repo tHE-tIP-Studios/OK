@@ -93,9 +93,8 @@ namespace Fauna.Animals.AI
         {
             Vector3 direction = _fish.ContainingArea.ActiveFishingScript.BaitVelocityDirection;
             direction.z = direction.y;
-            direction.y = 0;
-            direction.x *= _fish.ContainingArea.ActiveFishingScript.TendencySide;
-            Vector3 newPos = (-direction) + _fish.ContainingArea.BaitTransform.position;
+            direction.y = 0;;
+            Vector3 newPos = (-direction.normalized * _fish.MouthPivotOffset.z) + _fish.ContainingArea.BaitTransform.position;
             transform.position = newPos;
             transform.LookAt(_fish.ContainingArea.BaitTransform);
         }

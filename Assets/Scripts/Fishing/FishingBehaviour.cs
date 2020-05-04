@@ -58,8 +58,8 @@ namespace Fishing
 
         public void Init(Fish fish, FishingArea callerArea)
         {
-            _staminaPerlinSeed = UnityEngine.Random.Range(0, int.MaxValue);
-            _steerPerlinSeed = UnityEngine.Random.Range(0, int.MaxValue);
+            _staminaPerlinSeed = UnityEngine.Random.Range(0, 1000);
+            _steerPerlinSeed = UnityEngine.Random.Range(0, 1000);
 
             _fishTendencySide = UnityEngine.Random.Range(0.0f, 1.0f) >= 0.5f ?
                 -1 : 1;
@@ -101,12 +101,14 @@ namespace Fishing
             _reelInWindowTimer = FishInfo.CatchingValues.ReelWindow + 1;
             ActiveCatchingAction = WhileOnInitialReelInWindow;
             OnReelWindow?.Invoke();
+            BaitVelocityDirection = new Vector2(BaitVelocityDirection.x, 1);
             Debug.LogWarning("Waiting Initial Reel!");
         }
 
         protected virtual void WhileOnInitialReelInWindow()
         {
             _reelInWindowTimer -= Time.deltaTime;
+            DoSidewaysFishMovement();
 
             if (_reelInWindowTimer <= 0)
             {
@@ -114,6 +116,7 @@ namespace Fishing
                 FishVulnerable = false;
                 Debug.LogWarning("Initial Reel window missed, fish got away...");
                 ActiveCatchingAction = DecreaseFishStamina;
+                Fail(true);
             }
         }
 
@@ -128,6 +131,7 @@ namespace Fishing
         protected virtual void WhileOnReelInWindow()
         {
             _reelInWindowTimer -= Time.deltaTime;
+            DoSidewaysFishMovement();
 
             if (_reelInWindowTimer <= 0)
             {
@@ -151,24 +155,38 @@ namespace Fishing
 
         protected virtual void DoFishMovement()
         {
-            float randomSteerFactor = (_fishStamina * _steerPerlinSeed) /
+            DoSidewaysFishMovement();
+            DoForwardFishMovement();
+        }
+
+        protected virtual void DoForwardFishMovement()
+        {
+            float randomPercentageFactor = (_fishStamina * _steerPerlinSeed) /
                 (FishInfo.CatchingValues.Stamina * _steerPerlinSeed);
-            float steerPerlin = Mathf.PerlinNoise(randomSteerFactor * 5, randomSteerFactor * 5);
+            float forwardPerlin = Mathf.PerlinNoise(randomPercentageFactor * 5, randomPercentageFactor * 5);
+            float forward = forwardPerlin * (FishStaminaPercentage + 0.1f);
+            Vector3 newPosition = _callerArea.BaitTransform.position +
+                _callerArea.BaitTransform.forward * (forward * Time.deltaTime);
+
+            _callerArea.BaitTransform.position = newPosition;
+
+            BaitVelocityDirection = new Vector2(BaitVelocityDirection.x, forward);
+        }
+
+        protected virtual void DoSidewaysFishMovement()
+        {
+            float sidewaysPerlin = Mathf.PerlinNoise((Time.time + _steerPerlinSeed) * 5, (Time.time + _steerPerlinSeed) * 5);
 
             // Normalize result
-            _steerDir = (steerPerlin - 0.5f) * 2;
+            _steerDir = (sidewaysPerlin - 0.5f) * 2;
 
-            BaitVelocityDirection = new Vector2(Mathf.Clamp(_steerDir, -1, 1), Mathf.Clamp01(steerPerlin));
+            BaitVelocityDirection = new Vector2(_steerDir * _fishTendencySide, BaitVelocityDirection.y);
 
             float sideways = _steerDir * 3;
             sideways *= Time.deltaTime;
 
-            float forward = steerPerlin * (FishStaminaPercentage + 0.1f);
-
             Vector3 newPosition = _callerArea.BaitTransform.position +
                 (_callerArea.BaitTransform.right * sideways) * _fishTendencySide;
-
-            newPosition += _callerArea.BaitTransform.forward * (forward * Time.deltaTime);
 
             _callerArea.BaitTransform.position = newPosition;
         }
@@ -182,7 +200,7 @@ namespace Fishing
                 OnReelSuccess?.Invoke();
                 Debug.Log("Reel window taken!");
                 _fishTendencySide *= -1;
-                BaitVelocityDirection = new Vector2(0, -1);
+                BaitVelocityDirection = new Vector2(BaitVelocityDirection.x, -1);
 
                 if (_reelCount == _reelsRequired)
                 {
@@ -243,12 +261,13 @@ namespace Fishing
             ActiveCatchingAction?.Invoke();
         }
 
-        private void Fail()
+        private void Fail(bool forceFinish = false)
         {
             Fails++;
-            if (Fails > FishInfo.CatchingValues.FailAttempts)
+            if (Fails > FishInfo.CatchingValues.FailAttempts || forceFinish)
                 EndFishing(false);
             else
+
                 Debug.Log("Failed reel...\n remaining fails: " + (FishInfo.CatchingValues.FailAttempts - Fails));
         }
 
@@ -276,6 +295,12 @@ namespace Fishing
             _fishingControls.Disable();
         }
         #endregion
+
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawRay(_callerArea.BaitTransform.position, BaitVelocityDirection);
+        }
 
         private Action UpdateAction;
 

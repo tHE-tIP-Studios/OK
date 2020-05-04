@@ -65,12 +65,12 @@ namespace Fauna.Animals
 
         private void MoveTowardsBait()
         {
-            _aiBehaviour.MoveTowardsBait(Vector3.zero);
+            _aiBehaviour.MoveTowardsBait(ContainingArea.BaitTransform.position);
         }
 
         private void LookForBait()
         {
-            _aiBehaviour.LookForBait(Vector3.zero);
+            _aiBehaviour.LookForBait(ContainingArea.BaitTransform.position);
         }
         //* ///
 
