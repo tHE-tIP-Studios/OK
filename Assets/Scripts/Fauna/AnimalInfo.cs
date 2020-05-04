@@ -84,7 +84,6 @@ namespace Fauna
                 string[] rawMonths = raw.Months.Split(' ');
                 for (int i = 0; i < rawMonths.Length; i++)
                 {
-                    Debug.Log(i);
                     switch (int.Parse(rawMonths[i]))
                     {
                         case 1:

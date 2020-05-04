@@ -20,7 +20,7 @@ MonoBehaviour:
   _detailedDescripion: Legend has it that its gray colors and distinct body shape
     originate from the lack of effort Mother Nature had wen creating it.
   _availability:
-    _availableMonths: 3839
+    _availableMonths: 4095
     _availablePhases: 127
     _spawnChance: 1
     _lifespan: 500

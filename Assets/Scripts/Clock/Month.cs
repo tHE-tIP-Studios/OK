@@ -12,7 +12,7 @@
         JUNE = 32,
         JULY = 64,
         AUGUST = 128,
-        SEPTEMBER = 254,
+        SEPTEMBER = 256,
         OCTOBER = 512,
         NOVEMBER = 1024,
         DECEMBER = 2048
