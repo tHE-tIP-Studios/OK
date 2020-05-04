@@ -9,8 +9,11 @@ namespace Fishing.Rod
         private Transform _target;
         private Vector3 _mid;
 
+        public Vector3 Point {get; private set;}
+
         public void Cast(FishingArea area, Vector3 pointToReach)
         {
+            Point = pointToReach;
             StartCoroutine(MoveTo(pointToReach, transform.position, 1.5f));
             transform.parent = null;
         }

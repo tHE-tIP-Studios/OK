@@ -118,9 +118,9 @@ namespace Fishing.Rod
                     // Create and throw a new floater.
                     _currentFloater = Instantiate(_floaterPrefab, _floaterLine.transform.position, 
                         _floaterLine.transform.rotation);
-                    _floaterLine.NewTarget(_currentFloater.transform);
                     Debug.Log(_point);
                     _currentFloater.Cast(area, _point);
+                    _floaterLine.NewTarget(_currentFloater.transform);
                     Casted = true;
                     return true;
                 }
