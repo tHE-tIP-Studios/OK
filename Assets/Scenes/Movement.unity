@@ -798,6 +798,7 @@ MonoBehaviour:
   _floaterPrefab: {fileID: 4212820979197860381, guid: d8f2105c414adf24fab6a40b498c7f85,
     type: 3}
   _floaterLine: {fileID: 1956225242}
+  _switch: {fileID: 11400000, guid: b8d525b0eed77fb429e51845316a0bb7, type: 2}
 --- !u!1 &848716479
 GameObject:
   m_ObjectHideFlags: 0
@@ -808,7 +809,6 @@ GameObject:
   m_Component:
   - component: {fileID: 848716481}
   - component: {fileID: 848716480}
-  - component: {fileID: 848716482}
   m_Layer: 0
   m_Name: CamerasRig
   m_TagString: Untagged
@@ -845,18 +845,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &848716482
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 848716479}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b484139827cd98b49bdea5791e1ee437, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1246436233
 GameObject:
   m_ObjectHideFlags: 0
@@ -1096,6 +1084,7 @@ MonoBehaviour:
   - {fileID: 1246436235}
   _markersParent: {fileID: 2009834984}
   _areaType: 3
+  _capacity: 10
 --- !u!4 &1402602686
 Transform:
   m_ObjectHideFlags: 0
@@ -1466,7 +1455,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5f421b8731db3345966ef818a9eb976, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SECTION_LENGTH: 0.2
+  SECTION_LENGTH: 0.5
   _lineResolution: 13
   _lineMaterial: {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
   _dampening: 0.2

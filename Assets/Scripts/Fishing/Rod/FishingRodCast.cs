@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Fishing.Area;
-using Utilities;
+using Movement.Cameras;
 
 namespace Fishing.Rod
 {
@@ -13,6 +13,7 @@ namespace Fishing.Rod
         [SerializeField] float _castStrengthSpeed = 1f;
         [SerializeField] Floater _floaterPrefab;
         [SerializeField] LineHandler _floaterLine;
+        [SerializeField] CameraSwitch _switch; 
         private Floater _currentFloater = default;
         private FishingControls _controls;
         private bool _held;
@@ -63,6 +64,7 @@ namespace Fishing.Rod
             if (Casted)
             {
                 _floaterLine.Release();
+                _switch.TurnOnWalkCamera();
                 GameObject.Destroy(_currentFloater.gameObject);
             }
 
@@ -121,6 +123,7 @@ namespace Fishing.Rod
                     Debug.Log(_point);
                     _currentFloater.Cast(area, _point);
                     _floaterLine.NewTarget(_currentFloater.transform);
+                    _switch.TurnOnFishingCamera(_currentFloater.transform);
                     Casted = true;
                     return true;
                 }

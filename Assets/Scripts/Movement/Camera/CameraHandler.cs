@@ -18,5 +18,10 @@ namespace Movement
         {
             gameObject.SetActive(value);
         }
+
+        public void SetNewTarget(Transform target)
+        {
+            _camera.Follow = target;
+        }
     }
 }
