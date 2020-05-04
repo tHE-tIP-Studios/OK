@@ -6,7 +6,7 @@ namespace Fauna
         FISH,
         EEL,
         SQUID,
-        OCTOPUS,
+        OCTOPI,
         OK,
     }
 }
