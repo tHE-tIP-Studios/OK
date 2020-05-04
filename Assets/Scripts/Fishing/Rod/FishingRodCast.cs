@@ -75,6 +75,11 @@ namespace Fishing.Rod
             _switch.TurnOnWalkCamera();
             if (_currentFloater != null)
                 GameObject.Destroy(_currentFloater.gameObject);
+        }
+
+        private void OnFail()
+        {
+            PullBack();
             Casted = false;
         }
 
@@ -128,7 +133,7 @@ namespace Fishing.Rod
                     _currentFloater = Instantiate(_floaterPrefab, _floaterLine.transform.position,
                         _floaterLine.transform.rotation);
                     Debug.Log(_point);
-                    _currentFloater.Cast(area, _point, PullBack);
+                    _currentFloater.Cast(area, _point, OnFail);
                     _floaterLine.NewTarget(_currentFloater.transform);
                     _switch.TurnOnFishingCamera(_currentFloater.transform);
                     Casted = true;
