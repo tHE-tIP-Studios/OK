@@ -1,6 +1,7 @@
 using System.Collections;
 using Fishing.Area;
 using UnityEngine;
+using System;
 
 namespace Fishing.Rod
 {
@@ -12,7 +13,7 @@ namespace Fishing.Rod
 
         public Vector3 Point { get; private set; }
 
-        public void Cast(FishingArea area, Vector3 pointToReach)
+        public void Cast(FishingArea area, Vector3 pointToReach, Action onFail)
         {
             Point = pointToReach;
             StartCoroutine(MoveTo(pointToReach, transform.position, 1.5f));
