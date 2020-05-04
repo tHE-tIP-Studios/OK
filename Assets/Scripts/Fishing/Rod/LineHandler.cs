@@ -4,7 +4,7 @@ namespace Fishing.Rod
 {
     public class LineHandler : MonoBehaviour
     {
-        [SerializeField] private float SECTION_LENGTH = .5f;
+        [SerializeField] private float SECTION_LENGTH = 1f;
         [SerializeField] private int _lineResolution = 10;
         [SerializeField] private Material _lineMaterial;
         [SerializeField] private float _dampening = .2f;
@@ -46,7 +46,7 @@ namespace Fishing.Rod
             {
                 _line.SetPosition(i, _points[i].Pos);
             }
-            _floaterPos.LookAt(_points[_lineResolution - 2].Pos);
+            //_floaterPos.LookAt(_points[_lineResolution - 2].Pos);
         }
 
         private void UpdateRopeSimulation(float dt)
@@ -110,9 +110,14 @@ namespace Fishing.Rod
             Floater tempF = _floaterPos.GetComponent<Floater>();
             
             // Calculate line distance via hypotenuse with player height
-            int a = Mathf.FloorToInt(Vector3.Distance(tempF.Point, transform.position));
-            _lineResolution = a;
-            _lineResolution *= 2;
+            Vector3 groundPos = transform.position;
+            groundPos.y = tempF.Point.y;
+            float a = Vector3.Distance(tempF.Point, groundPos);
+            float b = transform.position.y;
+            _lineResolution = Mathf.FloorToInt(Mathf.Sqrt((a*a) + (b*b)));
+            _lineResolution *=2;
+            _lineResolution += 2;
+            Debug.Log(_lineResolution);
             _points = new VerletLinePoint[_lineResolution];
             gameObject.AddComponent<LineRenderer>();
             _line = GetComponent<LineRenderer>();

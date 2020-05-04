@@ -11,6 +11,12 @@ namespace Movement.Cameras
         private CameraHandler _activeCamera;
         public CameraType ActiveType => _activeCamera.Type;
         
+        private void Awake() 
+        {
+            CameraSwitch switcher = Resources.Load<CameraSwitch>("CameraSwitch");
+            switcher.Master = this;
+        }
+
         private void Start()
         {
             _cameras = new List<CameraHandler>();
@@ -18,7 +24,7 @@ namespace Movement.Cameras
             SetNewCamera(CameraType.WALKING);
         }
 
-        public void SetNewCamera(CameraType type)
+        public void SetNewCamera(CameraType type, Transform target = null)
         {
             for(int i = 0; i < _cameras.Count; i++)
             {
@@ -32,6 +38,8 @@ namespace Movement.Cameras
                     _activeCamera = _cameras[i];
                 }
             }
+
+            if (target != null) _activeCamera.SetNewTarget(target);
         }
     }
 }

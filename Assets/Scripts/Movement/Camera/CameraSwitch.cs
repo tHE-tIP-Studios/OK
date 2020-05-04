@@ -4,16 +4,13 @@ using UnityEngine;
 
 namespace Movement.Cameras
 {
-    public class CameraSwitch : MonoBehaviour
+    [CreateAssetMenu(menuName = "OK/CameraSwitcher")]
+    public class CameraSwitch : ScriptableObject
     {
         private CamerasMaster _master;
+        public CamerasMaster Master {set{_master = value;}}
 
-        private void Awake() 
-        {
-            _master = GetComponent<CamerasMaster>();
-        }
-
-        public void TurnOnWalk()
+        public void TurnOnWalkCamera()
         {
             _master.SetNewCamera(CameraType.WALKING);
         }
@@ -23,9 +20,9 @@ namespace Movement.Cameras
             _master.SetNewCamera(CameraType.CROUCH);
         }
 
-        public void TurnOnFish()
+        public void TurnOnFishingCamera(Transform target)
         {
-            _master.SetNewCamera(CameraType.FISHING);
+            _master.SetNewCamera(CameraType.FISHING, target);
         }
     }
 }
