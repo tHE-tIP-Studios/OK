@@ -22,7 +22,7 @@ MonoBehaviour:
     _spawnChance: 0
     _lifespan: 0
   _catchingValues:
-    _stamina: 3
+    _stamina: 2
     _failAttempts: 2
     _reelInWindow: 1.5
     _windowIncreasePerReel: 0

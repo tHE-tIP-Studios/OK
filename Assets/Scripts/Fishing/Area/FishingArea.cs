@@ -118,12 +118,13 @@ namespace Fishing.Area
             return inside;
         }
 
-        public FishingBehaviour FishingStart(Transform baitTransform)
+        public FishingBehaviour FishingStart(Transform baitTransform, Action onFail)
         {
             if (_fishingBehaviourScript != null) return _fishingBehaviourScript;
 
             Debug.Log("Started Fishing!");
 
+            OnFail = onFail;
 
             areaCollider.enabled = false;
             BaitTransform = baitTransform;
@@ -141,6 +142,7 @@ namespace Fishing.Area
                 f.FishingEnd();
 
             areaCollider.enabled = true;
+            Debug.Log("Stopped fishing.");
 
             if (_fishingBehaviourScript == null) return;
 
@@ -150,7 +152,10 @@ namespace Fishing.Area
                 Debug.Log("Fish Caught!");
             }
             else
+            {
+                OnFail?.Invoke();
                 Debug.Log("Fish Got Away...");
+            }
 
             Destroy(_fishingBehaviourScript.gameObject);
         }
@@ -364,5 +369,7 @@ namespace Fishing.Area
 #endif
             }
         }
+
+        private Action OnFail;
     }
 }

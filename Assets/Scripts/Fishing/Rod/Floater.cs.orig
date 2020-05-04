@@ -1,7 +1,10 @@
-using System;
 using System.Collections;
+<<<<<<< HEAD
 using Fishing.Area;
 using UnityEngine;
+=======
+using System;
+>>>>>>> a059dbc406c94a31049a0cd4eef646f44fc1ef43
 
 namespace Fishing.Rod
 {
@@ -10,7 +13,6 @@ namespace Fishing.Rod
         private Transform _target;
         private Vector3 _mid;
         private FishingArea _currentArea;
-        private Action _onFail;
 
         public Vector3 Point { get; private set; }
 
@@ -19,7 +21,6 @@ namespace Fishing.Rod
             Point = pointToReach;
             StartCoroutine(MoveTo(pointToReach, transform.position, 1.5f));
             transform.parent = null;
-            _onFail = onFail;
             _currentArea = area;
         }
 
@@ -63,12 +64,10 @@ namespace Fishing.Rod
 
         private void OnWaterLand()
         {
-            // Wobble animation
-            LeanTween.moveY(gameObject, transform.position.y - 0.5f, .85f).setEasePunch();
-            _currentArea.FishingStart(transform, _onFail);
+            _currentArea.FishingStart(transform);
         }
 
-        private void OnDisable()
+        private void OnDestroy()
         {
             if (!Application.isPlaying) return;
             _currentArea?.FishingEnd(false);

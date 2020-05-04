@@ -75,11 +75,14 @@ namespace Fishing.Rod
             _switch.TurnOnWalkCamera();
             if (_currentFloater != null)
                 GameObject.Destroy(_currentFloater.gameObject);
+<<<<<<< HEAD
+=======
         }
 
         private void OnFail()
         {
             PullBack();
+>>>>>>> 777b6ea7a57a2f38054de2861a06f74c08b1ff96
             Casted = false;
         }
 
