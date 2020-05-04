@@ -1084,7 +1084,7 @@ MonoBehaviour:
   - {fileID: 1246436235}
   _markersParent: {fileID: 2009834984}
   _areaType: 3
-  _capacity: 10
+  _capacity: 50
 --- !u!4 &1402602686
 Transform:
   m_ObjectHideFlags: 0

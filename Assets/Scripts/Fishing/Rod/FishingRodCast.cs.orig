@@ -63,7 +63,14 @@ namespace Fishing.Rod
         {
             if (Casted)
             {
-                PullBack();
+<<<<<<< HEAD
+                _floaterLine.Release();
+                _switch.TurnOnWalkCamera();
+                if (_currentFloater != null)
+                    GameObject.Destroy(_currentFloater.gameObject);
+=======
+                PullBack();    
+>>>>>>> a059dbc406c94a31049a0cd4eef646f44fc1ef43
             }
 
             _held = true;
@@ -73,9 +80,7 @@ namespace Fishing.Rod
         {
             _floaterLine.Release();
             _switch.TurnOnWalkCamera();
-            if (_currentFloater != null)
-                GameObject.Destroy(_currentFloater.gameObject);
-            Casted = false;
+            GameObject.Destroy(_currentFloater.gameObject);
         }
 
         private void OnButtonRelease()

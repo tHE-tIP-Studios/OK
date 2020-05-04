@@ -44,7 +44,6 @@ namespace Fishing
         {
             _fishingControls = new FishingControls();
             _fishingControls.Rod.Reel.performed += ctx => UpdateReelState();
-            _fishingControls.Rod.Reel.canceled += ctx => UpdateReelState();
 
             _playerControls = new PlayerControls();
             _playerControls.Movement.Look.performed += ctx => _playerSteerDir = ctx.ReadValue<Vector2>();
