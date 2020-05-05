@@ -11,9 +11,17 @@ namespace Fauna.Animals
     {
         [SerializeField] private bool _drawGizmos = false;
         protected FishAI _aiBehaviour;
+        protected static GameObject _splashParticlesPrefab;
+        protected ParticleSystem _splashParticles;
 
         public Vector3 MouthPivotOffset { get; private set; }
         public FishingArea ContainingArea { get; private set; }
+
+        private void Awake()
+        {
+            if (_splashParticlesPrefab == null)
+                _splashParticlesPrefab = Resources.Load<GameObject>("Prefabs/VFX/Splash Particles");
+        }
 
         public void Init(AnimalInfo info, FishingArea containingArea)
         {
@@ -46,6 +54,19 @@ namespace Fauna.Animals
         public void RunFrom(Vector3 position)
         {
 
+        }
+
+        public void ToggleSplashParticles(bool active)
+        {
+            if (active)
+            {
+                _splashParticles.transform.position = transform.position;
+                _splashParticles.Play();
+            }
+            else
+            {
+                _splashParticles.Stop();
+            }
         }
 
         protected override void OnUpdate()
@@ -94,6 +115,10 @@ namespace Fauna.Animals
         {
             ForceStopAI();
             Behaviour = _aiBehaviour.LockOnBait;
+            _splashParticles = Instantiate(_splashParticlesPrefab, transform.position,
+                    _splashParticlesPrefab.transform.rotation)
+                .GetComponent<ParticleSystem>();
+            _splashParticles.Stop();
             ContainingArea.FishBite(this);
         }
 

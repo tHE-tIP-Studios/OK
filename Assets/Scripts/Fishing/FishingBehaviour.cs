@@ -96,6 +96,7 @@ namespace Fishing
         protected virtual void InitialReelWindow()
         {
             FishVulnerable = true;
+            _fish.ToggleSplashParticles(FishVulnerable);
             _reelInWindowTimer = FishInfo.CatchingValues.ReelWindow + 1;
             ActiveCatchingAction = WhileOnInitialReelInWindow;
             OnReelWindow?.Invoke();
@@ -112,6 +113,7 @@ namespace Fishing
             {
                 _fishStamina = NextWindow + 1;
                 FishVulnerable = false;
+                _fish.ToggleSplashParticles(FishVulnerable);
                 Debug.LogWarning("Initial Reel window missed, fish got away...");
                 ActiveCatchingAction = DecreaseFishStamina;
                 Fail(true);
@@ -121,6 +123,7 @@ namespace Fishing
         protected virtual void ReelWindow()
         {
             FishVulnerable = true;
+            _fish.ToggleSplashParticles(FishVulnerable);
             _reelInWindowTimer = FishInfo.CatchingValues.ReelWindow + (_reelCount * FishInfo.CatchingValues.ReelWindowIncrease);
             ActiveCatchingAction = WhileOnReelInWindow;
             OnReelWindow?.Invoke();
@@ -135,6 +138,7 @@ namespace Fishing
             {
                 _fishStamina = NextWindow + 1;
                 FishVulnerable = false;
+                _fish.ToggleSplashParticles(FishVulnerable);
                 Debug.LogWarning("Reel window missed...");
                 Fail();
                 OnReelWindowMissed?.Invoke();
@@ -195,6 +199,7 @@ namespace Fishing
             {
                 _reelCount++;
                 FishVulnerable = false;
+                _fish.ToggleSplashParticles(FishVulnerable);
                 OnReelSuccess?.Invoke();
                 Debug.Log("Reel window taken!");
                 _fishTendencySide *= -1;

@@ -18,7 +18,7 @@ namespace Fishing.Area
         public static IEnumerable<Fish> SpawnFish(FishingArea area)
         {
             // Use randomization and time phases in the future
-            AnimalInfo chosenInfo = Resources.Load<AnimalInfo>("Fauna/Aquatic/Glup Glup");
+            AnimalInfo chosenInfo = Resources.Load<AnimalInfo>("Fauna/Aquatic/Debug Glup Glup");
 
             for (int i = 0; i < area.Capacity; i++)
             {

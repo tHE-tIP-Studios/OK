@@ -79,26 +79,12 @@ namespace Fauna.Animals.AI
         {
             if (IgnoreBait || _fish.ContainingArea.BaitTaken) return;
 
-            Vector3 directionToTarget = transform.position - baitPosition;
-            float angle = Vector3.Angle(transform.forward, directionToTarget);
-            float distance = directionToTarget.magnitude;
+            Vector3 targetDir = baitPosition - transform.position;
+            float distance = targetDir.magnitude;
+            float angleToPlayer = (Vector3.Angle(targetDir, transform.forward));
 
-            if (Mathf.Abs(angle) < FOV && distance < FOV_DISTANCE)
-            {
+            if (Mathf.Abs(angleToPlayer) < FOV && distance < FOV_DISTANCE)
                 OnBaitFound();
-            }
-        }
-
-        public void LockOnBait()
-        {
-            Vector3 direction = _fish.ContainingArea.ActiveFishingScript.BaitVelocityDirection;
-            direction.z = direction.y;
-            direction.y = 0;
-            direction.x *= 0.3f;
-            //direction = Vector3.RotateTowards(transform.forward, _fish.ContainingArea.BaitTransform.forward, 100, 0.0f);
-            Vector3 newPos = (-(_fish.ContainingArea.BaitTransform.TransformDirection(direction.normalized)) * _fish.MouthPivotOffset.z) + _fish.ContainingArea.BaitTransform.position;
-            transform.position = newPos;
-            transform.LookAt(_fish.ContainingArea.BaitTransform);
         }
 
         private void OnBaitFound()
@@ -109,6 +95,18 @@ namespace Fauna.Animals.AI
                 _fish.Info.CatchingValues.BaitInterest;
             _fish.BaitFound();
             Debug.Log("bait is in front of me");
+        }
+
+        public void LockOnBait()
+        {
+            Vector3 direction = _fish.ContainingArea.ActiveFishingScript.BaitVelocityDirection;
+            direction.z = direction.y;
+            direction.y = 0;
+            direction.x *= 0.3f;
+            //direction = Vector3.RotateTowards(transform.forward, _fish.ContainingArea.BaitTransform.forward, 100, 0.0f);
+            Vector3 newPos = (-(_fish.ContainingArea.BaitTransform.TransformDirection(direction.normalized)) * _fish.MouthPivotOffset.z) + _fish.ContainingArea.BaitTransform.position;
+            transform.position = Vector3.Lerp(transform.position, newPos, Time.deltaTime * 7.0f);
+            transform.LookAt(_fish.ContainingArea.BaitTransform);
         }
 
         private void DoMovement(float speed)
