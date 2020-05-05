@@ -58,7 +58,12 @@ namespace Fishing.Rod
                 _line.SetPosition(i, _points[i].Pos);
             }
             if (_hang)
-                _floaterPos.LookAt(_points[_resolution - 2].Pos);
+            {
+                Vector3 dir = _points[_resolution - 2].Pos - _floaterPos.position;
+                _floaterPos.up = dir;
+                
+                //_floaterPos.LookAt(_points[_resolution - 2].Pos);
+            }
         }
 
         private void UpdateRopeSimulation(float dt)

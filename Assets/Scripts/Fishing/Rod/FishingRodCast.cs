@@ -150,7 +150,7 @@ namespace Fishing.Rod
                         _floaterLine.transform.rotation);
                     Debug.Log(_point);
                     _currentFloater.Cast(area, _point, OnFail);
-                    _floaterLine.NewLine(_currentFloater.transform);
+                    _floaterLine.NewLine(_currentFloater.transform, 0.9f);
                     _switch.TurnOnFishingCamera(_currentFloater.transform);
                     Casted = true;
                     return true;
