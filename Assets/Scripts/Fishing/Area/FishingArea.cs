@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using Fauna.Animals;
+using Fishing.Rod;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using Utilities;
 
 namespace Fishing.Area
@@ -33,10 +35,12 @@ namespace Fishing.Area
         public int Capacity => _capacity;
 
         public FishingBehaviour ActiveFishingScript => _fishingBehaviourScript;
+        public FishingControls FishingControls { get; set; }
 
         public Fish ActiveFish { get; private set; }
         public bool BaitTaken => ActiveFish != null;
         public Transform BaitTransform { get; private set; }
+        public Floater FloaterScript { get; private set; }
 
         private void Awake()
         {
@@ -118,22 +122,26 @@ namespace Fishing.Area
             return inside;
         }
 
-        public FishingBehaviour FishingStart(Transform baitTransform, Action onFail)
+        public void FishingStart(Floater bait, Action onFail)
         {
-            if (_fishingBehaviourScript != null) return _fishingBehaviourScript;
+            if (_fishingBehaviourScript != null) return;
+
 
             Debug.Log("Started Fishing!");
 
             OnFail = onFail;
 
             areaCollider.enabled = false;
-            BaitTransform = baitTransform;
+            FloaterScript = bait;
+            BaitTransform = bait.transform;
+
+            FishingControls = new FishingControls();
+            FishingControls.Rod.Reel.performed += WiggleCallback;
+            FishingControls.Enable();
 
             ActiveFish = null;
             foreach (Fish f in Fishes)
                 f.FishingStart();
-
-            return _fishingBehaviourScript;
         }
 
         public void FishingEnd(bool success)
@@ -142,6 +150,11 @@ namespace Fishing.Area
                 f.FishingEnd();
 
             areaCollider.enabled = true;
+
+            FishingControls?.Disable();
+            FishingControls?.Dispose();
+            FishingControls = null;
+
             Debug.Log("Stopped fishing.");
 
             if (_fishingBehaviourScript == null) return;
@@ -160,18 +173,10 @@ namespace Fishing.Area
             Destroy(_fishingBehaviourScript.gameObject);
         }
 
-        public void FishInterested(Fish fish)
-        {
-            ActiveFish = fish;
-        }
-
-        public void FishLostInterest()
-        {
-            ActiveFish = null;
-        }
-
         public FishingBehaviour FishBite(Fish fish)
         {
+            FishingControls.Rod.Reel.performed -= WiggleCallback;
+
             Type chosenBehaviour = default;
 
             switch (_fishingBehaviour)
@@ -191,6 +196,31 @@ namespace Fishing.Area
             _fishingBehaviourScript.Init(fish, this);
 
             return _fishingBehaviourScript;
+        }
+
+        public void FishInterested(Fish fish)
+        {
+            ActiveFish = fish;
+        }
+
+        public void FishLostInterest()
+        {
+            ActiveFish = null;
+        }
+
+        private void OnEnable()
+        {
+            FishingControls?.Enable();
+        }
+
+        private void OnDisable()
+        {
+            FishingControls?.Disable();
+        }
+
+        private void WiggleCallback(InputAction.CallbackContext ctx)
+        {
+            FloaterScript.Wiggle();
         }
 
         private void CreateMesh()
