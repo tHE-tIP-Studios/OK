@@ -11,7 +11,6 @@ namespace Fishing.Rod
         private Vector3 _mid;
         private FishingArea _currentArea;
         private Action _onFail;
-
         public Vector3 Point { get; private set; }
 
         public void Cast(FishingArea area, Vector3 pointToReach, Action onFail)
@@ -25,7 +24,7 @@ namespace Fishing.Rod
 
         public void ReleaseFish()
         {
-            _currentArea.ActiveFish?.FishingEnd();
+            _currentArea?.ActiveFish?.FishingEnd();
         }
 
         public void FollowTarget(Transform target)

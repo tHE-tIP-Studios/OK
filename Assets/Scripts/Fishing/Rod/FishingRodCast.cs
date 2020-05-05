@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Fishing.Area;
+﻿using Fishing.Area;
 using Movement.Cameras;
 using UnityEngine;
 
@@ -75,15 +73,22 @@ namespace Fishing.Rod
             _currentFloater.ReleaseFish();
             if (_currentFloater != null)
             {
-                LeanTween.move(_currentFloater.gameObject, _floaterLine.transform, 0.3f).
+                //_floaterLine.PullLine(5);
+                LeanTween.move(_currentFloater.gameObject, _floaterLine.transform, 0.2f).
+                setOnStart(OnStart).
                 setOnComplete(x=> 
                 {
                     GameObject.Destroy(_currentFloater.gameObject);
-                    
+         
                     _currentFloater = Instantiate(_floaterPrefab, _floaterLine.transform.position,
                         _floaterLine.transform.rotation);
-                    _floaterLine.NewTarget(_currentFloater.transform, .5f, true);
+                    _floaterLine.NewTarget(_currentFloater.transform);
                 });
+            }
+
+            void OnStart()
+            {
+                _floaterLine.NewLine(_currentFloater.transform, 0.9f, true);
             }
         }
 
@@ -145,7 +150,7 @@ namespace Fishing.Rod
                         _floaterLine.transform.rotation);
                     Debug.Log(_point);
                     _currentFloater.Cast(area, _point, OnFail);
-                    _floaterLine.NewTarget(_currentFloater.transform);
+                    _floaterLine.NewLine(_currentFloater.transform);
                     _switch.TurnOnFishingCamera(_currentFloater.transform);
                     Casted = true;
                     return true;
