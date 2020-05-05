@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 100cc103b48892c449d5b957402c27da, type: 3}
   m_Name: Schlumb
   m_EditorClassIdentifier: 
-  _fishGFX: {fileID: 0}
+  _fishGFX: {fileID: -927199367670048503, guid: c1bf4b3531c538b429d844dc174a63a8,
+    type: 3}
   _id: 2
   _specie: 1
   _location: 2
