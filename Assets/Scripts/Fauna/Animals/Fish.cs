@@ -60,12 +60,11 @@ namespace Fauna.Animals
         {
             if (active)
             {
+                _splashParticles.transform.position = transform.position;
                 _splashParticles.Play();
-                Debug.LogWarning("Play Splash particles");
             }
             else
             {
-                Debug.LogWarning("Stop Splash particles");
                 _splashParticles.Stop();
             }
         }
@@ -116,7 +115,8 @@ namespace Fauna.Animals
         {
             ForceStopAI();
             Behaviour = _aiBehaviour.LockOnBait;
-            _splashParticles = Instantiate(_splashParticlesPrefab, transform)
+            _splashParticles = Instantiate(_splashParticlesPrefab, transform.position,
+                    _splashParticlesPrefab.transform.rotation)
                 .GetComponent<ParticleSystem>();
             _splashParticles.Stop();
             ContainingArea.FishBite(this);
