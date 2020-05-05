@@ -10,20 +10,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 100cc103b48892c449d5b957402c27da, type: 3}
-  m_Name: Glup Glup
+  m_Name: Schlumb
   m_EditorClassIdentifier: 
-  _specie: 0
-  _name: Glup Glup
-  _briefDescripion: 'Glup Glup Glup Glup '
-  _detailedDescripion: 'Glup Glup Glup Glup Glup Glup '
+  _fishGFX: {fileID: 0}
+  _id: 2
+  _specie: 1
+  _location: 2
+  _name: Schlumb
+  _subtitle: The big chunk
+  _detailedDescripion: Comonly used as lard.
   _availability:
-    _availableMonths: 0
-    _availablePhases: 0
-    _spawnChance: 0
-    _lifespan: 0
+    _availableMonths: 508
+    _availablePhases: 60
+    _spawnChance: 0.75
+    _lifespan: 1200
   _catchingValues:
-    _stamina: 2
-    _failAttempts: 2
+    _stamina: 6
+    _failAttempts: 3
     _reelInWindow: 1.5
-    _windowIncreasePerReel: 0
-    _baseBaitInterest: 1
+    _windowIncreasePerReel: 0.099999994
+    _baseBaitInterest: 0.75

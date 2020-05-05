@@ -10,6 +10,7 @@ namespace Fauna
     [CreateAssetMenu(menuName = "OK/Animal Info")]
     public class AnimalInfo : ScriptableObject
     {
+        [SerializeField] private GameObject _fishGFX = default;
         [SerializeField] private int _id = default;
         [SerializeField] private AnimalSpecie _specie = default;
         [SerializeField] private FishingAreaType _location = default;
@@ -25,6 +26,7 @@ namespace Fauna
 
         // Add serialized struct for the cooking values
 
+        public GameObject FishGFX => _fishGFX;
         public AnimalSpecie Specie => _specie;
         public string Name => _name;
         public string Subtitle => _subtitle;

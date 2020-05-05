@@ -11,6 +11,7 @@ namespace Fauna.Animals
         public const int ANIMAL_LAYER = 10;
         public const string ANIMAL_LAYER_NAME = "Animal";
         public AnimalInfo Info { get; private set; }
+        public GameObject GFXObject { get; private set; }
 
         protected float LifespanLeft { get; private set; }
         protected SavedTime SpawnTime { get; private set; }
@@ -31,6 +32,9 @@ namespace Fauna.Animals
             SpawnTime = MainClock.NowTime;
             LifespanLeft = Info.Availability.Lifespan;
             LifetimeFactor = 1;
+
+            GFXObject =
+                Instantiate(info.FishGFX, transform);
 
             LifespanSpeedUpEvent = new ClockEvent(
                 SavedTime.NoTime,

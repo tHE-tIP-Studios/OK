@@ -4,13 +4,13 @@ using Fauna;
 using Fauna.Animals;
 using Fishing.Area;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Fishing
 {
     public class FishingBehaviour : MonoBehaviour
     {
         private const float GETAWAY_THRESHOLD = 1;
-        private FishingControls _fishingControls;
         private PlayerControls _playerControls;
         private bool _reelPressed;
 
@@ -42,9 +42,6 @@ namespace Fishing
 
         private void Awake()
         {
-            _fishingControls = new FishingControls();
-            _fishingControls.Rod.Reel.performed += ctx => UpdateReelState();
-
             _playerControls = new PlayerControls();
             _playerControls.Movement.Look.performed += ctx => _playerSteerDir = ctx.ReadValue<Vector2>();
         }
@@ -74,6 +71,8 @@ namespace Fishing
             OnFishBiteAction = StartCatchingBehaviour;
 
             ReelPressedAction = ReelIn;
+
+            callerArea.FishingControls.Rod.Reel.performed += UpdateReelStateCallback;
             OnInit();
         }
 
@@ -272,26 +271,18 @@ namespace Fishing
 
         protected void EndFishing(bool success)
         {
+            _callerArea.FishingControls.Rod.Reel.performed -= UpdateReelStateCallback;
+
             OnCatchEnded?.Invoke(success);
             _callerArea.FishingEnd(success);
         }
 
-        private void UpdateReelState()
+        private void UpdateReelStateCallback(InputAction.CallbackContext ctx)
         {
             _reelPressed = !_reelPressed;
 
             if (_reelPressed) ReelPressedAction?.Invoke();
             else if (!_reelPressed) ReelReleasedAction?.Invoke();
-        }
-
-        private void OnEnable()
-        {
-            _fishingControls.Enable();
-        }
-
-        private void OnDisable()
-        {
-            _fishingControls.Disable();
         }
         #endregion
 

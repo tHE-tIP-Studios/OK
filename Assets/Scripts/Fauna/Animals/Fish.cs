@@ -9,6 +9,7 @@ namespace Fauna.Animals
 {
     public class Fish : Animal
     {
+        [SerializeField] private bool _drawGizmos = false;
         protected FishAI _aiBehaviour;
 
         public Vector3 MouthPivotOffset { get; private set; }
@@ -42,7 +43,7 @@ namespace Fauna.Animals
             Behaviour = DoWander;
         }
 
-        public void RunFromCenter()
+        public void RunFrom(Vector3 position)
         {
 
         }
@@ -107,7 +108,7 @@ namespace Fauna.Animals
 
         private void OnDrawGizmos()
         {
-            if (true) return;
+            if (!_drawGizmos) return;
             Gizmos.color = Color.gray;
             Gizmos.DrawWireSphere(_aiBehaviour.TargetPoint, FishAI.MIN_DISTANCE);
             Gizmos.DrawLine(transform.position, _aiBehaviour.TargetPoint);
