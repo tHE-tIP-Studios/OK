@@ -1,13 +1,14 @@
 using UnityEngine;
+using System.Collections;
 
 namespace Fishing.Rod
 {
     public class LineHandler : MonoBehaviour
     {
         [SerializeField] private float SECTION_LENGTH = 1f;
-        [SerializeField] private int _extendedResolution = 10;
+        [SerializeField] private int _retractedResolution = 5;
         [SerializeField] private Material _lineMaterial;
-        [SerializeField] private float _dampeningAmount = .1f;
+        [SerializeField] private float _dampeningAmount = .4f;
         private LineRenderer _line;
         private Transform _floaterPos;
         private VerletLinePoint[] _points;
@@ -56,7 +57,8 @@ namespace Fishing.Rod
             {
                 _line.SetPosition(i, _points[i].Pos);
             }
-            //_floaterPos.LookAt(_points[_lineResolution - 2].Pos);
+            if (_hang)
+                _floaterPos.LookAt(_points[_resolution - 2].Pos);
         }
 
         private void UpdateRopeSimulation(float dt)
@@ -117,26 +119,42 @@ namespace Fishing.Rod
             point.OldPos = temp;
         }
 
-        public void NewTarget(Transform target, float customDampening = 0.0f, bool hang = false)
+        public void NewTarget(Transform target)
+        {
+            _floaterPos = target;
+            EndPoint = target;
+        }
+
+        public void NewLine(Transform target, float customDampening = 0.0f, bool hang = false)
         {
             _hang = hang;
             _floaterPos = target;
             EndPoint = target;
             Floater tempF = _floaterPos.GetComponent<Floater>();
             
-            _resolution = _extendedResolution;
             // Calculate line distance via hypotenuse with player height
-            Vector3 groundPos = transform.position;
-            groundPos.y = tempF.Point.y;
-            float a = Vector3.Distance(tempF.Point, groundPos);
-            float b = transform.position.y;
-            _resolution = Mathf.FloorToInt(Mathf.Sqrt((a*a) + (b*b)));
-            _resolution *=2;
-            _resolution += 2;
+            
+            if (hang) 
+                _resolution = _retractedResolution;
+            else
+            {
+                Vector3 groundPos = transform.position;
+                groundPos.y = tempF.Point.y;
+                float a = Vector3.Distance(tempF.Point, groundPos);
+                float b = transform.position.y;
+                _resolution = Mathf.FloorToInt(Mathf.Sqrt((a*a) + (b*b)));
+                _resolution *=2;
+                _resolution += 2;
+            }
+
             Debug.Log(_resolution);
             _points = new VerletLinePoint[_resolution];
-            gameObject.AddComponent<LineRenderer>();
-            _line = GetComponent<LineRenderer>();
+
+            if (!_line)
+            {
+                gameObject.AddComponent<LineRenderer>();
+                _line = GetComponent<LineRenderer>();
+            }
             _line.material = _lineMaterial;
             _line.startWidth = .02f;
             _line.endWidth = .02f;
@@ -144,15 +162,18 @@ namespace Fishing.Rod
 
             _line.positionCount = _resolution;
             InitRope();
-            if (customDampening != 0.0f) _dampening = customDampening;
-            else _dampening = _dampeningAmount;
+            if (customDampening != 0.0f) StartCoroutine(LerpDampening(customDampening));
+            else StartCoroutine(LerpDampening(_dampeningAmount));
         }
 
-        public void Release()
+        public IEnumerator LerpDampening(float dampValue)
         {
-            _floaterPos = null;
-            Destroy(_line);
-            // Move point 2 thowards point 1 quickly.
+            _dampening = 0;
+            while(_dampening < dampValue )
+            {
+                yield return null;
+                _dampening += Time.deltaTime;
+            }
         }
     }
 }

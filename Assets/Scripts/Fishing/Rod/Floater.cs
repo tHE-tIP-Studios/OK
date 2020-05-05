@@ -27,7 +27,7 @@ namespace Fishing.Rod
 
         public void ReleaseFish()
         {
-            _currentArea.ActiveFish?.FishingEnd();
+            _currentArea?.ActiveFish?.FishingEnd();
         }
 
         public void FollowTarget(Transform target)
