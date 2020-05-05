@@ -11,11 +11,8 @@ namespace Fishing.Rod
         private Vector3 _mid;
         private FishingArea _currentArea;
         private Action _onFail;
-<<<<<<< HEAD
-=======
         private int? _wiggleTweenID;
 
->>>>>>> bbdfcdf66883f02426cfc4971b74ef82bd9f90b1
         public Vector3 Point { get; private set; }
 
         public void Cast(FishingArea area, Vector3 pointToReach, Action onFail)
