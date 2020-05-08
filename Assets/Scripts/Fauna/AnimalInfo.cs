@@ -61,16 +61,17 @@ namespace Fauna
             newAnimal._catchingValues = cValues;
             newAnimal._availability = aValues;
 
-            string path = "Assets/Resources/Fauna/Aquatic/" + raw.Specie + '/';
+            string path = "Assets/Resources/Fauna Info/Aquatic/" + raw.Specie + '/';
             string file = newAnimal._name + ".asset";
 
             AnimalInfo[] foundAssets =
-                Resources.LoadAll<AnimalInfo>("Fauna/Aquatic/" + raw.Specie);
+                Resources.LoadAll<AnimalInfo>("Fauna Info/Aquatic/" + raw.Specie);
 
             bool flag = false;
             foreach (AnimalInfo i in foundAssets)
                 if (i._name == newAnimal._name)
                 {
+                    newAnimal._fishGFX = i.FishGFX;
                     AssetDatabase.DeleteAsset(path + file);
                     Debug.Log("Found duplicate of " + newAnimal.Name + "\nReplacing...");
                     flag = true;

@@ -35,6 +35,7 @@ namespace Fauna.Animals
 
             GFXObject =
                 Instantiate(info.FishGFX, transform);
+            GFXObject.name = "GFX";
 
             LifespanSpeedUpEvent = new ClockEvent(
                 SavedTime.NoTime,

@@ -1012,7 +1012,7 @@ MonoBehaviour:
   - {fileID: 1118353987}
   _markersParent: {fileID: 1494055850}
   _areaType: 3
-  _capacity: 20
+  _capacity: 10
 --- !u!4 &345840689
 Transform:
   m_ObjectHideFlags: 0

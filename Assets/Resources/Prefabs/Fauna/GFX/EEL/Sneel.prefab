@@ -1,0 +1,1370 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &691278866206726813
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4369858005539613401}
+  m_Layer: 0
+  m_Name: Bone.001
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4369858005539613401
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 691278866206726813}
+  m_LocalRotation: {x: -4.776713e-16, y: 0.000000021855692, z: 0.000000021855692,
+    w: 1}
+  m_LocalPosition: {x: -0, y: 0.01, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 3438844184462370864}
+  m_Father: {fileID: 6742034761549199286}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &858627331889154188
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1296165231926856627}
+  m_Layer: 0
+  m_Name: Bone.006
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1296165231926856627
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 858627331889154188}
+  m_LocalRotation: {x: -2.9607658e-21, y: -7.1054274e-15, z: -1.2434499e-14, w: 1}
+  m_LocalPosition: {x: 1.4210854e-16, y: 0.011000452, z: 6.731366e-24}
+  m_LocalScale: {x: 1, y: 0.99999994, z: 1}
+  m_Children:
+  - {fileID: 9066049804423674815}
+  m_Father: {fileID: 644570809248114291}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1093513607332105832
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6902453823261823044}
+  m_Layer: 0
+  m_Name: Bone.008
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6902453823261823044
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1093513607332105832}
+  m_LocalRotation: {x: -3.8287537e-22, y: -1.8932662e-29, z: -5.3290705e-15, w: 1}
+  m_LocalPosition: {x: -3.5527136e-17, y: 0.014522953, z: 1.965359e-23}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 214214510036733346}
+  m_Father: {fileID: 9066049804423674815}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1332899556484858850
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 644570809248114291}
+  m_Layer: 0
+  m_Name: Bone.005
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &644570809248114291
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1332899556484858850}
+  m_LocalRotation: {x: 2.3822458e-21, y: 7.1054274e-15, z: 8.881784e-15, w: 1}
+  m_LocalPosition: {x: -1.4210854e-16, y: 0.011266455, z: 2.8967007e-23}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1296165231926856627}
+  m_Father: {fileID: 8543527483209863549}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2106842495646037308
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 750868149441678143}
+  m_Layer: 0
+  m_Name: Bone.003
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &750868149441678143
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2106842495646037308}
+  m_LocalRotation: {x: -9.689231e-22, y: -0.00000011920929, z: -1.0658141e-14, w: 1}
+  m_LocalPosition: {x: 3.5527136e-17, y: 0.015571303, z: -1.4098573e-25}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 8543527483209863549}
+  m_Father: {fileID: 3438844184462370864}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2470811238226141334
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 214214510036733346}
+  m_Layer: 0
+  m_Name: Bone.009
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &214214510036733346
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2470811238226141334}
+  m_LocalRotation: {x: -5.974925e-22, y: -7.1054274e-15, z: -1.7763568e-15, w: 1}
+  m_LocalPosition: {x: 5.32907e-16, y: 0.014860057, z: -4.1576693e-23}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 6952676506617316844}
+  m_Father: {fileID: 6902453823261823044}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2968190225553485348
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9066049804423674815}
+  m_Layer: 0
+  m_Name: Bone.007
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9066049804423674815
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2968190225553485348}
+  m_LocalRotation: {x: 2.1894829e-21, y: 7.1054274e-15, z: 1.0658141e-14, w: 1}
+  m_LocalPosition: {x: 2.4868996e-16, y: 0.017862638, z: -1.0310785e-22}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 6902453823261823044}
+  m_Father: {fileID: 1296165231926856627}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3769449973333029378
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5499163358500347146}
+  m_Layer: 0
+  m_Name: Armature
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5499163358500347146
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3769449973333029378}
+  m_LocalRotation: {x: -0.49999997, y: 0.5000001, z: -0.5, w: 0.49999988}
+  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalScale: {x: 300, y: 300, z: 300}
+  m_Children:
+  - {fileID: 6742034761549199286}
+  m_Father: {fileID: 8142219325116372612}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3826388038183768261
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6291162436981468905}
+  m_Layer: 0
+  m_Name: Bone.012
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6291162436981468905
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3826388038183768261}
+  m_LocalRotation: {x: 2.1101882e-21, y: 7.1054274e-15, z: 1.0658141e-14, w: 1}
+  m_LocalPosition: {x: -3.5527136e-17, y: 0.009552889, z: 6.520888e-23}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1188015632373600760}
+  m_Father: {fileID: 6941187301229723217}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4074444781435341477
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3261814769147983326}
+  m_Layer: 0
+  m_Name: Sneel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3261814769147983326
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4074444781435341477}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 8142219325116372612}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5090651489105814679
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8142219325116372612}
+  - component: {fileID: 2194654447348841470}
+  m_Layer: 0
+  m_Name: Sneel Rig
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8142219325116372612
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5090651489105814679}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
+  m_Children:
+  - {fileID: 5499163358500347146}
+  - {fileID: 2407572583691521005}
+  m_Father: {fileID: 3261814769147983326}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &2194654447348841470
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5090651489105814679}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: abf30865d2446ad44912cf183509dd99, type: 3}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 1
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!1 &5194327032758146706
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6952676506617316844}
+  m_Layer: 0
+  m_Name: Bone.010
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6952676506617316844
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5194327032758146706}
+  m_LocalRotation: {x: -3.0744547e-23, y: -1.8932662e-29, z: -1.7763568e-15, w: 1}
+  m_LocalPosition: {x: -3.5527136e-17, y: 0.011675768, z: -6.5223133e-23}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 6941187301229723217}
+  m_Father: {fileID: 214214510036733346}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5242899041420078824
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6742034761549199286}
+  - component: {fileID: 3507625861776826596}
+  m_Layer: 0
+  m_Name: Bone
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6742034761549199286
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5242899041420078824}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 4369858005539613401}
+  m_Father: {fileID: 5499163358500347146}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3507625861776826596
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5242899041420078824}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afd3a8c0c34ba4d4d9679edb4af4db76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TailTransforms:
+  - {fileID: 6742034761549199286}
+  - {fileID: 4369858005539613401}
+  - {fileID: 3438844184462370864}
+  - {fileID: 750868149441678143}
+  - {fileID: 8543527483209863549}
+  - {fileID: 644570809248114291}
+  - {fileID: 1296165231926856627}
+  - {fileID: 9066049804423674815}
+  - {fileID: 6902453823261823044}
+  - {fileID: 214214510036733346}
+  - {fileID: 6952676506617316844}
+  - {fileID: 6941187301229723217}
+  - {fileID: 6291162436981468905}
+  - {fileID: 1188015632373600760}
+  - {fileID: 1519050052226596230}
+  - {fileID: 4986370105718094387}
+  - {fileID: 5217686398102289835}
+  RootToParent: 0
+  AutoGetWithOne: 1
+  InitBeforeAnimator: 0
+  proceduralPoints:
+  - index: 0
+    Transform: {fileID: 0}
+    Position: {x: -15.98989, y: -1.8307335, z: -5.7442756}
+    Rotation: {x: 0.70082736, y: -0.6953688, z: 0.13834132, w: -0.0785174}
+    PreviousRotation: {x: -0.70710564, y: 0.7071079, z: -0.00044835015, w: 0.000350761}
+    InitialRotation: {x: -0.70710564, y: 0.7071079, z: -0.00044835015, w: 0.000350761}
+    InitialLossyScale: {x: 30.000011, y: 30.000011, z: 30.000025}
+    PreviousPosition: {x: -13.201592, y: -2.1459682, z: -11.151225}
+    SpringOffset: {x: 0, y: 0, z: 0}
+    SpringOffset2: {x: 0, y: 0, z: 0}
+    LookDirection: {x: -0, y: -0, z: -0}
+    InitLookDirection: {x: -0, y: -0, z: -0}
+    CrossUp: {x: 0, y: 1, z: 0}
+    BoneLength: 0
+    InitBoneLength: 0
+    ScaleFactor: 1.0000001
+    Correction: {x: -0.7071068, y: 0.7071068, z: -0, w: 0}
+    InitialLocalPosition: {x: -0, y: 0, z: 0}
+    InitialLocalRotation: {x: -0.7071068, y: 0.7071068, z: -0, w: 0}
+    LookBackDirection: {x: 0, y: 0, z: -1.0000002}
+    RotationTargetPos: {x: -17.023472, y: -2.7966156, z: -7.0440326}
+    PreCollisionPosition: {x: -15.98989, y: -1.8307335, z: -5.7442756}
+    PreCollisionRotation: {x: 0, y: 0, z: 0, w: 0}
+    ColliderRadius: 1
+    collisionOffsets: {x: 0, y: 0, z: 0}
+    collisionFlags: 0
+  - index: 1
+    Transform: {fileID: 0}
+    Position: {x: -15.983908, y: -1.8387568, z: -5.8381267}
+    Rotation: {x: -0.48502865, y: 0.4422866, z: -0.5541335, w: 0.5119238}
+    PreviousRotation: {x: -0.49975106, y: 0.4996837, z: -0.5003179, w: 0.50024724}
+    InitialRotation: {x: -0.49975106, y: 0.4996837, z: -0.5003179, w: 0.50024724}
+    InitialLossyScale: {x: 30.000011, y: 30.00001, z: 30.000006}
+    PreviousPosition: {x: -25.126244, y: -1.9779816, z: 1.6914431}
+    SpringOffset: {x: -0.014792044, y: 0.00022707472, z: -0.031051328}
+    SpringOffset2: {x: 0, y: 0, z: 0}
+    LookDirection: {x: 0.00000052584994, y: -1, z: 0.0000017260485}
+    InitLookDirection: {x: 0.00000052584994, y: -1, z: 0.0000017260485}
+    CrossUp: {x: 0, y: 1, z: 0}
+    BoneLength: 0
+    InitBoneLength: 0
+    ScaleFactor: 1.0000002
+    Correction: {x: 0.7071068, y: 0, z: -0, w: 0.7071067}
+    InitialLocalPosition: {x: -0, y: 0, z: 0}
+    InitialLocalRotation: {x: 0.7071068, y: 0, z: -0, w: 0.7071067}
+    LookBackDirection: {x: 0, y: -0.99999994, z: -0.00000011920929}
+    RotationTargetPos: {x: -15.982659, y: -1.8404315, z: -5.857716}
+    PreCollisionPosition: {x: -15.98989, y: -1.8307335, z: -5.7442756}
+    PreCollisionRotation: {x: 0, y: 0, z: 0, w: 0}
+    ColliderRadius: 1
+    collisionOffsets: {x: 0, y: 0, z: 0}
+    collisionFlags: 0
+  - index: 2
+    Transform: {fileID: 0}
+    Position: {x: -15.963192, y: -1.8719149, z: -6.226701}
+    Rotation: {x: -0.54612213, y: 0.50904953, z: -0.4935094, w: 0.44616994}
+    PreviousRotation: {x: -0.49975103, y: 0.49968374, z: -0.5003179, w: 0.50024724}
+    InitialRotation: {x: -0.49975103, y: 0.49968374, z: -0.5003179, w: 0.50024724}
+    InitialLossyScale: {x: 30.000011, y: 30.00001, z: 30.000006}
+    PreviousPosition: {x: -25.001467, y: -2.0730863, z: 1.9537566}
+    SpringOffset: {x: -0.014069942, y: 0.0041304305, z: -0.029418647}
+    SpringOffset2: {x: 0, y: 0, z: 0}
+    LookDirection: {x: -0.00000050515297, y: -1, z: -0.00000060381603}
+    InitLookDirection: {x: -0.00000050515297, y: -1, z: -0.00000060381603}
+    CrossUp: {x: -0.99953747, y: -0.00000057809865, z: -0.030411612}
+    BoneLength: 0.3000004
+    InitBoneLength: 0.3000004
+    ScaleFactor: 1.0000002
+    Correction: {x: -4.776713e-16, y: 0.000000021855692, z: 0.000000021855692, w: 1}
+    InitialLocalPosition: {x: -0, y: 0.01, z: 0}
+    InitialLocalRotation: {x: -4.776713e-16, y: 0.000000021855692, z: 0.000000021855692,
+      w: 1}
+    LookBackDirection: {x: 0.000000043711385, y: 1.9106853e-15, z: 1}
+    RotationTargetPos: {x: -15.967528, y: -1.8735363, z: -6.246017}
+    PreCollisionPosition: {x: -15.942417, y: -1.8641467, z: -6.134157}
+    PreCollisionRotation: {x: 0, y: 0, z: 0, w: 0}
+    ColliderRadius: 1
+    collisionOffsets: {x: 0, y: 0, z: 0}
+    collisionFlags: 0
+  - index: 3
+    Transform: {fileID: 0}
+    Position: {x: -16.033846, y: -1.9102308, z: -6.681361}
+    Rotation: {x: -0.562037, y: 0.52668965, z: -0.4746346, w: 0.42595118}
+    PreviousRotation: {x: -0.49975103, y: 0.49968374, z: -0.5003179, w: 0.50024724}
+    InitialRotation: {x: -0.49975103, y: 0.49968374, z: -0.5003179, w: 0.50024724}
+    InitialLossyScale: {x: 30.000011, y: 30.00001, z: 30.000006}
+    PreviousPosition: {x: -24.851927, y: -2.219623, z: 2.2680154}
+    SpringOffset: {x: -0.014116332, y: 0.0030270107, z: -0.029384917}
+    SpringOffset2: {x: 0, y: 0, z: 0}
+    LookDirection: {x: 0.00000016718194, y: -1, z: 0.0000010765847}
+    InitLookDirection: {x: 0.00000016718194, y: -1, z: 0.0000010765847}
+    CrossUp: {x: -0.99974746, y: 0.00000051859354, z: -0.022470659}
+    BoneLength: 0.37017465
+    InitBoneLength: 0.37017465
+    ScaleFactor: 1.0000005
+    Correction: {x: -1.2708408e-22, y: 5.3290705e-15, z: 5.3290705e-15, w: 1}
+    InitialLocalPosition: {x: -0, y: 0.0123391505, z: 2.1175823e-24}
+    InitialLocalRotation: {x: -1.2708408e-22, y: 5.3290705e-15, z: 5.3290705e-15,
+      w: 1}
+    LookBackDirection: {x: 1.0658141e-14, y: 2.541682e-22, z: 1}
+    RotationTargetPos: {x: -16.03966, y: -1.9117688, z: -6.699786}
+    PreCollisionPosition: {x: -16.005995, y: -1.9028623, z: -6.593088}
+    PreCollisionRotation: {x: 0, y: 0, z: 0, w: 0}
+    ColliderRadius: 1
+    collisionOffsets: {x: 0, y: 0, z: 0}
+    collisionFlags: 0
+  - index: 4
+    Transform: {fileID: 0}
+    Position: {x: -16.131208, y: -1.9561379, z: -7.2266183}
+    Rotation: {x: 0.5301676, y: -0.49140856, z: 0.51107484, w: -0.4650188}
+    PreviousRotation: {x: -0.4997511, y: 0.49968368, z: -0.5003178, w: 0.5002473}
+    InitialRotation: {x: -0.4997511, y: 0.49968368, z: -0.5003178, w: 0.5002473}
+    InitialLossyScale: {x: 30.000011, y: 30.00001, z: 30.000006}
+    PreviousPosition: {x: -24.665972, y: -2.4178, z: 2.6587048}
+    SpringOffset: {x: -0.015049034, y: -0.0024830739, z: -0.031183558}
+    SpringOffset2: {x: 0, y: 0, z: 0}
+    LookDirection: {x: 0.00000011827342, y: -1, z: -0.000002667715}
+    InitLookDirection: {x: 0.00000011827342, y: -1, z: -0.000002667715}
+    CrossUp: {x: -0.9996176, y: -0.00000019688719, z: -0.027651513}
+    BoneLength: 0.4671386
+    InitBoneLength: 0.4671386
+    ScaleFactor: 1.0000005
+    Correction: {x: -9.689231e-22, y: -0.00000011920929, z: -1.0658141e-14, w: 1}
+    InitialLocalPosition: {x: 3.5527136e-17, y: 0.015571303, z: -1.4098573e-25}
+    InitialLocalRotation: {x: -9.689231e-22, y: -0.00000011920929, z: -1.0658141e-14,
+      w: 1}
+    LookBackDirection: {x: -0.00000023841858, y: 4.478945e-21, z: 1}
+    RotationTargetPos: {x: -16.133228, y: -1.9576927, z: -7.2449937}
+    PreCollisionPosition: {x: -16.121527, y: -1.9486889, z: -7.138583}
+    PreCollisionRotation: {x: 0, y: 0, z: 0, w: 0}
+    ColliderRadius: 1
+    collisionOffsets: {x: 0, y: 0, z: 0}
+    collisionFlags: 0
+  - index: 5
+    Transform: {fileID: 0}
+    Position: {x: -16.12679, y: -1.9954529, z: -7.687768}
+    Rotation: {x: -0.46398127, y: 0.41944584, z: -0.5716227, w: 0.53106874}
+    PreviousRotation: {x: -0.4997511, y: 0.49968368, z: -0.5003178, w: 0.5002473}
+    InitialRotation: {x: -0.4997511, y: 0.49968368, z: -0.5003178, w: 0.5002473}
+    InitialLossyScale: {x: 30.000011, y: 30.00001, z: 30.000006}
+    PreviousPosition: {x: -24.515213, y: -2.5807893, z: 2.9753823}
+    SpringOffset: {x: -0.016214015, y: -0.009197707, z: -0.033503108}
+    SpringOffset2: {x: 0, y: 0, z: 0}
+    LookDirection: {x: -0.0000002870085, y: -1, z: 0.0000013226135}
+    InitLookDirection: {x: -0.0000002870085, y: -1, z: 0.0000013226135}
+    CrossUp: {x: -0.99964696, y: -0.00000004735371, z: -0.026568789}
+    BoneLength: 0.3770373
+    InitBoneLength: 0.3770373
+    ScaleFactor: 1.0000007
+    Correction: {x: 8.999406e-22, y: -7.1054274e-15, z: 3.5527137e-15, w: 1}
+    InitialLocalPosition: {x: -1.4210854e-16, y: 0.012567913, z: 1.811235e-23}
+    InitialLocalRotation: {x: 8.999406e-22, y: -7.1054274e-15, z: 3.5527137e-15, w: 1}
+    LookBackDirection: {x: -1.4210855e-14, y: -1.7998812e-21, z: 1}
+    RotationTargetPos: {x: -16.122267, y: -1.9970051, z: -7.705689}
+    PreCollisionPosition: {x: -16.148453, y: -1.9880165, z: -7.601909}
+    PreCollisionRotation: {x: 0, y: 0, z: 0, w: 0}
+    ColliderRadius: 1
+    collisionOffsets: {x: 0, y: 0, z: 0}
+    collisionFlags: 0
+  - index: 6
+    Transform: {fileID: 0}
+    Position: {x: -16.007252, y: -2.0308201, z: -8.095014}
+    Rotation: {x: 0.40169975, y: -0.35288343, z: 0.61496294, w: -0.5795956}
+    PreviousRotation: {x: -0.4997511, y: 0.49968368, z: -0.5003178, w: 0.5002473}
+    InitialRotation: {x: -0.4997511, y: 0.49968368, z: -0.5003178, w: 0.5002473}
+    InitialLossyScale: {x: 30.000011, y: 30.00001, z: 30.000006}
+    PreviousPosition: {x: -24.378582, y: -2.7237084, z: 3.2623167}
+    SpringOffset: {x: -0.017533548, y: -0.01730099, z: -0.0361642}
+    SpringOffset2: {x: 0, y: 0, z: 0}
+    LookDirection: {x: -0.00000001813626, y: -1, z: 0.0000006772979}
+    InitLookDirection: {x: -0.00000001813626, y: -1, z: 0.0000006772979}
+    CrossUp: {x: -0.99970275, y: 0.00000025467548, z: -0.024381794}
+    BoneLength: 0.33799383
+    InitBoneLength: 0.33799383
+    ScaleFactor: 1.0000007
+    Correction: {x: 2.3822458e-21, y: 7.1054274e-15, z: 8.881784e-15, w: 1}
+    InitialLocalPosition: {x: -1.4210854e-16, y: 0.011266455, z: 2.8967007e-23}
+    InitialLocalRotation: {x: 2.3822458e-21, y: 7.1054274e-15, z: 8.881784e-15, w: 1}
+    LookBackDirection: {x: 1.4210855e-14, y: -4.7644917e-21, z: 1}
+    RotationTargetPos: {x: -15.997675, y: -2.0322719, z: -8.11142}
+    PreCollisionPosition: {x: -16.053137, y: -2.0238655, z: -8.016414}
+    PreCollisionRotation: {x: 0, y: 0, z: 0, w: 0}
+    ColliderRadius: 1
+    collisionOffsets: {x: 0, y: 0, z: 0}
+    collisionFlags: 0
+  - index: 7
+    Transform: {fileID: 0}
+    Position: {x: -15.811344, y: -2.0635695, z: -8.466308}
+    Rotation: {x: -0.37630776, y: 0.32598156, z: -0.62965995, w: 0.59636974}
+    PreviousRotation: {x: -0.4997511, y: 0.49968368, z: -0.5003178, w: 0.5002473}
+    InitialRotation: {x: -0.4997511, y: 0.49968368, z: -0.5003178, w: 0.5002473}
+    InitialLossyScale: {x: 30.000011, y: 30.00001, z: 30.000006}
+    PreviousPosition: {x: -24.243446, y: -2.8562696, z: 3.5460598}
+    SpringOffset: {x: -0.019127188, y: -0.028030094, z: -0.039403353}
+    SpringOffset2: {x: 0, y: 0, z: 0}
+    LookDirection: {x: 0.0000000475843, y: -1, z: -0}
+    InitLookDirection: {x: 0.0000000475843, y: -1, z: -0}
+    CrossUp: {x: -0.9996561, y: 3.6907974e-10, z: -0.026223237}
+    BoneLength: 0.33001348
+    InitBoneLength: 0.33001348
+    ScaleFactor: 1.0000007
+    Correction: {x: -2.9607658e-21, y: -7.1054274e-15, z: -1.2434499e-14, w: 1}
+    InitialLocalPosition: {x: 1.4210854e-16, y: 0.011000452, z: 6.731366e-24}
+    InitialLocalRotation: {x: -2.9607658e-21, y: -7.1054274e-15, z: -1.2434499e-14,
+      w: 1}
+    LookBackDirection: {x: -1.4210855e-14, y: 5.9215316e-21, z: 1}
+    RotationTargetPos: {x: -15.800028, y: -2.0649576, z: -8.481835}
+    PreCollisionPosition: {x: -15.865559, y: -2.056919, z: -8.391916}
+    PreCollisionRotation: {x: 0, y: 0, z: 0, w: 0}
+    ColliderRadius: 1
+    collisionOffsets: {x: 0, y: 0, z: 0}
+    collisionFlags: 0
+  - index: 8
+    Transform: {fileID: 0}
+    Position: {x: -15.498005, y: -2.1115632, z: -9.008007}
+    Rotation: {x: 0.41451353, y: -0.3664345, z: 0.60704017, w: -0.57044417}
+    PreviousRotation: {x: -0.4997511, y: 0.49968368, z: -0.5003178, w: 0.5002473}
+    InitialRotation: {x: -0.4997511, y: 0.49968368, z: -0.5003178, w: 0.5002473}
+    InitialLossyScale: {x: 30.000011, y: 30.00001, z: 30.000006}
+    PreviousPosition: {x: -24.022545, y: -3.0454905, z: 4.009889}
+    SpringOffset: {x: -0.021790514, y: -0.048715044, z: -0.044810984}
+    SpringOffset2: {x: 0, y: 0, z: 0}
+    LookDirection: {x: 0.000000069914854, y: -1, z: -0.0000010260429}
+    InitLookDirection: {x: 0.000000069914854, y: -1, z: -0.0000010260429}
+    CrossUp: {x: -0.9996469, y: -0.0000000475675, z: -0.026570337}
+    BoneLength: 0.5358795
+    InitBoneLength: 0.5358795
+    ScaleFactor: 1.0000007
+    Correction: {x: 2.1894829e-21, y: 7.1054274e-15, z: 1.0658141e-14, w: 1}
+    InitialLocalPosition: {x: 2.4868996e-16, y: 0.017862638, z: -1.0310785e-22}
+    InitialLocalRotation: {x: 2.1894829e-21, y: 7.1054274e-15, z: 1.0658141e-14, w: 1}
+    LookBackDirection: {x: 1.4210855e-14, y: -4.3789657e-21, z: 1}
+    RotationTargetPos: {x: -15.489164, y: -2.1130621, z: -9.024954}
+    PreCollisionPosition: {x: -15.5403595, y: -2.1043813, z: -8.926817}
+    PreCollisionRotation: {x: 0, y: 0, z: 0, w: 0}
+    ColliderRadius: 1
+    collisionOffsets: {x: 0, y: 0, z: 0}
+    collisionFlags: 0
+  - index: 9
+    Transform: {fileID: 0}
+    Position: {x: -15.324105, y: -2.1548665, z: -9.502951}
+    Rotation: {x: -0.5082076, y: 0.4672578, z: -0.5333491, w: 0.48880875}
+    PreviousRotation: {x: -0.4997511, y: 0.49968368, z: -0.5003178, w: 0.5002473}
+    InitialRotation: {x: -0.4997511, y: 0.49968368, z: -0.5003178, w: 0.5002473}
+    InitialLossyScale: {x: 30.000011, y: 30.00001, z: 30.000006}
+    PreviousPosition: {x: -23.839731, y: -3.1856449, z: 4.3936596}
+    SpringOffset: {x: -0.024421968, y: -0.06991728, z: -0.050182477}
+    SpringOffset2: {x: 0, y: 0, z: 0}
+    LookDirection: {x: -0.000000010612309, y: -1, z: 0.0000005013827}
+    InitLookDirection: {x: -0.000000010612309, y: -1, z: 0.0000005013827}
+    CrossUp: {x: -0.9996479, y: -0.00000004266436, z: -0.026534837}
+    BoneLength: 0.43568832
+    InitBoneLength: 0.43568832
+    ScaleFactor: 1.0000011
+    Correction: {x: -3.8287537e-22, y: -1.8932662e-29, z: -5.3290705e-15, w: 1}
+    InitialLocalPosition: {x: -3.5527136e-17, y: 0.014522953, z: 1.965359e-23}
+    InitialLocalRotation: {x: -3.8287537e-22, y: -1.8932662e-29, z: -5.3290705e-15,
+      w: 1}
+    LookBackDirection: {x: -3.786532e-29, y: 7.6575074e-22, z: 1}
+    RotationTargetPos: {x: -15.323163, y: -2.1565719, z: -9.522795}
+    PreCollisionPosition: {x: -15.328617, y: -2.1466963, z: -9.40788}
+    PreCollisionRotation: {x: 0, y: 0, z: 0, w: 0}
+    ColliderRadius: 1
+    collisionOffsets: {x: 0, y: 0, z: 0}
+    collisionFlags: 0
+  - index: 10
+    Transform: {fileID: 0}
+    Position: {x: -15.353677, y: -2.2008395, z: -10.041708}
+    Rotation: {x: -0.60001266, y: 0.56936693, z: -0.4226228, w: 0.3704}
+    PreviousRotation: {x: -0.4997511, y: 0.49968368, z: -0.5003178, w: 0.5002473}
+    InitialRotation: {x: -0.4997511, y: 0.49968368, z: -0.5003178, w: 0.5002473}
+    InitialLossyScale: {x: 30.000011, y: 30.00001, z: 30.000006}
+    PreviousPosition: {x: -23.649809, y: -3.3064988, z: 4.7923}
+    SpringOffset: {x: -0.027145764, y: -0.093672104, z: -0.055737123}
+    SpringOffset2: {x: 0, y: 0, z: 0}
+    LookDirection: {x: -0.00000020473769, y: -1, z: 3.9863895e-14}
+    InitLookDirection: {x: -0.00000020473769, y: -1, z: 3.9863895e-14}
+    CrossUp: {x: -0.99965554, y: -0.0000000025498208, z: -0.026244374}
+    BoneLength: 0.44580203
+    InitBoneLength: 0.44580203
+    ScaleFactor: 1.0000012
+    Correction: {x: -5.974925e-22, y: -7.1054274e-15, z: -1.7763568e-15, w: 1}
+    InitialLocalPosition: {x: 5.32907e-16, y: 0.014860057, z: -4.1576693e-23}
+    InitialLocalRotation: {x: -5.974925e-22, y: -7.1054274e-15, z: -1.7763568e-15,
+      w: 1}
+    LookBackDirection: {x: -1.4210855e-14, y: 1.194985e-21, z: 1}
+    RotationTargetPos: {x: -15.364175, y: -2.202482, z: -10.061552}
+    PreCollisionPosition: {x: -15.303383, y: -2.1929703, z: -9.946638}
+    PreCollisionRotation: {x: 0, y: 0, z: 0, w: 0}
+    ColliderRadius: 1
+    collisionOffsets: {x: 0, y: 0, z: 0}
+    collisionFlags: 0
+  - index: 11
+    Transform: {fileID: 0}
+    Position: {x: -15.563361, y: -2.234637, z: -10.449779}
+    Rotation: {x: -0.6410553, y: 0.6170416, z: -0.34933862, w: 0.29371804}
+    PreviousRotation: {x: -0.4997511, y: 0.49968368, z: -0.5003178, w: 0.5002473}
+    InitialRotation: {x: -0.4997511, y: 0.49968368, z: -0.5003178, w: 0.5002473}
+    InitialLossyScale: {x: 30.000011, y: 30.00001, z: 30.000006}
+    PreviousPosition: {x: -23.497408, y: -3.384229, z: 5.112093}
+    SpringOffset: {x: -0.029553382, y: -0.11446944, z: -0.06065579}
+    SpringOffset2: {x: 0, y: 0, z: 0}
+    LookDirection: {x: 0.0000004009445, y: -1, z: -7.8066785e-14}
+    InitLookDirection: {x: 0.0000004009445, y: -1, z: -7.8066785e-14}
+    CrossUp: {x: -0.9996938, y: 0.00000020467499, z: -0.024743857}
+    BoneLength: 0.35027337
+    InitBoneLength: 0.35027337
+    ScaleFactor: 1.0000012
+    Correction: {x: -3.0744547e-23, y: -1.8932662e-29, z: -1.7763568e-15, w: 1}
+    InitialLocalPosition: {x: -3.5527136e-17, y: 0.011675768, z: -6.5223133e-23}
+    InitialLocalRotation: {x: -3.0744547e-23, y: -1.8932662e-29, z: -1.7763568e-15,
+      w: 1}
+    LookBackDirection: {x: -3.7865323e-29, y: 6.1489095e-23, z: 1}
+    RotationTargetPos: {x: -15.580064, y: -2.2360437, z: -10.467271}
+    PreCollisionPosition: {x: -15.483338, y: -2.2278984, z: -10.365972}
+    PreCollisionRotation: {x: 0, y: 0, z: 0, w: 0}
+    ColliderRadius: 1
+    collisionOffsets: {x: 0, y: 0, z: 0}
+    collisionFlags: 0
+  - index: 12
+    Transform: {fileID: 0}
+    Position: {x: -15.856671, y: -2.2653105, z: -10.826519}
+    Rotation: {x: -0.6378352, y: 0.6131362, z: -0.35610333, w: 0.30070028}
+    PreviousRotation: {x: -0.4997511, y: 0.49968368, z: -0.5003178, w: 0.5002473}
+    InitialRotation: {x: -0.4997511, y: 0.49968368, z: -0.5003178, w: 0.5002473}
+    InitialLossyScale: {x: 30.000011, y: 30.00001, z: 30.000006}
+    PreviousPosition: {x: -23.33745, y: -3.4388766, z: 5.4477005}
+    SpringOffset: {x: -0.0315504, y: -0.13615185, z: -0.06469926}
+    SpringOffset2: {x: 0, y: 0, z: 0}
+    LookDirection: {x: -0.00000012982869, y: -1, z: 2.52786e-14}
+    InitLookDirection: {x: -0.00000012982869, y: -1, z: 2.52786e-14}
+    CrossUp: {x: -0.9995757, y: -0.00000040077435, z: -0.029127749}
+    BoneLength: 0.36221433
+    InitBoneLength: 0.36221433
+    ScaleFactor: 1.0000014
+    Correction: {x: 5.047826e-22, y: 7.1054274e-15, z: 4.440892e-15, w: 1}
+    InitialLocalPosition: {x: -3.5527136e-17, y: 0.012073803, z: -9.036236e-23}
+    InitialLocalRotation: {x: 5.047826e-22, y: 7.1054274e-15, z: 4.440892e-15, w: 1}
+    LookBackDirection: {x: 1.4210855e-14, y: -1.0095651e-21, z: 1}
+    RotationTargetPos: {x: -15.873597, y: -2.2667246, z: -10.84409}
+    PreCollisionPosition: {x: -15.775583, y: -2.2585354, z: -10.742336}
+    PreCollisionRotation: {x: 0, y: 0, z: 0, w: 0}
+    ColliderRadius: 1
+    collisionOffsets: {x: 0, y: 0, z: 0}
+    collisionFlags: 0
+  - index: 13
+    Transform: {fileID: 0}
+    Position: {x: -16.070663, y: -2.292977, z: -11.1623}
+    Rotation: {x: -0.5872442, y: 0.55457616, z: -0.4417542, w: 0.39043918}
+    PreviousRotation: {x: -0.4997511, y: 0.49968368, z: -0.5003178, w: 0.5002473}
+    InitialRotation: {x: -0.4997511, y: 0.49968368, z: -0.5003178, w: 0.5002473}
+    InitialLossyScale: {x: 30.000011, y: 30.00001, z: 30.000006}
+    PreviousPosition: {x: -23.207764, y: -3.464656, z: 5.7197113}
+    SpringOffset: {x: -0.032964744, y: -0.15590414, z: -0.06752676}
+    SpringOffset2: {x: 0, y: 0, z: 0}
+    LookDirection: {x: -0.0000005457914, y: -1, z: 1.06269506e-13}
+    InitLookDirection: {x: -0.0000005457914, y: -1, z: 1.06269506e-13}
+    CrossUp: {x: -0.9996803, y: 0.00000012978718, z: -0.025286127}
+    BoneLength: 0.286586
+    InitBoneLength: 0.286586
+    ScaleFactor: 1.0000017
+    Correction: {x: 2.1101882e-21, y: 7.1054274e-15, z: 1.0658141e-14, w: 1}
+    InitialLocalPosition: {x: -3.5527136e-17, y: 0.009552889, z: 6.520888e-23}
+    InitialLocalRotation: {x: 2.1101882e-21, y: 7.1054274e-15, z: 1.0658141e-14, w: 1}
+    LookBackDirection: {x: 1.4210855e-14, y: -4.2203765e-21, z: 1}
+    RotationTargetPos: {x: -16.081352, y: -2.2947268, z: -11.183319}
+    PreCollisionPosition: {x: -16.019453, y: -2.284594, z: -11.061599}
+    PreCollisionRotation: {x: 0, y: 0, z: 0, w: 0}
+    ColliderRadius: 1
+    collisionOffsets: {x: 0, y: 0, z: 0}
+    collisionFlags: 0
+  - index: 14
+    Transform: {fileID: 0}
+    Position: {x: -16.135118, y: -2.317646, z: -11.45258}
+    Rotation: {x: 0.49968794, y: -0.45744348, z: 0.5417127, w: -0.49759898}
+    PreviousRotation: {x: -0.4997511, y: 0.49968368, z: -0.5003178, w: 0.5002473}
+    InitialRotation: {x: -0.4997511, y: 0.49968368, z: -0.5003178, w: 0.5002473}
+    InitialLossyScale: {x: 30.000011, y: 30.00001, z: 30.000006}
+    PreviousPosition: {x: -23.117386, y: -3.472963, z: 5.9091682}
+    SpringOffset: {x: -0.03385408, y: -0.17367339, z: -0.06925082}
+    SpringOffset2: {x: 0, y: 0, z: 0}
+    LookDirection: {x: 0.00000047642067, y: -1, z: -0.0000025524691}
+    InitLookDirection: {x: 0.00000047642067, y: -1, z: -0.0000025524691}
+    CrossUp: {x: -0.99975187, y: 0.000000545656, z: -0.022274682}
+    BoneLength: 0.19105732
+    InitBoneLength: 0.19105732
+    ScaleFactor: 1.0000014
+    Correction: {x: -7.461111e-21, y: -3.5527137e-14, z: -3.7303494e-14, w: 1}
+    InitialLocalPosition: {x: -6.0396133e-16, y: 0.006368599, z: 1.3278315e-22}
+    InitialLocalRotation: {x: -7.461111e-21, y: -3.5527137e-14, z: -3.7303494e-14,
+      w: 1}
+    LookBackDirection: {x: -7.1054274e-14, y: 1.4922225e-20, z: 1}
+    RotationTargetPos: {x: -16.136353, y: -2.3196046, z: -11.475344}
+    PreCollisionPosition: {x: -16.129202, y: -2.3082628, z: -11.343525}
+    PreCollisionRotation: {x: 0, y: 0, z: 0, w: 0}
+    ColliderRadius: 1
+    collisionOffsets: {x: 0, y: 0, z: 0}
+    collisionFlags: 0
+  - index: 15
+    Transform: {fileID: 0}
+    Position: {x: -16.080744, y: -2.3417037, z: -11.727084}
+    Rotation: {x: 0.3978464, y: -0.34793973, z: 0.61784256, w: -0.58217424}
+    PreviousRotation: {x: -0.4997511, y: 0.49968368, z: -0.5003178, w: 0.5002473}
+    InitialRotation: {x: -0.4997511, y: 0.49968368, z: -0.5003178, w: 0.5002473}
+    InitialLossyScale: {x: 30.000011, y: 30.000006, z: 30.000006}
+    PreviousPosition: {x: -23.031797, y: -3.4608958, z: 6.0884695}
+    SpringOffset: {x: -0.033664577, y: -0.20616738, z: -0.06865447}
+    SpringOffset2: {x: 0, y: 0, z: 0}
+    LookDirection: {x: -0.0000009930674, y: -1, z: 2.6776387e-13}
+    InitLookDirection: {x: -0.0000009930674, y: -1, z: 2.6776387e-13}
+    CrossUp: {x: -0.9995755, y: -0.00000040185085, z: -0.029135546}
+    BoneLength: 0.17513764
+    InitBoneLength: 0.17513764
+    ScaleFactor: 1.0000011
+    Correction: {x: 1.7298127e-20, y: 8.526513e-14, z: 8.348877e-14, w: 1}
+    InitialLocalPosition: {x: -3.5527136e-17, y: 0.005837879, z: 1.0974003e-22}
+    InitialLocalRotation: {x: 1.7298127e-20, y: 8.526513e-14, z: 8.348877e-14, w: 1}
+    LookBackDirection: {x: 1.7053026e-13, y: -3.459624e-20, z: 1}
+    RotationTargetPos: {x: -16.07239, y: -2.343571, z: -11.748085}
+    PreCollisionPosition: {x: -16.120766, y: -2.332757, z: -11.626472}
+    PreCollisionRotation: {x: 0, y: 0, z: 0, w: 0}
+    ColliderRadius: 1
+    collisionOffsets: {x: 0, y: 0, z: 0}
+    collisionFlags: 0
+  - index: 16
+    Transform: {fileID: 0}
+    Position: {x: -15.971489, y: -2.3576608, z: -11.903582}
+    Rotation: {x: -0.3264752, y: 0.2726264, z: -0.6546652, w: 0.6249018}
+    PreviousRotation: {x: -0.4997511, y: 0.49968368, z: -0.5003178, w: 0.5002473}
+    InitialRotation: {x: -0.4997511, y: 0.49968368, z: -0.5003178, w: 0.5002473}
+    InitialLossyScale: {x: 30.000011, y: 30.000006, z: 30.000006}
+    PreviousPosition: {x: -22.976759, y: -3.425518, z: 6.2034593}
+    SpringOffset: {x: -0.032123525, y: -0.22527489, z: -0.06535544}
+    SpringOffset2: {x: 0, y: 0, z: 0}
+    LookDirection: {x: 0.0000010588103, y: -1, z: -2.390784e-13}
+    InitLookDirection: {x: 0.0000010588103, y: -1, z: -2.390784e-13}
+    CrossUp: {x: -0.9998188, y: 0.0000009928874, z: -0.019035868}
+    BoneLength: 0.09951026
+    InitBoneLength: 0.09951026
+    ScaleFactor: 1.0000012
+    Correction: {x: -5.750294e-21, y: -3.5527137e-14, z: -2.9309888e-14, w: 1}
+    InitialLocalPosition: {x: -7.105427e-17, y: 0.0033169745, z: -7.467397e-23}
+    InitialLocalRotation: {x: -5.750294e-21, y: -3.5527137e-14, z: -2.9309888e-14,
+      w: 1}
+    LookBackDirection: {x: -7.1054274e-14, y: 1.150059e-20, z: 1}
+    RotationTargetPos: {x: -15.957876, y: -2.3593295, z: -11.921869}
+    PreCollisionPosition: {x: -16.036707, y: -2.3496668, z: -11.815965}
+    PreCollisionRotation: {x: 0, y: 0, z: 0, w: 0}
+    ColliderRadius: 1
+    collisionOffsets: {x: 0, y: 0, z: 0}
+    collisionFlags: 0
+  - index: 17
+    Transform: {fileID: 0}
+    Position: {x: -15.826931, y: -2.3717933, z: -12.0559845}
+    Rotation: {x: 0.28302926, y: -0.22721557, z: 0.6718787, w: -0.64563656}
+    PreviousRotation: {x: -0.4997511, y: 0.49968368, z: -0.5003178, w: 0.5002473}
+    InitialRotation: {x: -0.4997511, y: 0.49968368, z: -0.5003178, w: 0.5002473}
+    InitialLossyScale: {x: 30.000011, y: 30.000006, z: 30.000006}
+    PreviousPosition: {x: -22.921028, y: -3.3658104, z: 6.31977}
+    SpringOffset: {x: -0.030251903, y: -0.24159043, z: -0.06139594}
+    SpringOffset2: {x: 0, y: 0, z: 0}
+    LookDirection: {x: 0, y: 0, z: 0}
+    InitLookDirection: {x: 0, y: 0, z: 0}
+    CrossUp: {x: -0.99942565, y: -0.0000010582022, z: -0.03388744}
+    BoneLength: 0.09951026
+    InitBoneLength: 0.09951026
+    ScaleFactor: 1.0000014
+    Correction: {x: 0, y: -0, z: -0, w: 1}
+    InitialLocalPosition: {x: -0, y: 0.003715, z: 0}
+    InitialLocalRotation: {x: 0, y: -0, z: -0, w: 1}
+    LookBackDirection: {x: 0, y: 0, z: 1}
+    RotationTargetPos: {x: -15.810055, y: -2.373282, z: -12.071906}
+    PreCollisionPosition: {x: -15.9077835, y: -2.3646607, z: -11.979706}
+    PreCollisionRotation: {x: 0, y: 0, z: 0, w: 0}
+    ColliderRadius: 1
+    collisionOffsets: {x: 0, y: 0, z: 0}
+    collisionFlags: 0
+  localProceduralPoints: []
+  PositionSpeed: 11.6
+  RotationSpeed: 7.6
+  MaxStretching: 1
+  Sensitivity: 1
+  Springiness: 0
+  AngleLimit: 83
+  AngleLimitAxis: {x: 0, y: 0, z: 0}
+  LimitAxisRange: {x: 0, y: 0}
+  LimitSmoothing: 0.15
+  MotionInfluence: 1
+  StiffTailEnd: 0
+  UseAutoCorrectLookAxis: 1
+  FullCorrection: 1
+  LookUpMethod: 3
+  OrientationReference: {fileID: 0}
+  AnimateCorrections: 0
+  AnimateRoot: 1
+  LengthMultiplier: 1
+  AxisCorrection: {x: -0, y: -0, z: -0}
+  AxisLookBack: {x: 0, y: 1, z: 0}
+  ExtraCorrectionOptions: 1
+  ExtraFromDirection: {x: -0, y: -0, z: -0}
+  ExtraToDirection: {x: 0, y: 0, z: 1}
+  AddTailReferences: 0
+  UpdateClock: 1
+  SafeDeltaTime: 1
+  RefreshHelpers: 0
+  QueueToLastUpdate: 1
+  UseCollision: 0
+  CollisionMethod: 1
+  CollidersType: 0
+  CollideWithOtherTails: 0
+  DetailedCollision: 0
+  CollidersScale:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  CollidersScaleMul: 6.5
+  DifferenceScaleFactor: 1
+  IgnoredColliders: []
+  BoxesDimensionsMul: {x: 1, y: 1, z: 1}
+  CollidersSameLayer: 1
+  CollidersAddRigidbody: 1
+  RigidbodyMass: 1
+  CollidersLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  CollisionSwapping: 0.5
+  CollisionSpace: 0
+  IncludedColliders: []
+  Curving: {x: 0, y: 0, z: 0}
+  Gravity: {x: 0, y: 0, z: 0}
+  RootRotationOffset: {x: 0, y: 0, z: 0}
+  RootPositionOffset: {x: 0, y: 0, z: 0}
+  OptimizeWithMesh: {fileID: 0}
+  RootPoint:
+    index: -1
+    Transform: {fileID: 0}
+    Position: {x: -17.026028, y: -2.7977104, z: -7.1706276}
+    Rotation: {x: 0.00004359649, y: -0.99993986, z: 0.004322086, w: 0.010085359}
+    PreviousRotation: {x: -0.000069005946, y: -0.00056505686, z: -0.0000016349433,
+      w: 0.9999999}
+    InitialRotation: {x: -0.000069005946, y: -0.00056505686, z: -0.0000016349433,
+      w: 0.9999999}
+    InitialLossyScale: {x: 0.099999994, y: 0.1, z: 0.099999994}
+    PreviousPosition: {x: -13.201592, y: -2.1459682, z: -11.151225}
+    SpringOffset: {x: 0, y: 0, z: 0}
+    SpringOffset2: {x: 0, y: 0, z: 0}
+    LookDirection: {x: -0, y: -0, z: -0}
+    InitLookDirection: {x: -0, y: -0, z: -0}
+    CrossUp: {x: 0.000000009864174, y: 0.0001380101, z: 1}
+    BoneLength: 0
+    InitBoneLength: 0
+    ScaleFactor: 1
+    Correction: {x: 0, y: 0, z: 0, w: 1}
+    InitialLocalPosition: {x: 2.6, y: 0, z: 0}
+    InitialLocalRotation: {x: -0, y: -0, z: -0, w: 1}
+    LookBackDirection: {x: 0, y: 0, z: 1}
+    RotationTargetPos: {x: -13.201592, y: -2.1459682, z: -11.151225}
+    PreCollisionPosition: {x: -13.201592, y: -2.1459682, z: -11.151225}
+    PreCollisionRotation: {x: 0, y: 0, z: 0, w: 0}
+    ColliderRadius: 1
+    collisionOffsets: {x: 0, y: 0, z: 0}
+    collisionFlags: 0
+  initializationBone1: {fileID: 0}
+  initializationBone2: {fileID: 0}
+  CollisionLookBack: 1
+  drawGizmos: 0
+  UseWaving: 1
+  CosinusAdd: 0
+  WavingSpeed: 1
+  WavingRange: 0.5
+  WavingAxis: {x: 3, y: 0, z: 0}
+  TailRotationOffset: {x: 0, y: 0, z: 0}
+  WavingType: 0
+  AlternateWave: 1
+  DisconnectTransforms: 0
+--- !u!1 &5296445688574442073
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4986370105718094387}
+  m_Layer: 0
+  m_Name: Bone.015
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4986370105718094387
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5296445688574442073}
+  m_LocalRotation: {x: -5.750294e-21, y: -3.5527137e-14, z: -2.9309888e-14, w: 1}
+  m_LocalPosition: {x: -7.105427e-17, y: 0.0033169745, z: -7.467397e-23}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 5217686398102289835}
+  m_Father: {fileID: 1519050052226596230}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5844359989352488654
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2407572583691521005}
+  - component: {fileID: 1128821397880705868}
+  m_Layer: 0
+  m_Name: Sneel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2407572583691521005
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5844359989352488654}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+  m_LocalPosition: {x: 14.447056, y: 0, z: 0}
+  m_LocalScale: {x: 569.26086, y: 100, z: 100}
+  m_Children: []
+  m_Father: {fileID: 8142219325116372612}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!137 &1128821397880705868
+SkinnedMeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5844359989352488654}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: dc1f4b88a4bc5fb4d8bf6cb04e8f4b05, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  serializedVersion: 2
+  m_Quality: 0
+  m_UpdateWhenOffscreen: 0
+  m_SkinnedMotionVectors: 1
+  m_Mesh: {fileID: 4985561763746681442, guid: abf30865d2446ad44912cf183509dd99, type: 3}
+  m_Bones:
+  - {fileID: 6742034761549199286}
+  - {fileID: 4369858005539613401}
+  - {fileID: 3438844184462370864}
+  - {fileID: 750868149441678143}
+  - {fileID: 8543527483209863549}
+  - {fileID: 644570809248114291}
+  - {fileID: 1296165231926856627}
+  - {fileID: 9066049804423674815}
+  - {fileID: 6902453823261823044}
+  - {fileID: 214214510036733346}
+  - {fileID: 6952676506617316844}
+  - {fileID: 6941187301229723217}
+  - {fileID: 6291162436981468905}
+  - {fileID: 1188015632373600760}
+  - {fileID: 1519050052226596230}
+  - {fileID: 4986370105718094387}
+  m_BlendShapeWeights: []
+  m_RootBone: {fileID: 6742034761549199286}
+  m_AABB:
+    m_Center: {x: -0.00002682535, y: 0.086408876, z: -0.0000000013969839}
+    m_Extent: {x: 0.006437286, y: 0.08892376, z: 0.007972745}
+  m_DirtyAABB: 0
+--- !u!1 &5933381951645919334
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6941187301229723217}
+  m_Layer: 0
+  m_Name: Bone.011
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6941187301229723217
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5933381951645919334}
+  m_LocalRotation: {x: 5.047826e-22, y: 7.1054274e-15, z: 4.440892e-15, w: 1}
+  m_LocalPosition: {x: -3.5527136e-17, y: 0.012073803, z: -9.036236e-23}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 6291162436981468905}
+  m_Father: {fileID: 6952676506617316844}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6206971195151554080
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5217686398102289835}
+  m_Layer: 0
+  m_Name: Bone.015_end
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5217686398102289835
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6206971195151554080}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0, y: 0.003715, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4986370105718094387}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6684283646973579680
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3438844184462370864}
+  m_Layer: 0
+  m_Name: Bone.002
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3438844184462370864
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6684283646973579680}
+  m_LocalRotation: {x: -1.2708408e-22, y: 5.3290705e-15, z: 5.3290705e-15, w: 1}
+  m_LocalPosition: {x: -0, y: 0.0123391505, z: 2.1175823e-24}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 750868149441678143}
+  m_Father: {fileID: 4369858005539613401}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7241799013696942048
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1519050052226596230}
+  m_Layer: 0
+  m_Name: Bone.014
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1519050052226596230
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7241799013696942048}
+  m_LocalRotation: {x: 1.7298127e-20, y: 8.526513e-14, z: 8.348877e-14, w: 1}
+  m_LocalPosition: {x: -3.5527136e-17, y: 0.005837879, z: 1.0974003e-22}
+  m_LocalScale: {x: 1, y: 0.99999994, z: 1}
+  m_Children:
+  - {fileID: 4986370105718094387}
+  m_Father: {fileID: 1188015632373600760}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8293156645411929234
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8543527483209863549}
+  m_Layer: 0
+  m_Name: Bone.004
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8543527483209863549
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8293156645411929234}
+  m_LocalRotation: {x: 8.999406e-22, y: -7.1054274e-15, z: 3.5527137e-15, w: 1}
+  m_LocalPosition: {x: -1.4210854e-16, y: 0.012567913, z: 1.811235e-23}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 644570809248114291}
+  m_Father: {fileID: 750868149441678143}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8717795462723888409
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1188015632373600760}
+  m_Layer: 0
+  m_Name: Bone.013
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1188015632373600760
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8717795462723888409}
+  m_LocalRotation: {x: -7.461111e-21, y: -3.5527137e-14, z: -3.7303494e-14, w: 1}
+  m_LocalPosition: {x: -6.0396133e-16, y: 0.006368599, z: 1.3278315e-22}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1519050052226596230}
+  m_Father: {fileID: 6291162436981468905}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
